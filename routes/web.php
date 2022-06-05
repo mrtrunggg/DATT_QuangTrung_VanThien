@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\taikhoanController;
+use App\Models\taikhoan;
+use App\Http\Controllers;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/',[taikhoanController::class, 'show'])->name('auth.show');
+Route::post('/',[taikhoanController::class, 'store'])->name('auth.post');
+Route::get('/login',[taikhoanController::class, 'loginShow'])->name('auth.loginShow');
+Route::post('/login',[taikhoanController::class, 'login'])->name('auth.login');

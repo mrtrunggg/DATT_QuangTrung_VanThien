@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'taikhoan' => [
+            'driver' => 'session',
+            'provider' => 'taikhoan',
+        ],
     ],
 
     /*
@@ -64,7 +68,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'taikhoan' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\taikhoan::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -88,6 +95,12 @@ return [
 
     'passwords' => [
         'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'taikhoan' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,

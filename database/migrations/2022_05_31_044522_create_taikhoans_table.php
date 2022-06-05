@@ -16,13 +16,14 @@ class CreateTaikhoansTable extends Migration
         Schema::create('taikhoans', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tendangnhap');    
-            $table->string('matkhau');
-            $table->string('mail');
-            $table->string('dienthoai');
-            $table->string('hinhdaidien');
-            $table->string('hoten');
-            $table->string('diachi');
-            $table->integer('loaitk')->nullable()->default(1); //0 là user, 1 là nhân viên, 2 là quản lý
+            $table->string('password');
+            $table->rememberToken();
+            $table->string('email');
+            $table->string('dienthoai')->nullable();
+            $table->string('hinhdaidien')->nullable();
+            $table->string('hoten')->nullable();
+            $table->string('diachi')->nullable();
+            $table->integer('loaitk')->nullable()->default(0); //0 là user, 1 là nhân viên, 2 là quản lý
             $table->integer('trangthai')->nullable()->default(1);     
             $table->timestamps();
             $table->softDeletes();
