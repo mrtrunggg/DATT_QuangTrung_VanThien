@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\taikhoanController;
+use App\Http\Controllers\adminController;
 use App\Models\taikhoan;
 use App\Http\Controllers;
 /*
@@ -23,3 +24,5 @@ Route::get('/',[taikhoanController::class, 'show'])->name('auth.show');
 Route::post('/',[taikhoanController::class, 'store'])->name('auth.post');
 Route::get('/login',[taikhoanController::class, 'loginShow'])->name('auth.loginShow');
 Route::post('/login',[taikhoanController::class, 'login'])->name('auth.login');
+
+Route::get('/admin1',[adminController::class, 'index'])->name('admin.index');
