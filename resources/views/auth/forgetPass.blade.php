@@ -6,6 +6,7 @@
     <title>Login - {{ config('app.name') }}</title>
     <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
     <!-- Form without bootstrap -->
@@ -15,7 +16,7 @@
             <div class="auth-action-left">
                 <div class="auth-form-outer">
                     <h2 class="auth-form-title">
-                        Sign In
+                        Forget Password
                     </h2>
                     <div class="auth-external-container">
                         <div class="auth-external-list">
@@ -26,43 +27,16 @@
                                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                             </ul>
                         </div>
-                        <p class="auth-sgt">or sign in with:</p>
                     </div>
-                    @if (session('message'))
-                        <div class="alert alert-danger" role="alert">
-                                {{ session('message') }}
-                        </div>
-                    @endif
-                    <form class="login-form" action="{{ route('auth.login') }}" method="POST" role="form">
+                    <p> Please enter your registered email</p>
+                    <form class="login-form" action="" method="POST" role="form">
                         @csrf
                         <div class="mg-dangnhap">
                             <input class="auth-form-input" type="email" id="email" name="email" placeholder="Email" autofocus value="{{ old('email') }}">
-                            @if($errors->has('email'))
-                                {{$errors->first('email')}}
-                            @endif
+                            @error('email') <small class ="help-block">{{$message}}</small>@enderror
                         </div>
-                        <div class="mg-dangnhap">
-                            <div class="input-icon">
-                                <input class="auth-form-input" type="password" id="password" name="password" placeholder="Password">
-                                <i class="fa fa-eye show-password"></i>
-                                @if($errors->has('password'))
-                                {{$errors->first('password')}}
-                            @endif
-                            </div>
-                        </div>
-                        <label class="btn active">
-                            <input type="checkbox" name='remember' checked>
-                            <i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> 
-                            <span> Remember password.</span>
-                        </label>
-                        <div class="footer-action">
-                            <input type="submit" value="Sign In" class="auth-submit">
-                            <a href="{{ route('auth.show')}}" class="auth-btn-direct">Sign Up</a>
-                        </div>
+                        <button type ="submit" class="btn btn-primary">Send</button>
                     </form>
-                    <div class="auth-forgot-password">
-                        <a href="{{route('auth.forgetPass')}}">Forfot Password</a>
-                    </div>
                 </div>
             </div>
             <div class="auth-action-right">
