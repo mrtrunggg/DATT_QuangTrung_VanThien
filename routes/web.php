@@ -30,6 +30,10 @@ Route::get('/admin1',[adminController::class, 'index'])->name('admin.index');
 
 //home
 Route::get('/home',[taikhoanController::class, 'home'])->name('home');
+Route::get('/cart',[taikhoanController::class, 'cart'])->name('cart');
+Route::get('/shop',[taikhoanController::class, 'shop'])->name('shop');
+Route::get('/detail-product',[taikhoanController::class, 'detail'])->name('detail');
+Route::get('/check-out',[taikhoanController::class, 'checkout'])->name('checkout');
 
 // Quên mật khẩu
 Route::get('/forget-password',[taikhoanController::class, 'forgetPass'])->name('auth.forgetPass');

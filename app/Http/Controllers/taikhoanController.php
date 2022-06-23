@@ -48,7 +48,19 @@ class taikhoanController extends Controller
         }
     }
     public function home(){
-        return view('home');
+        return view('shop.index');
+    }
+    public function cart(){
+        return view('shop.cart');
+    }
+    public function shop(){
+        return view('shop.shop');
+    }
+    public function detail(){
+        return view('shop.detail-product');
+    }
+    public function checkout(){
+        return view('shop.checkout');
     }
     public function loginShow(){
         return view('auth.login');
