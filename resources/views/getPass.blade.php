@@ -15,7 +15,7 @@
             <div class="auth-action-left">
                 <div class="auth-form-outer">
                     <h2 class="auth-form-title">
-                        Create Account
+                        Reset Password
                     </h2>
                     <div class="auth-external-container">
                         <div class="auth-external-list">
@@ -26,7 +26,6 @@
                                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                             </ul>
                         </div>
-                        <p class="auth-sgt">or use your email for registration:</p>
                     </div>
                     <form class="login-form" action="" method="POST" role="form">
                         @csrf

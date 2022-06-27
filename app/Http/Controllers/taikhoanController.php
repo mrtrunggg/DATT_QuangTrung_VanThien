@@ -99,11 +99,11 @@ class taikhoanController extends Controller
         $id->remember_token = $token;
         $id->save();
         
-         Mail::send('emails.check_email_forget',compact('id'), function($email) use($id){
+        Mail::send('emails.check_email_forget',compact('id'), function($email) use($id){
              $email->subject("MyShopping - Lấy lại mật khẩu");
              $email->to($id->email, $id->tendangnhap);
              return redirect()->back()->with('yes','Vui lòng check email để thực hiện thay đổi mật khẩu');
-         });
+        });
 
 
     }

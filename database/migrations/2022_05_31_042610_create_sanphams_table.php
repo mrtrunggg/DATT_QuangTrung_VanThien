@@ -19,12 +19,13 @@ class CreateSanphamsTable extends Migration
             $table->string('loaisp');      
             $table->string('mausac');
             $table->string('kichthuoc');
-            $table->string('hinhanh');
+            $table->string('hinhanh')->nullable();
             $table->integer('soluong');
             $table->integer('giaban');
             $table->integer('discount');
             $table->integer('giakhuyenmai');
             $table->string('mota');
+            $table->integer('dongianhap');
             $table->integer('trangthai')->nullable()->default(1);     
             $table->timestamps();
             $table->softDeletes();

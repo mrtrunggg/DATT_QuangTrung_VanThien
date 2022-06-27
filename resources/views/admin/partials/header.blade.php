@@ -4,17 +4,18 @@
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <a class="navbar-brand" href="dashboard.html">
+            <a class="navbar-brand" href= {{route('admin.index')}}>
                 <!-- Logo icon -->
                 <b class="logo-icon">
                     <!-- Dark Logo icon -->
-                    <img src="admin/plugins/images/logo-icon.png" alt="homepage" />
+                    
+                    <img src={{ asset('admin/plugins/images/logo-icon.png')}} alt="homepage" />
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span class="logo-text">
                     <!-- dark Logo text -->
-                    <img src="admin/plugins/images/logo-text.png" alt="homepage" />
+                    <img src={{ asset('admin/plugins/images/logo-text.png')}} alt="homepage" />
                 </span>
             </a>
             <!-- ============================================================== -->

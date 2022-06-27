@@ -18,13 +18,10 @@ class CreateCthoadonnhapsTable extends Migration
             $table->integer('hoadonnhap_id')->unsigned();
             $table->integer('sanpham_id')->unsigned();
             $table->integer('soluong');
-            $table->integer('dongia');
             $table->integer('thanhtien');
             $table->integer('trangthai')->nullable()->default(1);     
             $table->timestamps();     
             $table->softDeletes();  
-
-            
             $table->foreign('hoadonnhap_id')->references('id')->on('hoadonnhaps');
             $table->foreign('sanpham_id')->references('id')->on('sanphams');
         });
