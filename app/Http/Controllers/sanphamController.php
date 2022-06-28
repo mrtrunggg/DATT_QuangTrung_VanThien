@@ -27,12 +27,20 @@ class sanphamController extends Controller
     }
 
     function xulycreate(Request $req){
+        
+        if($req->has('hinhanh')){
+            $file = $req->hinhanh;
+            $ext = $req->hinhanh->extension();
+            $file_name = time().'-'.$req->size.'-'.'prtoduct'.'-'.$req->color.'.'.$ext;
+            $file->move(public_path('uploads'), $file_name);
+        }
+        $req->merge(['image'=>$file_name]);
         $SP = new sanpham();
         $SP->tensp = $req->tensp;
         $SP->loaisp = $req->loaisp;
         $SP->mausac = $req->color;
         $SP->kichthuoc = $req->size;
-        $SP->hinhanh = $req->hinhanh;
+        $SP->hinhanh = $req->image;
         $SP->soluong = $req->soluong;
         $SP->giaban = $req->giaban;
         $SP->discount = $req->discount;

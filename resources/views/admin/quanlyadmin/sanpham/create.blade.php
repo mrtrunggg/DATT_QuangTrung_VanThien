@@ -35,7 +35,7 @@
             <!-- Column -->
             <!-- Column -->
             <div class="col-lg-12 col-xlg-9 col-md-12">
-                <form method="POST" action="{{route('xulythemsp')}}">
+                <form method="POST" action="{{route('xulythemsp')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="card">
                         <div class="card-body">

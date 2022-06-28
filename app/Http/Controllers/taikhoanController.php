@@ -12,11 +12,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail;
 use Illuminate\Mail\Message;
+use Hash;
 use Illuminate\Mail\Mailable;
 class taikhoanController extends Controller
 {
     public function show(){
         return view('auth.add');
+    }
+    public function loginShow(){
+        return view('auth.login');
     }
     public function store(Request $request){
 
@@ -47,26 +51,9 @@ class taikhoanController extends Controller
             }
         }
     }
-    public function home(){
-        return view('shop.index');
-    }
-    public function cart(){
-        return view('shop.cart');
-    }
-    public function shop(){
-        return view('shop.shop');
-    }
-    public function detail(){
-        return view('shop.detail-product');
-    }
-    public function checkout(){
-        return view('shop.checkout');
-    }
-    public function loginShow(){
-        return view('auth.login');
-    }
 
     public function login(Request $request){
+        $tk = taikhoan::where('email',$request->email)->first();
         $validator = Validator::make($request->all(),[
             'email'=>'required|email',
             'password'=>'required',
@@ -77,12 +64,11 @@ class taikhoanController extends Controller
                 ->withInput();
         }
         $remember = $request->remember;
-
         if (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '0' ], $remember)) {
             return redirect()->route('auth.show')->with('message', 'Tài khoản đã bị khóa');
         }
         if (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '0'], $remember)) {
-            return redirect()->route('home');
+            return redirect()->route('home',$tk->id);
         }
         if (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '1' ], $remember)) {
             return redirect()->route('admin.index');
@@ -102,7 +88,7 @@ class taikhoanController extends Controller
         $reg->validate([
             'email'=>'required|exists:taikhoans'],
             [
-                'email.required'=>'Vui lòng nhập địa chỉ emailt hợp lệ',
+                'email.required'=>'Vui lòng nhập địa chỉ email hợp lệ',
                 'email.exists'=>'Email không tồn tại',
             ]);
            
@@ -114,8 +100,9 @@ class taikhoanController extends Controller
         Mail::send('emails.check_email_forget',compact('id'), function($email) use($id){
              $email->subject("MyShopping - Lấy lại mật khẩu");
              $email->to($id->email, $id->tendangnhap);
-             return redirect()->back()->with('yes','Vui lòng check email để thực hiện thay đổi mật khẩu');
+           
         });
+        return redirect()->back()->with("message","Vui lòng check email để thực hiện thay đổi mật khẩu");
 
 
     }
@@ -134,6 +121,6 @@ class taikhoanController extends Controller
         $id->remember_token = $token;
         $id->password = $pass;
         $id->save();
-        return redirect()->route('auth.login')->with('yes','Thay đổi mật khẩu thành công');
+        return redirect()->route('auth.login')->with('message','Thay đổi mật khẩu thành công');
     }
 }

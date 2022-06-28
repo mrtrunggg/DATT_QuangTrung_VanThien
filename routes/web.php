@@ -5,6 +5,7 @@ use App\Http\Controllers\taikhoanController;
 use App\Http\Controllers\qltaikhoanController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\sanphamController;
+use App\Http\Controllers\giaodienController;
 use App\Models\taikhoan;
 use App\Http\Controllers;
 /*
@@ -31,11 +32,13 @@ Route::post('/login',[taikhoanController::class, 'login'])->name('auth.login');
 Route::get('/admin1',[adminController::class, 'index'])->name('admin.index');
 
 //home
-Route::get('/home',[taikhoanController::class, 'home'])->name('home');
-Route::get('/cart',[taikhoanController::class, 'cart'])->name('cart');
-Route::get('/shop',[taikhoanController::class, 'shop'])->name('shop');
-Route::get('/detail-product',[taikhoanController::class, 'detail'])->name('detail');
-Route::get('/check-out',[taikhoanController::class, 'checkout'])->name('checkout');
+Route::get('/home/{id}',[giaodienController::class, 'home'])->name('home');
+Route::get('/cart/{id}',[giaodienController::class, 'cart'])->name('cart');
+Route::get('/shop/{id}',[giaodienController::class, 'shop'])->name('shop');
+Route::get('/detail-product/{id}',[giaodienController::class, 'detail'])->name('detail');
+Route::get('detail/{id}/{id-sp}',[giaodienController::class, 'detailProduct'])->name('detail-product');
+Route::get('/check-out/{id}',[giaodienController::class, 'checkout'])->name('checkout');
+
 
 // Quên mật khẩu
 Route::get('/forget-password',[taikhoanController::class, 'forgetPass'])->name('auth.forgetPass');
