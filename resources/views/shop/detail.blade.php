@@ -3,61 +3,48 @@
       <!-- Product Details Area Start -->
        <div class="single-product-area section-padding-100 clearfix">
             <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-12 col-lg-7">
                         <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    @foreach($SP as $sanpham)
-                                    @if($sanpham->id == 1)
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url({{asset('uploads/'.$sanpham->hinhanh)}});">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url({{asset('uploads/'.$SP->hinhanh)}});">
                                     </li>
-                                    @else
-                                    <li data-target="#product_details_slider" data-slide-to="{{$sanpham->id - 1}}" style="background-image: url({{asset('uploads/'.$sanpham->hinhanh)}});">
-                                    </li>
-                                    @endif
-                                    @endforeach
                                 </ol>
-                                @foreach($SP as $sanpham)
-                                @if($sanpham->id == 1)
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <a class="gallery_img" href="{{asset('uploads/'.$sanpham->hinhanh)}}">
-                                            <img class="d-block w-100" src="{{asset('uploads/'.$sanpham->hinhanh)}}" alt="First slide">
+                                        <a class="gallery_img" href="{{asset('uploads/'.$SP->hinhanh)}}">
+                                            <img class="d-block w-100" src="{{asset('uploads/'.$SP->hinhanh)}}" alt="First slide">
                                         </a>
                                     </div>
-                                @else
-                                <div class="carousel-item">
-                                        <a class="gallery_img" href="{{asset('uploads/'.$sanpham->hinhanh)}}">
-                                            <img class="d-block w-100" src="{{asset('uploads/'.$sanpham->hinhanh)}}" alt="Second slide">
-                                        </a>
-                                    </div>
-                                @endif
-                                @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-12 col-lg-5">
                         <div class="single_product_desc">
-                        @foreach($SP as $sanpham)
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">Price: {{$sanpham->giaban}}</p>
-                                <a href="{{route('detail',$id)}}">
-                                    <h6>{{$sanpham->tensp}}</h6>
+                                <p class="product-price">Price: {{$SP->giaban}}</p>
+                                <a href="{{route('detail')}}">
+                                    <h6>{{$SP->tensp}}</h6>
                                 </a>
                                 <!-- Ratings & Review -->
                                 <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
-                                    <div class="ratings">
+                                    <!-- <div class="ratings">
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
-                                    </div>
+                                    </div> -->
                                     <div class="review">
                                         <a href="#">Write A Review</a>
                                     </div>
@@ -67,12 +54,8 @@
                             </div>
 
                             <div class="short_overview my-5">
-                                <p>{{$sanpham->mota}}</p>
+                                <p>{{$SP->mota}}</p>
                             </div>
-                        @endforeach
-
-
-
 
                             <!-- Add to Cart Form -->
                             <form class="cart clearfix" method="post">

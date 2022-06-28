@@ -80,10 +80,22 @@
                                                     {{$TK->diachi}}    
                                                 </td>
                                                 <td>
-                                                    {{$TK->loaitk}}    
+                                                      
+                                                    @if($TK->loaitk == 0)
+                                                    <p>User</p>
+                                                    @elseif($TK->loaitk == 1)
+                                                    <p>Staff</p>
+                                                    @else
+                                                    <p>Manage</p>
+                                                    @endif    
                                                 </td>
                                                 <td>
-                                                    {{$TK->trangthai}}    
+                                                    @if($TK->trangthai == 0)
+                                                    <p>Disable</p>
+                                                    @else
+                                                    <p>Enable</p>
+                                                    @endif
+                                                
                                                 </td>
                                                 <td class="column2">
                                                     <a href="{{route('SuaTK',['TK'=>$TK->id])}}"  >Edit |</a>

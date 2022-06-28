@@ -20,12 +20,14 @@ class quanlyhoadonnhapController extends Controller
 
     function create()
     {
+       
         $dsHoadonnhap = DB::table('Nhacungcap')->where('trangthai','=','1')->get();
         $dsHoadonnhap1 = DB::table('Nhanvien')->where('trangthai','=','1')->get();
         return view('QuangTrung.Hoadonnhap.create',compact('dsHoadonnhap','dsHoadonnhap1'));
     }
 
     function xulycreate(Request $req){
+        
         $HDN = new Hoadonnhap();
         $HDN->nhacungcap_id = $req->MaNCC;
         $HDN->nhanvien_id = $req->MaNV;

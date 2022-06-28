@@ -29,13 +29,23 @@
                         </div>
                     </div>
                     <p> Please enter your registered email</p>
+                    @if (session('message'))
+                        <div class="alert alert-danger" role="alert">
+                                {{ session('message') }}
+                        </div>
+                    @endif
                     <form class="login-form" action="" method="POST" role="form">
                         @csrf
                         <div class="mg-dangnhap">
                             <input class="auth-form-input" type="email" id="email" name="email" placeholder="Email" autofocus value="{{ old('email') }}">
                             @error('email') <small class ="help-block">{{$message}}</small>@enderror
                         </div>
-                        <button type ="submit" class="btn btn-primary">Send</button>
+                        <div class ="footer-action">
+                        <button type ="submit" class="btn btn-primary" >Send</button> 
+                       
+                            <a href="{{ route('auth.show')}}" class="auth-btn-direct">Sign In</a>
+                        </div>
+                        
                     </form>
                 </div>
             </div>
