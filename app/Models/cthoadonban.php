@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class cthoadonban extends Model
 {
     use HasFactory;
-    protected $table = 'cthoadonban';
+    protected $table = 'cthoadonbans';
 }

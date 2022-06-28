@@ -87,9 +87,9 @@
                                     <label class="col-sm-12">Account Type</label>
                                     <div class="col-sm-12 border-bottom">
                                         <select class="form-select shadow-none p-0 border-0 form-control-line" name="loaitk" id="loaitk">
-                                            <option value="0">User</option>
-                                            <option value="1">Staff</option> 
-                                            <option value="2">Manage</option>
+                                            <option value="0" <?php if($thongtin->loaitk == '0'){echo("selected");}?>>User</option>
+                                            <option value="1" <?php if($thongtin->loaitk == '1'){echo("selected");}?>>Staff</option> 
+                                            <option value="2" <?php if($thongtin->loaitk == '2'){echo("selected");}?>>Manage</option>
                                         </select>
                                     </div>
                                 </div>

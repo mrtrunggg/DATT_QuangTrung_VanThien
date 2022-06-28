@@ -5,6 +5,7 @@ use App\Http\Controllers\taikhoanController;
 use App\Http\Controllers\qltaikhoanController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\sanphamController;
+use App\Http\Controllers\hoadonbanController; 
 use App\Models\taikhoan;
 use App\Http\Controllers;
 /*
@@ -64,3 +65,14 @@ Route::group(['prefix' => 'taikhoan'], function() {
     Route::get('delete/{TK}',[qltaikhoanController::class, 'xulydelete'])->name('xylyxoaTK');
 });
 
+// hoa don ban ne
+Route::group(['prefix' => 'hoadon'], function() {
+    Route::get('index',[hoadonbanController::class, 'index'])->name('indexHdb');
+    // Route::get('create',[hoadonbanController::class, 'create'])->name('formthemTK');
+    // Route::post('xulycreate',[hoadonbanController::class, 'xulycreate'])->name('xylythemTK');
+    // Route::get('edit/{TK}',[hoadonbanController::class, 'edit'])->name('SuaTK');
+    // Route::post('edit/{TK}',[hoadonbanController::class, 'xulyedit'])->name('xylysuaTK');
+    Route::get('delete/{SP}',[hoadonbanController::class, 'xulydelete'])->name('xylyxoaHDB');
+    Route::post('editTTHdb/{SP}',[hoadonbanController::class, 'editTTHdb']);
+    Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
+});

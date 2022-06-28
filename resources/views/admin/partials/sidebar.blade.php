@@ -25,8 +25,15 @@
                         <span class="hide-menu">Account</span>
                     </a>
                 </li>
+                <li class="sidebar-item pt-2">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('indexHdb')}}
+                        aria-expanded="false">
+                        <i class="far fa-money-bill-alt" aria-hidden="true"></i>
+                        <span class="hide-menu">Invoice</span>
+                    </a>
+                </li>
             </ul>
-
+            
         </nav>
         <!-- End Sidebar navigation -->
     </div>
