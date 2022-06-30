@@ -25,14 +25,28 @@ class giaodienController extends Controller
         return view('shop.cart',compact('id'));
     }
     public function shop($id){
-        return view('shop.shop',compact('id'));
+        $SP = DB::table('sanphams')->get();
+        return view('shop.shop',compact('id','SP'));
     }
+    public function shopao($id){
+        $SP = DB::table('sanphams')->where('loaisp','like','%Áo%')->get();
+        
+        return view('shop.shopao',compact('id','SP'));
+    }
+    public function shopquan($id){
+        $SP = DB::table('sanphams')->where('loaisp','like','%Quần%')->get();
+        
+        return view('shop.shopquan',compact('id','SP'));
+    }
+
+
+
     public function detail($id){
         $SP = DB::table('sanphams')->get();
         return view('shop.detail-product',compact('SP','id'));
     }
-    public function detailProduct($id,$id_sp){
-        $SP = DB::table('sanphams')->find($id_sp);
+    public function detailProduct($id,$idsp){
+        $SP = DB::table('sanphams')->find($idsp);
         
         return view('shop.detail',compact('SP','id'));
     }

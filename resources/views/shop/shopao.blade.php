@@ -1,7 +1,7 @@
 @extends('shop.partialsshop.index')
 @section('contentshop')
                 <div class="row">
-                    @foreach($SP as $sanpham)
+                    @forelse($SP as $sanpham)
                      <!-- Single Product Area -->
                     <div class="col-12 col-sm-6 col-md-12 col-xl-6">
                         <div class="single-product-wrapper">
@@ -38,7 +38,11 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+                        <p>Không có dữ liệu</p>
+                        </div>
+                    @endforelse
 
                 </div>
     @endsection

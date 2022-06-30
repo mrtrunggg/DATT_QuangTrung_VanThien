@@ -70,13 +70,10 @@
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    
-                    <li class="active"><a href="{{route('home',$id)}}">Home</a></li>
-                    <li><a href="{{route('shop',$id)}}">Shop</a></li>
-                    <li><a href="{{route('detail',$id)}}">Product</a></li>
-                    <li><a href="{{route('cart',$id)}}">Cart</a></li>
-                    <li><a href="{{route('checkout',$id)}}">Checkout</a></li>
-                    <li><a href="{{route('homeAccount',$id)}}">Account</a></li>
+                    <li class="active"><a href="{{route('homeAccount',$id)}}">Information</a></li>
+                    <li><a href="{{route('changepassword',$id)}}">Change Password</a></li>
+                    <li><a href="{{route('detail',$id)}}">Transaction history</a></li>
+                    <li><a href="{{route('auth.login')}}">Logout</a></li>
                 </ul>
             </nav>
             <!-- Button Group -->

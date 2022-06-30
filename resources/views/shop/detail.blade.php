@@ -33,7 +33,7 @@
                             <div class="product-meta-data">
                                 <div class="line"></div>
                                 <p class="product-price">Price: {{$SP->giaban}}</p>
-                                <a href="{{route('detail')}}">
+                                <a href="{{route('detail',$id)}}">
                                     <h6>{{$SP->tensp}}</h6>
                                 </a>
                                 <!-- Ratings & Review -->

@@ -36,7 +36,7 @@
             <!-- Column -->
             <!-- Column -->
             <div class="col-lg-12 col-xlg-9 col-md-12">
-                <form method="POST" acction="{{route('xulysuasp',['SP'=>$thongtin->id])}}"> 
+                <form method="POST" acction="{{route('xulysuasp',['SP'=>$thongtin->id])}}" enctype="multipart/form-data"> 
                     @csrf
                     <div class="card">
                         <div class="card-body">
@@ -105,7 +105,7 @@
                             
                                 <div class="form-group mb-4">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success">Add</button>
+                                        <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>
                             </form>

@@ -5,11 +5,9 @@ use App\Http\Controllers\taikhoanController;
 use App\Http\Controllers\qltaikhoanController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\sanphamController;
-<<<<<<< HEAD
 use App\Http\Controllers\hoadonbanController; 
-=======
 use App\Http\Controllers\giaodienController;
->>>>>>> 3e8bab8b01460021cf9030029ebff0c097b8e228
+use App\Http\Controllers\AccountController;
 use App\Models\taikhoan;
 use App\Http\Controllers;
 /*
@@ -38,11 +36,24 @@ Route::get('/admin1',[adminController::class, 'index'])->name('admin.index');
 //home
 Route::get('/home/{id}',[giaodienController::class, 'home'])->name('home');
 Route::get('/cart/{id}',[giaodienController::class, 'cart'])->name('cart');
+
 Route::get('/shop/{id}',[giaodienController::class, 'shop'])->name('shop');
+Route::get('shop/ao/{id}',[giaodienController::class, 'shopao'])->name('shopao');
+Route::get('shop/quan/{id}',[giaodienController::class, 'shopquan'])->name('shopquan');
+
+
 Route::get('/detail-product/{id}',[giaodienController::class, 'detail'])->name('detail');
-Route::get('detail/{id}/{id-sp}',[giaodienController::class, 'detailProduct'])->name('detail-product');
+Route::get('detail/{id}/{idsp}',[giaodienController::class, 'detailProduct'])->name('detailproduct');
 Route::get('/check-out/{id}',[giaodienController::class, 'checkout'])->name('checkout');
 
+//Account
+Route::get('/account/{id}',[AccountController::class,'homeAccount'])->name('homeAccount');
+
+Route::get('/change-information/{id}',[AccountController::class,'changeInformation'])->name('changeinformation');
+Route::post('/change-information/{id}',[AccountController::class,'postChangeInformation'])->name('postchangeinformation');
+
+Route::get('/change-password/{id}',[AccountController::class,'changePassword'])->name('changepassword');
+Route::post('/change-password/{id}',[AccountController::class,'postChangePassword'])->name('postchangepassword');
 
 // Quên mật khẩu
 Route::get('/forget-password',[taikhoanController::class, 'forgetPass'])->name('auth.forgetPass');
