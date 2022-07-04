@@ -50,8 +50,6 @@ class giaodienController extends Controller
         
         return view('shop.detail',compact('SP','id'));
     }
-    public function checkout($id){
-        return view('shop.checkout',compact('id'));
-    }
+
 
 }

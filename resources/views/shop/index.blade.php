@@ -13,7 +13,7 @@
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <div class="line"></div>
-                            <p>{{$sanpham->giaban}}</p>
+                            <p>{{number_format($sanpham->giaban)}}</p>
                             <h4>{{$sanpham->tensp}}</h4>
                         </div>
                     </a>

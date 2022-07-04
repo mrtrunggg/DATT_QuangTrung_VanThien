@@ -74,7 +74,7 @@
                     <li class="active"><a href="{{route('home',$id)}}">Home</a></li>
                     <li><a href="{{route('shop',$id)}}">Shop</a></li>
                     <li><a href="{{route('detail',$id)}}">Product</a></li>
-                    <li><a href="{{route('cart',$id)}}">Cart</a></li>
+                    
                     <li><a href="{{route('checkout',$id)}}">Checkout</a></li>
                     <li><a href="{{route('homeAccount',$id)}}">Account</a></li>
                 </ul>
@@ -86,7 +86,7 @@
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-                <a href="{{route('cart',$id)}}" class="cart-nav"><img src="{{asset('amado-master/img/core-img/cart.png')}}" alt=""> Cart <span>(0)</span></a>
+                <a href="{{route('showCart',$id)}}" class="cart-nav"><img src="{{asset('amado-master/img/core-img/cart.png')}}" alt=""> Cart</a>
                 <a href="#" class="fav-nav"><img src="{{asset('amado-master/img/core-img/favorites.png')}}" alt=""> Favourite</a>
                 <a href="#" class="search-nav"><img src="{{asset('amado-master/img/core-img/search.png')}}" alt=""> Search</a>
                 <a href="{{route('auth.loginShow')}}"> Log out</a>

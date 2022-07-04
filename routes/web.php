@@ -8,6 +8,7 @@ use App\Http\Controllers\sanphamController;
 use App\Http\Controllers\hoadonbanController; 
 use App\Http\Controllers\giaodienController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CartController;
 use App\Models\taikhoan;
 use App\Http\Controllers;
 /*
@@ -44,7 +45,7 @@ Route::get('shop/quan/{id}',[giaodienController::class, 'shopquan'])->name('shop
 
 Route::get('/detail-product/{id}',[giaodienController::class, 'detail'])->name('detail');
 Route::get('detail/{id}/{idsp}',[giaodienController::class, 'detailProduct'])->name('detailproduct');
-Route::get('/check-out/{id}',[giaodienController::class, 'checkout'])->name('checkout');
+
 
 //Account
 Route::get('/account/{id}',[AccountController::class,'homeAccount'])->name('homeAccount');
@@ -54,6 +55,20 @@ Route::post('/change-information/{id}',[AccountController::class,'postChangeInfo
 
 Route::get('/change-password/{id}',[AccountController::class,'changePassword'])->name('changepassword');
 Route::post('/change-password/{id}',[AccountController::class,'postChangePassword'])->name('postchangepassword');
+
+Route::get('/Transaction-history/{id}',[AccountController::class,'showHistory'])->name('showhistory');
+Route::get('/Transaction-history/huy/{id}/{hds}',[AccountController::class,'huydonhang'])->name('huy');
+Route::get('/Transaction-history/datlai/{id}/{hds}',[AccountController::class,'datlaidon'])->name('datlai');
+
+//cart 
+Route::get('/show-cart/{id}',[CartController::class, 'showCart'])->name('showCart');
+Route::post('/save-cart/{id}',[CartController::class, 'saveCart'])->name('saveCart');
+Route::get('delete-cart/{id}/{idSP}',[CartController::class, 'deleteCart'])->name('deletecart');
+Route::post('/update-cart/{id}',[CartController::class, 'updateCart'])->name('updatecart');
+
+Route::get('/check-out/{id}',[CartController::class, 'checkout'])->name('checkout');
+Route::post('/check-out/{id}',[CartController::class, 'saveCheckout'])->name('savecheckout');
+
 
 // Quên mật khẩu
 Route::get('/forget-password',[taikhoanController::class, 'forgetPass'])->name('auth.forgetPass');

@@ -38,7 +38,7 @@ class AccountController extends Controller
             $file_name = Null;
         }
         $req->merge(['image'=>$file_name]);
-        $userchange = DB::table('taikhoans')->where('id',$id)->update(['hinhdaidien'=>$req->image,'hoten'=>$req->hoten,'diachi'=>$req->diachi]);
+        $userchange = DB::table('taikhoans')->where('id',$id)->update(['hinhdaidien'=>$req->image,'hoten'=>$req->hoten,'diachi'=>$req->diachi,'dienthoai'=>$req->dienthoai]);
         $user = DB::table('taikhoans')->find($id);
         return redirect()->route('homeAccount',compact('user','id'));
     }
@@ -70,5 +70,19 @@ class AccountController extends Controller
             return redirect()->route('changepassword',compact('id'))->with('notice','Thay đổi mật khẩu thành công!');
 
         }
+    }
+    public function showHistory($id){
+        $hd = DB::table('hoadonbans')->where('khachhang_id','=',$id)->get();
+        return view('userAccount.show-history',compact('id','hd'));
+    }
+    public function huydonhang($id,$hds){
+        $hdhuy = DB::table('hoadonbans')->where('id','=',$hds)->update(['trangthai'=>0]);
+        $hd = DB::table('hoadonbans')->where('khachhang_id','=',$id)->get();
+        return redirect()->route('showhistory',compact('id','hds'))->with('succes','Hủy thành công');
+    }
+    public function datlaidon($id,$hds){
+        $hdhuy = DB::table('hoadonbans')->where('id','=',$hds)->update(['trangthai'=>1]);
+        $hd = DB::table('hoadonbans')->where('khachhang_id','=',$id)->get();
+        return redirect()->route('showhistory',compact('id','hds'))->with('succes','Đặt lại thành công');
     }
 }
