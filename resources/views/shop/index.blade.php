@@ -8,12 +8,12 @@
                 @foreach($SP as $sanpham)
                
                 <div class="single-products-catagory clearfix">
-                <a href="{{route('detail-product',['id'=>$id,'id-sp'=>$sanpham->id])}}">
+                <a href="{{route('detailproduct',['id'=>$id,'idsp'=>$sanpham->id])}}">
                         <img src="{{asset('uploads/'.$sanpham->hinhanh)}}" alt="">
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <div class="line"></div>
-                            <p>{{$sanpham->giaban}}</p>
+                            <p>{{number_format($sanpham->giaban)}}</p>
                             <h4>{{$sanpham->tensp}}</h4>
                         </div>
                     </a>

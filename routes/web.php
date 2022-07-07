@@ -7,7 +7,12 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\sanphamController;
 use App\Http\Controllers\hoadonbanController; 
 use App\Http\Controllers\giaodienController;
+<<<<<<< HEAD
 use App\Http\Controllers\nhapkhoController;
+=======
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CartController;
+>>>>>>> 082f3be43c374e3fe01a7a3ba36ef4d0fe5b353e
 use App\Models\taikhoan;
 use App\Http\Controllers;
 use App\Http\Controllers\hinhanhController;
@@ -38,10 +43,37 @@ Route::get('/admin1',[adminController::class, 'index'])->name('admin.index');
 //home
 Route::get('/home/{id}',[giaodienController::class, 'home'])->name('home');
 Route::get('/cart/{id}',[giaodienController::class, 'cart'])->name('cart');
+
 Route::get('/shop/{id}',[giaodienController::class, 'shop'])->name('shop');
+Route::get('shop/ao/{id}',[giaodienController::class, 'shopao'])->name('shopao');
+Route::get('shop/quan/{id}',[giaodienController::class, 'shopquan'])->name('shopquan');
+
+
 Route::get('/detail-product/{id}',[giaodienController::class, 'detail'])->name('detail');
-Route::get('detail/{id}/{id-sp}',[giaodienController::class, 'detailProduct'])->name('detail-product');
-Route::get('/check-out/{id}',[giaodienController::class, 'checkout'])->name('checkout');
+Route::get('detail/{id}/{idsp}',[giaodienController::class, 'detailProduct'])->name('detailproduct');
+
+
+//Account
+Route::get('/account/{id}',[AccountController::class,'homeAccount'])->name('homeAccount');
+
+Route::get('/change-information/{id}',[AccountController::class,'changeInformation'])->name('changeinformation');
+Route::post('/change-information/{id}',[AccountController::class,'postChangeInformation'])->name('postchangeinformation');
+
+Route::get('/change-password/{id}',[AccountController::class,'changePassword'])->name('changepassword');
+Route::post('/change-password/{id}',[AccountController::class,'postChangePassword'])->name('postchangepassword');
+
+Route::get('/Transaction-history/{id}',[AccountController::class,'showHistory'])->name('showhistory');
+Route::get('/Transaction-history/huy/{id}/{hds}',[AccountController::class,'huydonhang'])->name('huy');
+Route::get('/Transaction-history/datlai/{id}/{hds}',[AccountController::class,'datlaidon'])->name('datlai');
+
+//cart 
+Route::get('/show-cart/{id}',[CartController::class, 'showCart'])->name('showCart');
+Route::post('/save-cart/{id}',[CartController::class, 'saveCart'])->name('saveCart');
+Route::get('delete-cart/{id}/{idSP}',[CartController::class, 'deleteCart'])->name('deletecart');
+Route::post('/update-cart/{id}',[CartController::class, 'updateCart'])->name('updatecart');
+
+Route::get('/check-out/{id}',[CartController::class, 'checkout'])->name('checkout');
+Route::post('/check-out/{id}',[CartController::class, 'saveCheckout'])->name('savecheckout');
 
 
 // Quên mật khẩu

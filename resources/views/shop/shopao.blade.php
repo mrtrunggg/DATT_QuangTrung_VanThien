@@ -1,7 +1,7 @@
 @extends('shop.partialsshop.index')
 @section('contentshop')
                 <div class="row">
-                    @foreach($SP as $sanpham)
+                    @forelse($SP as $sanpham)
                      <!-- Single Product Area -->
                     <div class="col-12 col-sm-6 col-md-12 col-xl-6">
                         <div class="single-product-wrapper">
@@ -17,7 +17,7 @@
                                 <!-- Product Meta Data -->
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">Price: {{number_format($sanpham->giaban)}} VNĐ</p>
+                                    <p class="product-price">Price: Price: {{number_format($sanpham->giaban)}} VNĐ</p>
                                     <a href="#">
                                         <h6>{{$sanpham->tensp}}</h6>
                                     </a>
@@ -31,27 +31,27 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div> -->
-
-                            <form class="cart clearfix" method="post" action="{{route('saveCart',$id)}}">
+                                    <form class="cart clearfix" method="post" action="{{route('saveCart',$id)}}">
                                 @csrf
                                 <div class="cart-btn d-flex mb-50">
                                         <input type="hidden" name="quantity" value="1">
                                         <input type="hidden" name="product_id_hidden" value="{{$sanpham->id}}">
                                 </div>
-                                <button type="submit" name="addtocart" style="border: transparent">                                    <div class="cart add_to_cart">
-                                        <img src="{{asset('amado-master/img/core-img/cart.png')}}" alt="">          
-                                        </div></button>
+                                <button type="submit" name="addtocart" style="border: transparent">              
+                                                      <div class="cart add_to_cart">
+                                      <img src="{{asset('amado-master/img/core-img/cart.png')}}" alt="">
+                                    </div></button>
                             </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    
+                    @empty
+                    <div class="col-12 col-sm-6 col-md-12 col-xl-6">
+                        <p>Không có dữ liệu</p>
+                        </div>
+                    @endforelse
 
                 </div>
     @endsection
-    <script>
-       $(function(){
-        alert('test');
-       }) ;
-        </script>

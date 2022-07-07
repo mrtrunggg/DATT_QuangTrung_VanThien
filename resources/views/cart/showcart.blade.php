@@ -1,70 +1,12 @@
 @extends('shop.partials.index')
 @section('content')
-<div class="cart-table-area section-padding-100">
+
+        <div class="cart-table-area section-padding-100">
             <div class="container-fluid">
-            <form action="{{route('savecheckout',$id)}}" method="post">
-                                @csrf
-@if(session('erro'))
-<div class="alert alert-success">
-    {{session()->get('erro')}}
-</div> 
-@endif
                 <div class="row">
                     <div class="col-12 col-lg-8">
-                        <div class="checkout_details_area mt-50 clearfix">
-
-                            <div class="cart-title">
-                                <h2>Checkout</h2>
-                            </div>
-
-
-                                <div class="row">
-                                    <div class="col-12 mb-3">
-                                        <input type="text" class="form-control" name="fullName"  placeholder="Full Name" >
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <input type="email" class="form-control" name="email" placeholder="Email" >
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <input type="text" class="form-control mb-3" name="address" placeholder="Address" >
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <input type="number" class="form-control" name="phoneNo" min="0" placeholder="Phone No" >
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <textarea name="comment" class="form-control w-100" name="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>
-                                    </div>
-
-
-                                </div>
-
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <div class="cart-summary">
-                            <h5>Cart Total</h5>
-                            <ul class="summary-table">
-                            <li><span>subtotal:</span> <span>{{Cart::subtotal()}} VNĐ</span></li>
-                                <li><span>delivery:</span> <span>Miễn phí</span></li>
-                                <li><span>total:</span> <span>{{Cart::subtotal()}} VNĐ</span></li>
-                                @if(Cart::subtotal() == 0)
-                                <input type="hidden" name = "check" value="1">
-                                @else
-                                <input type="hidden" name ="check" value="2">
-                                @endif
-                            </ul>
-                            <div class="cart-btn mt-100">
-                                <button type="submit" class="btn amado-btn w-100">Order</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </form>
-            </div>
-            <div class ="row">
-            <div class="col-12 col-lg-8">
                         <div class="cart-title mt-50">
-                            <h2>Your Cart</h2>
+                            <h2>Shopping Cart</h2>
                         </div>
 
                         <div class="cart-table clearfix">
@@ -123,10 +65,22 @@
                             </table>
                         </div>
                     </div>
-</div>
+                    <div class="col-12 col-lg-4">
+                        <div class="cart-summary">
+                            <h5>Cart Total</h5>
+                            <ul class="summary-table">
+                                <li><span>subtotal:</span> <span>{{Cart::subtotal()}} VNĐ</span></li>
+                                <li><span>delivery:</span> <span>Miễn phí</span></li>
+                                <li><span>total:</span> <span>{{Cart::subtotal()}} VNĐ</span></li>
+                            </ul>
+                            <div class="cart-btn mt-100">
+                                <a href="{{route('checkout',$id)}}" class="btn amado-btn w-100">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
-
-   
-@endsection
+    @endsection

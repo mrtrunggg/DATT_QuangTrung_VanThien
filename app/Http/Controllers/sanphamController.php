@@ -34,6 +34,9 @@ class sanphamController extends Controller
             $file_name = time().'-'.$req->size.'-'.'prtoduct'.'-'.$req->color.'.'.$ext;
             $file->move(public_path('uploads'), $file_name);
         }
+        if($req->hinhanh == Null){
+            $file_name = Null;
+        }
         $req->merge(['image'=>$file_name]);
         $SP = new sanpham();
         $SP->tensp = $req->tensp;
@@ -66,12 +69,22 @@ class sanphamController extends Controller
     }
 
     function xulyedit(Request $req, $id){       
+        if($req->has('hinhanh')){
+            $file = $req->hinhanh;
+            $ext = $req->hinhanh->extension();
+            $file_name = time().'-'.$req->size.'-'.'prtoduct'.'-'.$req->color.'.'.$ext;
+            $file->move(public_path('uploads'), $file_name);
+        }
+        if($req->hinhanh == Null){
+            $file_name = Null;
+        }
+        $req->merge(['image'=>$file_name]);
         $SP = sanpham::find($id);
         $SP->tensp = $req->tensp;
         $SP->loaisp = $req->loaisp;
         $SP->mausac = $req->color;
         $SP->kichthuoc = $req->size;
-        $SP->hinhanh = $req->hinhanh;
+        $SP->hinhanh = $req->image;
         $SP->soluong = $req->soluong;
         $SP->giaban = $req->giaban;
         $SP->discount = $req->discount;

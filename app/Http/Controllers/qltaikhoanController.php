@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\taikhoan;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class qltaikhoanController extends Controller
@@ -25,12 +26,22 @@ class qltaikhoanController extends Controller
     }
 
     function xulycreate(Request $req){
+        if($req->has('hinhdaidien')){
+            $file = $req->hinhdaidien;
+            $ext = $req->hinhdaidien->extension();
+            $file_name = time().'-'.'account'.'.'.$ext;
+            $file->move(public_path('uploads'), $file_name);
+        } 
+        if($req->hinhdaidien == Null){
+            $file_name = Null;
+        }
+        $req->merge(['image'=>$file_name]);
         $TK = new taikhoan();
         $TK->tendangnhap = $req->tendangnhap;
         $TK->password = bcrypt($req -> password);
         $TK->email = $req->email;
         $TK->dienthoai = $req->dienthoai;
-        $TK->hinhdaidien = $req->hinhdaidien;
+        $TK->hinhdaidien = $req->image;
         $TK->hoten = $req->hoten;
         $TK->diachi = $req->diachi;
         $TK->loaitk = $req->loaitk;
@@ -49,13 +60,24 @@ class qltaikhoanController extends Controller
         return view('admin.quanlyadmin.taikhoan.edit',compact('thongtin'), ['cuccung' => $data]);
     }
 
-    function xulyedit(Request $req, $id){       
+    function xulyedit(Request $req, $id){  
+
+        if($req->has('hinhdaidien')){
+            $file = $req->hinhdaidien;
+            $ext = $req->hinhdaidien->extension();
+            $file_name = time().'-'.'account'.'.'.$ext;
+            $file->move(public_path('uploads'), $file_name);
+        } 
+        if($req->hinhdaidien == Null){
+            $file_name = Null;
+        }
+        $req->merge(['image'=>$file_name]);
         $Tk = taikhoan::find($id);
         $Tk->tendangnhap = $req->tendangnhap;
         $Tk->password = bcrypt($req -> password);
         $Tk->email = $req->email;
         $Tk->dienthoai = $req->dienthoai;
-        $Tk->hinhdaidien = $req->hinhdaidien;
+        $Tk->hinhdaidien = $req->image;
         $Tk->hoten = $req->hoten;
         $Tk->diachi = $req->diachi;
         $Tk->loaitk = $req->loaitk;
