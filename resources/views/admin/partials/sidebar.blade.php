@@ -33,10 +33,24 @@
                     </a>
                 </li>
                 <li class="sidebar-item pt-2">
+<<<<<<< HEAD
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('indexcomment')}}
                         aria-expanded="false">
                         <i class="far fa-comments" aria-hidden="true"></i>
                         <span class="hide-menu">Comment</span>
+=======
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('indexNK')}}
+                        aria-expanded="false">
+                        <i class="fas fa-warehouse" aria-hidden="true"></i>
+                        <span class="hide-menu">Import management</span>
+                    </a>
+                </li>
+                <li class="sidebar-item pt-2">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('indexHA')}}
+                        aria-expanded="false">
+                        <i class="fas fa-file-image" aria-hidden="true"></i>
+                        <span class="hide-menu">Image</span>
+>>>>>>> 917fbfce0bcaf1bcfdb7befaf5b61d3c841d68cc
                     </a>
                 </li>
             </ul>

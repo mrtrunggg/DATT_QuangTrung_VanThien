@@ -7,7 +7,7 @@
     <div class="page-breadcrumb bg-white">
         <div class="row align-items-center">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">Product</h4>
+                <h4 class="page-title">Invoice</h4>
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 <div class="d-md-flex">
@@ -29,82 +29,54 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
+        <p>
+            <a href="{{route('indexHdb')}}" class="btn btn-primary pull-right">Back</a>
+        </p>
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
         <div class="row">
+            <p class="text-uppercase">
+                Invoice
+            </p>
             <div class="col-sm-12">
                 <div class="white-box">
-
-                    <p>
-                        <a href="{{route('themsp')}}" class="btn btn-primary pull-right">Add Product</a>
-                    </p>
-                   
                     <div class="table-responsive">
                         <table class="table text-nowrap">
                             <thead>
                                 <tr>
-                                    <th class="border-top-0">Name Product</th>
-                                    <th class="border-top-0">Product Type</th>
-                                    <th class="border-top-0">Color</th>
-                                    <th class="border-top-0">Size</th>
-                                    <th class="border-top-0">Picture</th>
-                                    <th class="border-top-0">Quantily</th>
-                                    <th class="border-top-0">Price</th>
-                                    <th class="border-top-0">Discount</th>
-                                    <th class="border-top-0">Promotional Price</th>
-                                    <th class="border-top-0">Desc</th>
-                                    <th class="border-top-0">Import Unit Price</th>
+                                    <th class="border-top-0">Customer Name</th>
+                                    <th class="border-top-0">Staff's Name</th>
+                                    <th class="border-top-0">Invoice Date</th>
+                                    <th class="border-top-0">Total Money</th>
+                                    <th class="border-top-0">Describe</th>
+                                    <th class="border-top-0">Receiver's Information</th>
                                     <th class="border-top-0">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dsSanpham as $SP)
+                                @foreach ($dshoadonban3 as $SP)
                                             <tr>                   
                                                 <td>
-                                                    {{$SP->tensp}}    
+                                                    {{$SP->khachhang_id}}    
                                                 </td>
                                                 <td>
-                                                    {{$SP->loaisp}}    
+                                                    {{$SP->nhanvien_id}}    
                                                 </td>
                                                 <td>
-                                                    {{$SP->mausac}}    
+                                                    {{$SP->ngaylap}}    
                                                 </td>
                                                 <td>
-                                                    {{$SP->kichthuoc}}    
-                                                </td>
-                                                <td>
-                                                    {{$SP->hinhanh}}    
-                                                </td>
-                                                <td>
-                                                    {{$SP->soluong}}    
-                                                </td>
-                                                <td>
-                                                    {{$SP->giaban}}    
-                                                </td>
-                                                <td>
-                                                    {{$SP->discount}}    
-                                                </td>
-                                                <td>
-                                                    {{$SP->giakhuyenmai}}    
+                                                    {{$SP->tongtien}}    
                                                 </td>
                                                 <td>
                                                     {{$SP->mota}}    
                                                 </td>
                                                 <td>
-                                                    {{$SP->dongianhap}}    
+                                                    {{$SP->thongtinnguoinhan}}    
                                                 </td>
                                                 <td>
-                                                   
-                                                    @if($SP->trangthai == 0)
-                                                    <p>Not in stock</p>
-                                                    @else
-                                                    <p>In stock</p>
-                                                    @endif    
-                                                </td>
-                                                <td class="column2">
-                                                    <a href="{{route('suasp',['SP'=>$SP->id])}}"  >Edit |</a>
-                                                    <a href="{{route('xoasp',['SP'=>$SP->id])}}" onclick="return confirm('Bạn có muốn xoá không?')">Delete</a>  
+                                                    {{$SP->trangthai}}
                                                 </td>
                                             </tr>              
                                     @endforeach  
@@ -114,6 +86,55 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <p class="text-uppercase">
+                Invoice Detail
+            </p>
+            <div class="col-sm-12">
+                <div class="white-box">
+                    <div class="table-responsive">
+                        <table class="table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="border-top-0">Invoice Code</th>
+                                    <th class="border-top-0">Product Code</th>
+                                    <th class="border-top-0">Quantity</th>
+                                    <th class="border-top-0">Unit Price</th>
+                                    <th class="border-top-0">Into Money</th>
+                                    <th class="border-top-0">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($dscthoadonban as $SP)
+                                            <tr>                   
+                                                <td>
+                                                    {{$SP->hoadonban_id}}    
+                                                </td>
+                                                <td>
+                                                    {{$SP->sanpham_id}}    
+                                                </td>
+                                                <td>
+                                                    {{$SP->soluong}}    
+                                                </td>
+                                                <td>
+                                                    {{$SP->dongia}}    
+                                                </td>
+                                                <td>
+                                                    {{$SP->thanhtien}}    
+                                                </td>
+                                                <td>
+                                                    {{$SP->trangthai}}    
+                                                </td>
+                                            </tr>              
+                                    @endforeach  
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->
