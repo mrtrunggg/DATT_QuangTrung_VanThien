@@ -31,7 +31,7 @@ class hoadonbanController extends Controller
         $HDB = Hoadonban::find($req->id);
         $HDB->trangthai = $req->trangthai;
         $HDB -> save();
-        @dd($HDB);
+        // @dd($HDB);
         return response()->json($HDB);
     } 
 

@@ -18,8 +18,8 @@ class CreateHoadonnhapsTable extends Migration
             $table->string('tennhacungcap');
             $table->integer('taikhoan_id')->unsigned();
             $table->datetime('ngaylap');
-            $table->integer('tongtien');
-            $table->string('mota');
+            $table->integer('tongtien')->nullable();;
+            $table->string('mota')->nullable();;
             $table->integer('trangthai')->nullable()->default(1);     
             $table->timestamps();
             $table->softDeletes();

@@ -5,13 +5,13 @@ use App\Http\Controllers\taikhoanController;
 use App\Http\Controllers\qltaikhoanController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\sanphamController;
-<<<<<<< HEAD
 use App\Http\Controllers\hoadonbanController; 
-=======
 use App\Http\Controllers\giaodienController;
->>>>>>> 3e8bab8b01460021cf9030029ebff0c097b8e228
+use App\Http\Controllers\nhapkhoController;
 use App\Models\taikhoan;
 use App\Http\Controllers;
+use App\Http\Controllers\hinhanhController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,4 +81,34 @@ Route::group(['prefix' => 'hoadon'], function() {
     Route::get('delete/{SP}',[hoadonbanController::class, 'xulydelete'])->name('xylyxoaHDB');
     Route::post('editTTHdb/{SP}',[hoadonbanController::class, 'editTTHdb']);
     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
+});
+
+// quản lý nhập kho nè
+Route::group(['prefix' => 'hoadonnhap'], function() {
+    Route::get('index',[nhapkhoController::class, 'index'])->name('indexNK');
+    Route::get('create',[nhapkhoController::class, 'create'])->name('formthemHDN');
+    Route::post('xulycreate',[nhapkhoController::class, 'xulycreate'])->name('xylythemHDN');
+    // Route::get('edit/{TK}',[nhapkhoController::class, 'edit'])->name('SuaTK');
+    // Route::post('edit/{TK}',[nhapkhoController::class, 'xulyedit'])->name('xylysuaTK');
+    Route::post('delete/{SP}',[nhapkhoController::class, 'xulydelete']);
+    Route::post('editTTHdb/{SP}',[nhapkhoController::class, 'editTTHdb']);
+    Route::get('view/{SP}',[nhapkhoController::class, 'view'])->name('viewHDN');
+    Route::get('viewct/{SP}', [nhapkhoController::class, 'viewct'])->name('viewCTHDN');
+    Route::post('xulycreatectsp',[nhapkhoController::class, 'xulycreatectsp'])->name('xylythemCTHDN');
+    Route::get('showctsp/{SP}',[nhapkhoController::class, 'showctsp']);
+    Route::get('timidsp/{SP}',[nhapkhoController::class, 'timidsp']);
+
+    Route::post('destroy/{SP}',[nhapkhoController::class, 'destroy'])->name('xylyxoaCTHDN');
+    
+    Route::get('tongtienne/{SP}',[nhapkhoController::class, 'tongtienne']);
+
+    Route::get('create2',[nhapkhoController::class, 'create2'])->name('formthemhdn2');
+    
+});
+
+
+Route::group(['prefix' => 'hinhanh'], function() {
+    Route::get('index',[hinhanhController::class, 'index'])->name('indexHA');
+    Route::get('create',[hinhanhController::class, 'create'])->name('themha');
+    Route::post('xulycreate',[hinhanhController::class, 'xulycreate'])->name('xylythemha');
 });
