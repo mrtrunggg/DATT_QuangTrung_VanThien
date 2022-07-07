@@ -98,11 +98,11 @@ class taikhoanController extends Controller
         $id->save();
         
         Mail::send('emails.check_email_forget',compact('id'), function($email) use($id){
-             $email->subject("MyShopping - Lấy lại mật khẩu");
+             $email->subject("MyShopping - Password retrieval");
              $email->to($id->email, $id->tendangnhap);
            
         });
-        return redirect()->back()->with("message","Vui lòng check email để thực hiện thay đổi mật khẩu");
+        return redirect()->back()->with("message","Please check your email to change your password");
 
 
     }

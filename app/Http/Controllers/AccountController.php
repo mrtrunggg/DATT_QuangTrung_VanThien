@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail;
 use Hash;
+use Cart;
 use Illuminate\Mail\Message;
 use Illuminate\Mail\Mailable;
 class AccountController extends Controller
@@ -40,7 +41,7 @@ class AccountController extends Controller
         $req->merge(['image'=>$file_name]);
         $userchange = DB::table('taikhoans')->where('id',$id)->update(['hinhdaidien'=>$req->image,'hoten'=>$req->hoten,'diachi'=>$req->diachi,'dienthoai'=>$req->dienthoai]);
         $user = DB::table('taikhoans')->find($id);
-        return redirect()->route('homeAccount',compact('user','id'));
+        return redirect()->route('homeAccount',compact('user','id'))->with('succes','Successfully updated personal information!');
     }
 
     public function changePassword($id){
@@ -49,25 +50,25 @@ class AccountController extends Controller
     public function postChangePassword(Request $req, $id){
         $user = DB::table('taikhoans')->find($id);
         if($req->oldpass == Null){
-            return redirect()->route('changepassword',compact('id'))->with('notice','Vui lòng nhập mật khẩu cũ!');
+            return redirect()->route('changepassword',compact('id'))->with('notice1','Please enter old password!');
         }
         elseif($req->newpass == Null)
         {
-            return redirect()->route('changepassword',compact('id'))->with('notice','Vui lòng nhập mật khẩu mới!');
+            return redirect()->route('changepassword',compact('id'))->with('notice1','Please enter a new password!');
         }
         elseif($req->renewpass == Null){
-            return redirect()->route('changepassword',compact('id'))->with('notice','Vui lòng nhập lại mật khẩu mới!');
+            return redirect()->route('changepassword',compact('id'))->with('notice1','Please re-enter new password!');
         }
         elseif($req->newpass != $req->renewpass){
-            return redirect()->route('changepassword',compact('id'))->with('notice','Vui lòng nhập lại mật khẩu mới chính xác!');
+            return redirect()->route('changepassword',compact('id'))->with('notice1','Please re-enter the correct new password!');
         }
         elseif(!(Hash::check($req->get('oldpass'),$user->password)))
         {
-            return redirect()->route('changepassword',compact('id'))->with('notice','Mật khẩu cũ không chính xác, vui lòng nhập lại!');
+            return redirect()->route('changepassword',compact('id'))->with('notice1','The old password is incorrect, please re-enter!');
         }
         else{
             $pass = DB::table('taikhoans')->where('id',$id)->update(['password'=>bcrypt($req->newpass)]);
-            return redirect()->route('changepassword',compact('id'))->with('notice','Thay đổi mật khẩu thành công!');
+            return redirect()->route('changepassword',compact('id'))->with('notice','Password change successful!');
 
         }
     }
@@ -78,11 +79,31 @@ class AccountController extends Controller
     public function huydonhang($id,$hds){
         $hdhuy = DB::table('hoadonbans')->where('id','=',$hds)->update(['trangthai'=>0]);
         $hd = DB::table('hoadonbans')->where('khachhang_id','=',$id)->get();
-        return redirect()->route('showhistory',compact('id','hds'))->with('succes','Hủy thành công');
+        return redirect()->route('showhistory',compact('id','hd'))->with('succes','Order canceled successfully!');
     }
     public function datlaidon($id,$hds){
         $hdhuy = DB::table('hoadonbans')->where('id','=',$hds)->update(['trangthai'=>1]);
         $hd = DB::table('hoadonbans')->where('khachhang_id','=',$id)->get();
-        return redirect()->route('showhistory',compact('id','hds'))->with('succes','Đặt lại thành công');
+        return redirect()->route('showhistory',compact('id','hd'))->with('succes','Your canceled order has been successfully reset!');
+    }
+    public function viewBill($id,$bill){
+        $cthd = DB::table('cthoadonbans')->where('hoadonban_id','=',$bill)->get();
+        $hda = DB::table('hoadonbans')->find($bill);
+       // dd($hd);
+        Cart::destroy();
+        foreach($cthd as $hd)
+        {
+            $product_info = DB::table('sanphams')->find($hd->sanpham_id);
+            $data['id'] = $product_info->id;
+            $data['qty'] = $hd->soluong;
+            $data['name'] = $product_info->tensp;
+            $data['price'] = $hd->dongia;
+            $data['weight'] = 0;
+            $data['options']['image'] = $product_info->hinhanh;
+            //dd($data);
+            Cart::add($data);  
+        }
+        $content = Cart::content();
+        return view('userAccount.viewbill',compact('id','bill','content','hda'));
     }
 }

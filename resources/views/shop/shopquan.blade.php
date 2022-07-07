@@ -7,7 +7,7 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="{{asset('uploads/'.$sanpham->hinhanh)}}" alt="">
+                            <a href="{{route('detailproduct',['id'=>$id,'idsp'=>$sanpham->id])}}">  <img src="{{asset('uploads/'.$sanpham->hinhanh)}}" alt=""></a>
                                 <!-- Hover Thumb -->
                                 <!-- <img class="hover-img" src="{{asset('amado-master/img/product-img/product2.jpg')}}" alt=""> -->
                             </div>
@@ -47,7 +47,8 @@
                     </div>
                     @empty
                     <div class="col-12 col-sm-6 col-md-12 col-xl-6">
-                        <p>Không có dữ liệu</p>
+                        <p>No products
+</p>
                         </div>
                     @endforelse
 

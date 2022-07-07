@@ -1,4 +1,4 @@
-@extends('shop.partials.index')
+@extends('userAccount.partials.index')
 @section('content')
 
         <div class="cart-table-area section-padding-100">
@@ -6,10 +6,10 @@
                 <div class="row">
                     <div class="col-12 col-lg-8">
                         <div class="cart-title mt-50">
-                            <h2>Shopping Cart</h2>
+                            <h2>Your cart</h2>
                         </div>
                         @if(session('erro'))
-                            <div class="alert alert-danger">
+                            <div class="alert alert-succes">
                             {{session()->get('erro')}}
                             </div> 
                         @endif
@@ -43,11 +43,11 @@
                                         
                                                 <div class="quantity">
                                                   
-                                                    <input type="number"  name="cart_quantity" value="{{$cart->qty}}">
+                                                    <input type="number"  name="cart_quantity" readonly value="{{$cart->qty}}">
                                                     <input type="hidden" name="rowID" value="{{$cart->rowId}}">
                                                    
                                                 </div>
-                                                <input type="submit" value="Update" name ="update_qty" class="btn btn-default btn-sm">
+                                               
                                             </div>
                                             </form>
                                         </td>
@@ -55,9 +55,6 @@
                                             <span>
                                                 {{number_format($cart->price * $cart->qty)}} VNĐ
                                             </span>
-                                       </td>
-                                       <td>
-                                        <a href="{{route('deletecart',['id'=>$id,'idSP'=>$cart->rowId])}}"><i class="fa fa-times"></i></a>
                                        </td>
                                     </tr>
                                     @empty
@@ -77,9 +74,15 @@
                                 <li><span>delivery:</span> <span>Free</span></li>
                                 <li><span>total:</span> <span>{{Cart::subtotal()}} VNĐ</span></li>
                             </ul>
+
                             <div class="cart-btn mt-100">
-                                <a href="{{route('checkout',$id)}}" class="btn amado-btn w-100">Checkout</a>
+                            @if($hda->trangthai == 1 ||$hda->trangthai == 2)
+                            <a href="{{route('huy',['id'=>$id,'hds'=>$bill])}}" class="btn amado-btn w-100">Cancel order</a>
+                            @elseif($hda->trangthai == 0)
+                            <a href="{{route('datlai',['id'=>$id,'hds'=>$bill])}}" class="btn amado-btn w-100">Reorder</a>
+                            @endif
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -87,4 +90,4 @@
         </div>
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
-    @endsection
+@endsection

@@ -8,6 +8,10 @@
 <div class="alert alert-success">
     {{session()->get('erro')}}
 </div> 
+@elseif(session('erro1'))
+<div class="alert alert-danger">
+    {{session()->get('erro1')}}
+</div> 
 @endif
                 <div class="row">
                     <div class="col-12 col-lg-8">
@@ -116,7 +120,7 @@
                                     </tr>
                                     @empty
                                     <td class="cart_product_img" colspan="6">
-                                            Không có dữ liệu
+                                    No products
                                         </td>
                                     @endforelse
                                 </tbody>

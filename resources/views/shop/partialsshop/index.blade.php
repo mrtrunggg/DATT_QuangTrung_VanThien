@@ -10,9 +10,9 @@
     <!--  Catagories  -->
     <div class="catagories-menu">
         <ul>
-            <li class="active"><a href="{{route('shop',$id)}}">Sản phẩm hiện có</a></li>
-            <li><a href="{{route('shopao',$id)}}">Áo</a></li>
-            <li><a href="{{route('shopquan',$id)}}">Quần</a></li>
+            <li class="active"><a href="{{route('shop',$id)}}">Products available</a></li>
+            <li><a href="{{route('shopao',$id)}}">Shirt</a></li>
+            <li><a href="{{route('shopquan',$id)}}">Trousers</a></li>
         </ul>
     </div>
 </div>

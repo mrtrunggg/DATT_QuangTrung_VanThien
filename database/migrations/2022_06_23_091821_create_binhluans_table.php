@@ -19,6 +19,7 @@ class CreateBinhluansTable extends Migration
             $table->integer('taikhoan_id')->unsigned();
             $table->integer('sanpham_id')->unsigned();
             $table->string('mota');
+            $table->string('traloibinhluan_id');
             $table->datetime('ngaybl');
             $table->foreign('taikhoan_id')->references('id')->on('taikhoans');
             $table->foreign('sanpham_id')->references('id')->on('sanphams');

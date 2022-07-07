@@ -9,6 +9,8 @@ use App\Http\Controllers\hoadonbanController;
 use App\Http\Controllers\giaodienController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\quanlyCommentController;
+use App\Http\Controllers\BinhluanController;
 use App\Models\taikhoan;
 use App\Http\Controllers;
 /*
@@ -39,8 +41,8 @@ Route::get('/home/{id}',[giaodienController::class, 'home'])->name('home');
 Route::get('/cart/{id}',[giaodienController::class, 'cart'])->name('cart');
 
 Route::get('/shop/{id}',[giaodienController::class, 'shop'])->name('shop');
-Route::get('shop/ao/{id}',[giaodienController::class, 'shopao'])->name('shopao');
-Route::get('shop/quan/{id}',[giaodienController::class, 'shopquan'])->name('shopquan');
+Route::get('shop/shirt/{id}',[giaodienController::class, 'shopao'])->name('shopao');
+Route::get('shop/trousers/{id}',[giaodienController::class, 'shopquan'])->name('shopquan');
 
 
 Route::get('/detail-product/{id}',[giaodienController::class, 'detail'])->name('detail');
@@ -57,11 +59,17 @@ Route::get('/change-password/{id}',[AccountController::class,'changePassword'])-
 Route::post('/change-password/{id}',[AccountController::class,'postChangePassword'])->name('postchangepassword');
 
 Route::get('/Transaction-history/{id}',[AccountController::class,'showHistory'])->name('showhistory');
+Route::get('/Transaction-history/view-bill/{id}/{bill}',[AccountController::class, 'viewBill'])->name('viewbill');
 Route::get('/Transaction-history/huy/{id}/{hds}',[AccountController::class,'huydonhang'])->name('huy');
 Route::get('/Transaction-history/datlai/{id}/{hds}',[AccountController::class,'datlaidon'])->name('datlai');
 
+//Binh luan
+Route::get('/Review/{id}/{sp}',[BinhluanController::class,'create'])->name('writeReview');
+Route::post('/Review/{id}/{sp}',[BinhluanController::class,'xulyCreate'])->name('xulycreate');
+
 //cart 
 Route::get('/show-cart/{id}',[CartController::class, 'showCart'])->name('showCart');
+
 Route::post('/save-cart/{id}',[CartController::class, 'saveCart'])->name('saveCart');
 Route::get('delete-cart/{id}/{idSP}',[CartController::class, 'deleteCart'])->name('deletecart');
 Route::post('/update-cart/{id}',[CartController::class, 'updateCart'])->name('updatecart');
@@ -107,4 +115,10 @@ Route::group(['prefix' => 'hoadon'], function() {
     Route::get('delete/{SP}',[hoadonbanController::class, 'xulydelete'])->name('xylyxoaHDB');
     Route::post('editTTHdb/{SP}',[hoadonbanController::class, 'editTTHdb']);
     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
+});
+
+// Bình luận
+Route::group(['prefix' => 'Comment'], function(){
+    Route::get('index',[quanlyCommentController::class, 'index'])->name('indexcomment');
+    Route::post('reply-comment',[quanlyCommentController::class, 'repComment'])->name('repcomment');
 });

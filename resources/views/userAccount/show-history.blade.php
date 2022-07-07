@@ -4,8 +4,12 @@
                         <div class="cart-title mt-50">
                             <h2>Purchase history</h2>
                         </div>
-
                         <div class="cart-table clearfix">
+                        @if(session('succes'))
+                        <div class="alert alert-success">
+                            {{session()->get('succes')}}
+                            </div> 
+                            @endif
                             <table class="table table-responsive">
                                 <thead>
                                     <tr>
@@ -14,7 +18,8 @@
                                         <th>Describe</th>
                                         <th>Informtion</th>
                                         <th>Status</th>
-                                        <th></th>
+                                        
+                                        <th>Function</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -32,16 +37,17 @@
                                         <td>{{$sp->thongtinnguoinhan}}</td>
                                         @if ($sp->trangthai == 0)
                                         <td>Cancelled</td>
-                                        <td><a href="{{route('datlai',['id'=>$id,'hds'=>$sp->id])}}">Reorder</td>
+                                      
+                                        <td><a class="btn amado-btn w-100" href="{{route('datlai',['id'=>$id,'hds'=>$sp->id])}}">Reorder</a></td><td> <a class="btn amado-btn w-100" href="{{route('viewbill',['id'=>$id,'bill'=>$sp->id])}}">View</a></td>
                                         @elseif($sp->trangthai == 1)
                                         <td>Awaiting Approval</td>
-                                        <td><a href="{{route('huy',['id'=>$id,'hds'=>$sp->id])}}">Cancel order</td>
+                                        <td><a class="btn amado-btn w-100" href="{{route('huy',['id'=>$id,'hds'=>$sp->id])}}">Cancel order</a></td><td> <a class="btn amado-btn w-100" href="{{route('viewbill',['id'=>$id,'bill'=>$sp->id])}}">View</a></td>
                                         @else
                                         <td>Approval</td>
-                                        <td><a href="{{route('huy',['id'=>$id,'hds'=>$sp->id])}}">Cancel order</td>
+                                        <td><a class="btn amado-btn w-100" href="{{route('huy',['id'=>$id,'hds'=>$sp->id])}}">Cancel order</a></td><td> <a class="btn amado-btn w-100" href="{{route('viewbill',['id'=>$id,'bill'=>$sp->id])}}">View</a></td>
                                         @endif
                                         @empty
-                                        <td>Không có hóa đơn</td>
+                                        <td>No bills</td>
                                         @endforelse
                                     </tr>
                                 </tbody>

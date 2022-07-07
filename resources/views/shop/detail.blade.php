@@ -46,7 +46,7 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div> -->
                                     <div class="review">
-                                        <a href="#">Write A Review</a>
+                                        <a href="{{route('writeReview',['id'=>$id,'sp'=>$SP->id])}}">Write A Review</a>
                                     </div>
                                 </div>
                                 <!-- Avaiable -->

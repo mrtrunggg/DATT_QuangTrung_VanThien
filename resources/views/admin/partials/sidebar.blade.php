@@ -32,6 +32,13 @@
                         <span class="hide-menu">Invoice</span>
                     </a>
                 </li>
+                <li class="sidebar-item pt-2">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('indexcomment')}}
+                        aria-expanded="false">
+                        <i class="far fa-comments" aria-hidden="true"></i>
+                        <span class="hide-menu">Comment</span>
+                    </a>
+                </li>
             </ul>
             
         </nav>

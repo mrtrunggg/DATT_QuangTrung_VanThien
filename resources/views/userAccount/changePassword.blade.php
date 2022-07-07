@@ -6,10 +6,14 @@
                     <div class="col-12 col-lg-8">
                         <div class="checkout_details_area mt-50 clearfix">
                         @if(session('notice'))
-<div class="alert alert-success">
-    {{session()->get('notice')}}
-</div> 
-@endif
+                            <div class="alert alert-success">
+                             {{session()->get('notice')}}
+                            </div> 
+                            @elseif(session('notice1'))
+                            <div class="alert alert-danger">
+                             {{session()->get('notice1')}}
+                            </div> 
+                            @endif
                             <form acction="{{route('postchangepassword',$id)}}" method="post" enctype="multipart/form-data">
                             @csrf
                                     <div class="col-12 mb-3">

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\taikhoan;
@@ -39,7 +38,6 @@ class CartController extends Controller
         $data['options']['image'] = $product_info->hinhanh;
         //dd($data);
         Cart::add($data);
-        
         return redirect()->route('showCart',$id);
     }
     public function showCart($id){
@@ -65,10 +63,19 @@ class CartController extends Controller
 
     public function saveCheckout(Request $req, $id){
         $content = Cart::content();
+        foreach($content as $check)
+        {
+            $idsp = DB::table('sanphams')->where('tensp','=',$check->name)->first();
+            if($idsp->soluong < $check ->qty)
+            {
+                return redirect()->route('showCart',$id)->with('erro','Product "'.$idsp->tensp.'" only "'.$idsp->soluong.'" products in stock, please choose less quantity!');
+            }
+        }
+
         $thongtin = Null;
         $tk = DB::table('taikhoans')->find($id);
         if($req->check == 1){
-            return redirect()->route('checkout',$id)->with('erro','Vui lòng chọn sản phảm trước khi đặt hàng!');
+            return redirect()->route('checkout',$id)->with('erro1','Please select product before ordering!');
         }
         else{
         if($req ->fullname == Null){
@@ -85,7 +92,7 @@ class CartController extends Controller
             $thongtin = $thongtin.' - '.$req->email;
         }
         if($req->address == Null){
-            return redirect()->route('checkout',$id)->with('erro','Vui lòng điền địa chỉ nhận hàng');
+            return redirect()->route('checkout',$id)->with('erro1','Please enter your delivery address');
         }
         else{
         $thongtin = $thongtin.' - '.$req->address;
@@ -97,7 +104,6 @@ class CartController extends Controller
             $thongtin = $thongtin.' - '.$req->phoneNo;
         }
         $NewHD = new hoadonban();
-        $NewHD ->khachhang_id = $id;
         $NewHD ->khachhang_id = $id;
         $NewHD -> ngaylap = Carbon::now();
         $NewHD -> tongtien = Cart::subtotal();
@@ -113,11 +119,11 @@ class CartController extends Controller
             $newcthd -> soluong = $cthd ->qty;
             $newcthd -> dongia = $cthd -> price;
             $newcthd ->thanhtien = $cthd->price * $cthd->qty;
-            $newcthd -> trangthai = 1;
+            $newcthd -> trangthai = 0;
             $newcthd->save();
         }
         Cart::destroy();
-        return redirect()->route('checkout',$id)->with('erro','Đặt hàng thành công!');
+        return redirect()->route('checkout',$id)->with('erro','Order Success!');
     }
     }
     
