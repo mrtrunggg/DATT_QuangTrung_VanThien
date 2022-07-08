@@ -30,7 +30,7 @@
                                         <input type="email" class="form-control" name="email" placeholder="Email" >
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <input type="text" class="form-control mb-3" name="address" placeholder="Address" >
+                                        <input type="text" class="form-control" name="address" placeholder="Address" >
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <input type="number" class="form-control" name="phoneNo" min="0" placeholder="Phone No" >

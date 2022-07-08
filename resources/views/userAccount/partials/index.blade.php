@@ -70,31 +70,21 @@
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li class="active"><a href="{{route('homeAccount',$id)}}">Information</a></li>
+                    <li><a href="{{route('homeAccount',$id)}}">Information</a></li>
                     <li><a href="{{route('changepassword',$id)}}">Change Password</a></li>
                     <li><a href="{{route('showhistory',$id)}}">Transaction history</a></li>
                     <li><a href="{{route('auth.login')}}">Logout</a></li>
                 </ul>
             </nav>
             <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
+            {{-- <div class="amado-btn-group mt-30 mb-100">
                 <a href="#" class="btn amado-btn mb-15">%Discount%</a>
                 <a href="#" class="btn amado-btn active">New this week</a>
-            </div>
+            </div> --}}
             <!-- Cart Menu -->
-            <div class="cart-fav-search mb-100">
-                <a href="{{route('cart',$id)}}" class="cart-nav"><img src="{{asset('amado-master/img/core-img/cart.png')}}" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="{{asset('amado-master/img/core-img/favorites.png')}}" alt=""> Favourite</a>
-                <a href="#" class="search-nav"><img src="{{asset('amado-master/img/core-img/search.png')}}" alt=""> Search</a>
-                <a href="{{route('auth.loginShow')}}"> Log out</a>
-            </div>
+            
             <!-- Social Button -->
-            <div class="social-info d-flex justify-content-between">
-                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
+         
         </header>
         <!-- Header Area End -->
 

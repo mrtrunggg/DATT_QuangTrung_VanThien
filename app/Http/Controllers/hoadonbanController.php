@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\cthoadonban;
+use App\Models\sanpham;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Hoadonban;
@@ -30,7 +31,21 @@ class hoadonbanController extends Controller
     function editTTHdb(Request $req){       
         $HDB = Hoadonban::find($req->id);
         $HDB->trangthai = $req->trangthai;
-        $HDB -> save();
+        $HDB -> update();
+        
+        $x = DB::table('cthoadonbans')->where('hoadonban_id','=',$HDB->id)->get();
+       
+        foreach($x as $b){
+
+            $cthdb = cthoadonban::find($b->id);
+            $cthdb -> trangthai = $req->trangthai;
+            $cthdb -> update();
+            
+            $sp = sanpham::find($b->sanpham_id);
+            $sp->soluong = $sp->soluong - $b->soluong;
+            $sp -> update();
+        }
+      
         // @dd($HDB);
         return response()->json($HDB);
     } 
@@ -40,7 +55,7 @@ class hoadonbanController extends Controller
         $data=1;
         $dshoadonban3 = DB::table('hoadonbans')->where('trangthai','!=','0')
                                             ->where('id','=',$id)->get();
-        $dscthoadonban = DB::table('cthoadonbans')->where('trangthai','!=','0')
+        $dscthoadonban = DB::table('cthoadonbans')
                                             ->where('hoadonban_id','=',$id)->get();
         return view('admin.quanlyadmin.hoadonban.view',compact('dshoadonban3','dscthoadonban'), ['cuccung' => $data]);
     } 

@@ -35,7 +35,6 @@ class giaodienController extends Controller
     }
     public function shopquan($id){
         $SP = DB::table('sanphams')->where('loaisp','like','%Quần%')->get();
-        
         return view('shop.shopquan',compact('id','SP'));
     }
 

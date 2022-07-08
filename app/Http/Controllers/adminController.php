@@ -21,7 +21,7 @@ class adminController extends Controller
         $data = [0,0,0,0,0,0,0,0,0,0,0,0];
         foreach ($monththongke as $index => $month){
             $index;
-            $data[$month] = $thongke[$index];
+            $data[--$month] = $thongke[$index];
         }
         return view('admin.index', ['cuccung' => $data]);
     }

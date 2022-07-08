@@ -29,13 +29,41 @@ class hinhanhController extends Controller
     function create()
     {
         $data=1;
-        // $dstaikhoanlaphd = DB::table('taikhoans')->where('trangthai','=','1')
-        //                                         ->where('loaitk','=','1')
-        //                                         ->get();
-        // $dssplaphd = DB::table('sanphams')
-        // ->where('trangthai','=','1')
-        // ->get();
-        return view('admin.quanlyadmin.hinhanh.create', ['cuccung' => $data]);
+        $dssanpham =  DB::table('sanphams')->where('trangthai','=','1')->get(); 
+        return view('admin.quanlyadmin.hinhanh.create',compact('dssanpham'), ['cuccung' => $data]);
     }
+
+
+    function xulycreate(Request $req){
+        
+        $input=$req->all();
+        $images=array();
+        if($files=$req->file('filename')){
+            foreach($files as $file){
+                $name=$file->getClientOriginalName();
+                $file->move('filename',$name);
+                $images[]=$name; 
+            }
+        };
+        for($i =0 ; $i < count($images) ; $i++){
+            $KH = new hinhanhsp();
+            $KH->masp = $req->masp;
+            $KH->tenhinhanh = $images[$i];
+            $KH->save();
+        }  
+
+        $dsanhmausanpham = hinhanhsp::all();
+       return redirect()->route('indexHA',compact('dsanhmausanpham'));
+    }
+
+    function deleteha($id){       
+        $KH = hinhanhsp::find($id);
+        hinhanhsp::where('id', $id)->delete();
+        $dsanhmausanpham = DB::table('hinhanhsps')->get();    
+        return redirect()->route('indexHA',compact('dsanhmausanpham'));
+    }
+
+
+    
     
 }

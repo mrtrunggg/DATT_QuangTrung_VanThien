@@ -51,7 +51,7 @@
                                 @foreach ($dshinhanh as $SP)
                                             <tr>                   
                                                 <td>
-                                                    {{$SP->tenhinhanh}} 
+                                                    <img style="width:150px;height:80px" src="{!! url('filename/'.$SP->tenhinhanh.'') !!}">
                                                 </td>
                                                 <td>
                                                     @foreach ($tensp as $TSP)
@@ -62,6 +62,9 @@
                                                 </td>
                                                 <td>
                                                     {{$SP->trangthai}}    
+                                                </td>
+                                                <td>
+                                                    <a href="{{route('xylyxoahahehe',['HA'=>$SP->id])}}" class="button btn btn-primary">Delete</a>
                                                 </td>
                                             </tr>              
                                     @endforeach  

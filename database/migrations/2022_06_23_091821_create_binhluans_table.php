@@ -16,10 +16,10 @@ class CreateBinhluansTable extends Migration
         Schema::create('binhluans', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('taikhoan_id')->unsigned();
+            $table->integer('taikhoan_id')->unsigned()->nullable();
             $table->integer('sanpham_id')->unsigned();
             $table->string('mota');
-            $table->string('traloibinhluan_id');
+            $table->string('traloibinhluan_id')->nullable();
             $table->datetime('ngaybl');
             $table->foreign('taikhoan_id')->references('id')->on('taikhoans');
             $table->foreign('sanpham_id')->references('id')->on('sanphams');
