@@ -40,24 +40,20 @@
                 <!-- ============================================================== -->
                 <!-- Search -->
                 <!-- ============================================================== -->
-                <li class=" in">
+                {{-- <li class=" in">
                     <form role="search" class="app-search d-none d-md-block me-3">
                         <input type="text" placeholder="Search..." class="form-control mt-0">
                         <a href="" class="active">
                             <i class="fa fa-search"></i>
                         </a>
                     </form>
-                </li>
+                </li> --}}
                 <!-- ============================================================== -->
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
-                <li>
-                    <a class="profile-pic" href="#">
-                        <img src="admin/plugins/images/users/varun.jpg" alt="user-img" width="36"
-                            class="img-circle"><span class="text-white font-medium">Steave</span></a>
-                </li>
+                
 
-                <li>
+                <li class="logout-btn">
                     <a class="dropdown-item" href="{{ route('admin.logout') }}">
                         <i class="fa fa-sign-out fa-lg"></i> Logout
                     </a>
@@ -74,3 +70,14 @@
         </div>
     </nav>
 </header>
+
+
+<style>
+
+.logout-btn{
+    margin-right: 20px;
+    background-color: #f7e9e9;
+    color: white;
+}
+
+</style>

@@ -10,14 +10,14 @@
                 <h4 class="page-title">Invoice</h4>
             </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                <div class="d-md-flex">
+                {{-- <div class="d-md-flex">
                     <ol class="breadcrumb ms-auto">
                         <li><a href="#" class="fw-normal">Dashboard</a></li>
                     </ol>
                     <a href="https://www.wrappixel.com/templates/ampleadmin/" target="_blank"
                         class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Upgrade
                         to Pro</a>
-                </div>
+                </div> --}}
             </div>
         </div>
         <!-- /.col-lg-12 -->
@@ -58,7 +58,11 @@
                                 @foreach ($dshoadonban3 as $SP)
                                             <tr>                   
                                                 <td>
-                                                    {{$SP->khachhang_id}}    
+                                                    @foreach ($tenkh as $TSP)
+                                                        @if ($TSP->id==$SP->khachhang_id)
+                                                            {{$TSP->tendangnhap}}   
+                                                        @endif
+                                                    @endforeach     
                                                 </td>
                                                 <td>
                                                     {{$SP->nhanvien_id}}    
@@ -76,7 +80,11 @@
                                                     {{$SP->thongtinnguoinhan}}    
                                                 </td>
                                                 <td>
-                                                    {{$SP->trangthai}}
+                                                    @if($SP->trangthai==1)
+                                                        Unconfimred
+                                                    @elseif($SP->trangthai==2)
+                                                        Confirm
+                                                    @endif   
                                                 </td>
                                             </tr>              
                                     @endforeach  
@@ -98,7 +106,7 @@
                             <thead>
                                 <tr>
                                     <th class="border-top-0">Invoice Code</th>
-                                    <th class="border-top-0">Product Code</th>
+                                    <th class="border-top-0">Product Name</th>
                                     <th class="border-top-0">Quantity</th>
                                     <th class="border-top-0">Unit Price</th>
                                     <th class="border-top-0">Into Money</th>
@@ -112,7 +120,11 @@
                                                     {{$SP->hoadonban_id}}    
                                                 </td>
                                                 <td>
-                                                    {{$SP->sanpham_id}}    
+                                                    @foreach ($tensp as $TSP)
+                                                        @if ($TSP->id==$SP->sanpham_id)
+                                                            {{$TSP->tensp}}   
+                                                        @endif
+                                                    @endforeach      
                                                 </td>
                                                 <td>
                                                     {{$SP->soluong}}    
@@ -124,7 +136,11 @@
                                                     {{$SP->thanhtien}}    
                                                 </td>
                                                 <td>
-                                                    {{$SP->trangthai}}    
+                                                    @if($SP->trangthai==1)
+                                                        Unconfimred
+                                                    @elseif($SP->trangthai==2)
+                                                        Confirm
+                                                    @endif    
                                                 </td>
                                             </tr>              
                                     @endforeach  

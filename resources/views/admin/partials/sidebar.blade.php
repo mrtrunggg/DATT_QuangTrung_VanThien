@@ -5,7 +5,7 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="sidebar-item pt-2">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('admin.index22222')}}
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('thongke')}}
                         aria-expanded="false">
                         <i class="far fa-clock" aria-hidden="true"></i>
                         <span class="hide-menu">Dashboard</span>
@@ -49,18 +49,16 @@
                         aria-expanded="false">
                         <i class="fas fa-file-image" aria-hidden="true"></i>
                         <span class="hide-menu">Image</span>
-<<<<<<< HEAD
+
                     </a>
                 </li>
-                <li class="sidebar-item pt-2">
+                {{-- <li class="sidebar-item pt-2">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('thongke')}}
                         aria-expanded="false">
                         <i class="fas fa-chart-line" aria-hidden="true"></i>
                         <span class="hide-menu">Statistical</span>
-=======
->>>>>>> 84a65fd567abf98a4e0a71e4a366578d282da687
                     </a>
-                </li>
+                </li> --}}
             </ul>
             
         </nav>

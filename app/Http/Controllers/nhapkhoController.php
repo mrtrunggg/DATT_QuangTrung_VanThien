@@ -23,6 +23,13 @@ class nhapkhoController extends Controller
         return view('admin.quanlyadmin.hoadonnhap.index',compact('dshoadonnhap'),  ['cuccung' => $data]);
     }
 
+    function indexnhanvien()
+    {
+        $data=1;
+        $dshoadonnhap = DB::table('hoadonnhaps')->where('trangthai','!=','0')->get();   
+        return view('admin.quanlyadmin.hoadonnhap.index',compact('dshoadonnhap'),  ['cuccung' => $data]);
+    }
+    
     function create()
     {
         
