@@ -49,14 +49,28 @@
                                 <div class="form-group mb-4">
                                     <label class="col-md-12 p-0">Product Type</label>
                                     <div class="col-md-12 border-bottom p-0">
-                                        <input type="text" placeholder=" " name="loaisp"
-                                            class="form-control p-0 border-0"> </div>
+                                            <select name="loaisp">
+                                                <option value="T-shirt">T-shirt</option>
+                                                <option value="Coart">Coat</option>
+                                                <option value="Shirt">Shirt</option>
+                                                <option value="Shorts">Shorts</option>
+                                                <option value="Trousers">Trousers</option>
+                                                <option value="Spandex pants">Spandex pants</option>
+                                            </select>
+                                        </div>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="col-md-6 p-0">Color</label>
                                     <div class="col-md-6 border-bottom p-0">
-                                        <input type="text" placeholder=" " name="color"
-                                            class="form-control p-0 border-0"> </div>
+                                            <select name="color">
+                                                <option value="Red">Red</option>
+                                                <option value="Yellow">Yellow</option>
+                                                <option value="Blue">Blue</option>
+                                                <option value="Green">Green</option>
+                                                <option value="Violet">Violet</option>
+                                                <option value="White">White</option>
+                                                <option value="Black">Black</option>
+                                            </select> </div>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="col-md-6 p-0">Size</label>
