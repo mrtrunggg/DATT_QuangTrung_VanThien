@@ -8,18 +8,11 @@ use App\Http\Controllers\sanphamController;
 use App\Http\Controllers\hoadonbanController; 
 use App\Http\Controllers\giaodienController;
 use App\Http\Controllers\nhapkhoController;
-<<<<<<< HEAD
-
-=======
->>>>>>> 84a65fd567abf98a4e0a71e4a366578d282da687
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\quanlyCommentController;
 use App\Http\Controllers\BinhluanController;
-<<<<<<< HEAD
 use App\Http\Controllers\thongkeController;
-=======
->>>>>>> 84a65fd567abf98a4e0a71e4a366578d282da687
 use App\Models\taikhoan;
 use App\Http\Controllers;
 use App\Http\Controllers\hinhanhController;
@@ -127,20 +120,11 @@ Route::group(['prefix' => 'hoadon'], function() {
     Route::post('editTTHdb/{SP}',[hoadonbanController::class, 'editTTHdb']);
     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
 });
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 84a65fd567abf98a4e0a71e4a366578d282da687
 // Bình luận
 Route::group(['prefix' => 'Comment'], function(){
     Route::get('index',[quanlyCommentController::class, 'index'])->name('indexcomment');
     Route::post('reply-comment',[quanlyCommentController::class, 'repComment'])->name('repcomment');
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> 84a65fd567abf98a4e0a71e4a366578d282da687
 // quản lý nhập kho nè
 Route::group(['prefix' => 'hoadonnhap'], function() {
     Route::get('index',[nhapkhoController::class, 'index'])->name('indexNK');
@@ -169,7 +153,7 @@ Route::group(['prefix' => 'hinhanh'], function() {
     Route::get('index',[hinhanhController::class, 'index'])->name('indexHA');
     Route::get('create',[hinhanhController::class, 'create'])->name('themha');
     Route::post('xulycreate',[hinhanhController::class, 'xulycreate'])->name('xylythemha');
-<<<<<<< HEAD
+    Route::get('delete/{HA}',[hinhanhController::class, 'deleteha'])->name('xylyxoahahehe');
 });
 
 // Thong ke
@@ -179,8 +163,5 @@ Route::group(['prefix' => 'thongke'], function() {
     Route::post('by-date',[thongkeController::class, 'byDate'])->name('TheoNgay');
     
 });
-=======
-    Route::get('delete/{HA}',[hinhanhController::class, 'deleteha'])->name('xylyxoahahehe');
 
-});
->>>>>>> 84a65fd567abf98a4e0a71e4a366578d282da687
+
