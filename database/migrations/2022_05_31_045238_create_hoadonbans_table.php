@@ -16,10 +16,10 @@ class CreateHoadonbansTable extends Migration
         Schema::create('hoadonbans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('khachhang_id')->unsigned();
-            $table->integer('nhanvien_id')->unsigned();
+            $table->integer('nhanvien_id')->nullable()->unsigned();
             $table->string('ngaylap');
             $table->integer('tongtien');
-            $table->string('mota');
+            $table->string('mota')->nullable();
             $table->string('thongtinnguoinhan');
             $table->integer('trangthai')->nullable()->default(1);     
             $table->timestamps();

@@ -7,17 +7,13 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\sanphamController;
 use App\Http\Controllers\hoadonbanController; 
 use App\Http\Controllers\giaodienController;
-<<<<<<< HEAD
 use App\Http\Controllers\nhapkhoController;
-=======
+
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
-<<<<<<< HEAD
 use App\Http\Controllers\quanlyCommentController;
 use App\Http\Controllers\BinhluanController;
-=======
->>>>>>> 082f3be43c374e3fe01a7a3ba36ef4d0fe5b353e
->>>>>>> 917fbfce0bcaf1bcfdb7befaf5b61d3c841d68cc
+use App\Http\Controllers\thongkeController;
 use App\Models\taikhoan;
 use App\Http\Controllers;
 use App\Http\Controllers\hinhanhController;
@@ -126,13 +122,11 @@ Route::group(['prefix' => 'hoadon'], function() {
     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
 });
 
-<<<<<<< HEAD
 // Bình luận
 Route::group(['prefix' => 'Comment'], function(){
     Route::get('index',[quanlyCommentController::class, 'index'])->name('indexcomment');
     Route::post('reply-comment',[quanlyCommentController::class, 'repComment'])->name('repcomment');
 });
-=======
 // quản lý nhập kho nè
 Route::group(['prefix' => 'hoadonnhap'], function() {
     Route::get('index',[nhapkhoController::class, 'index'])->name('indexNK');
@@ -162,4 +156,11 @@ Route::group(['prefix' => 'hinhanh'], function() {
     Route::get('create',[hinhanhController::class, 'create'])->name('themha');
     Route::post('xulycreate',[hinhanhController::class, 'xulycreate'])->name('xylythemha');
 });
->>>>>>> 917fbfce0bcaf1bcfdb7befaf5b61d3c841d68cc
+
+// Thong ke
+
+Route::group(['prefix' => 'thongke'], function() {
+    Route::get('index',[thongkeController::class, 'index'])->name('thongke');
+    Route::post('by-date',[thongkeController::class, 'byDate'])->name('TheoNgay');
+    
+});

@@ -103,13 +103,14 @@ class CartController extends Controller
         else{
             $thongtin = $thongtin.' - '.$req->phoneNo;
         }
+        $tongtien = 0;
         $NewHD = new hoadonban();
         $NewHD ->khachhang_id = $id;
         $NewHD -> ngaylap = Carbon::now();
-        $NewHD -> tongtien = Cart::subtotal();
         $NewHD -> mota = $req->comment;
         $NewHD ->thongtinnguoinhan = $thongtin;
         $NewHD -> trangthai = 1;
+        $NewHD -> tongtien = 1;
         $NewHD ->save();
         foreach($content as $cthd){
             $newcthd = new cthoadonban();
@@ -120,8 +121,12 @@ class CartController extends Controller
             $newcthd -> dongia = $cthd -> price;
             $newcthd ->thanhtien = $cthd->price * $cthd->qty;
             $newcthd -> trangthai = 0;
+            $tongtien = $tongtien +  $newcthd ->thanhtien;
             $newcthd->save();
         }
+
+        $NewHD -> tongtien = $tongtien;
+        $NewHD ->save();
         Cart::destroy();
         return redirect()->route('checkout',$id)->with('erro','Order Success!');
     }

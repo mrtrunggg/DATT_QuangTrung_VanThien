@@ -63,20 +63,14 @@
         @yield('content')
 
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
     <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
+        const ctx = document.getElementById('hoandon').getContext('2d');
+        const hoandon = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
+                labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],
                 datasets: [{
-                    label: 'Thống kê tài khoản được tạo trong tháng',
+                    label: 'Revenue statistics',
                     data: <?= json_encode($cuccung) ?>,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -106,8 +100,50 @@
             }
         });
     </script>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
     <!-- thong ke -->
-
+    <script>
+        const a = document.getElementById('ngay').getContext('2d');
+        const ngay = new Chart(a, {
+            type: 'line',
+            data: {
+                labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+                datasets: [{
+                    label: 'Profit',
+                    data: <?= json_encode($line) ?>,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 
     <script src="{{ asset('admin/plugins/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
