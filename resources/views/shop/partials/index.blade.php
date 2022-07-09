@@ -186,7 +186,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{{asset('amado-master/js/plugins.js')}}"></script>
     <!-- Active js -->
     <script src="{{asset('amado-master/js/active.js')}}"></script>
+    <script>
 
+        
+    </script>
 </body>
 
 </html>
