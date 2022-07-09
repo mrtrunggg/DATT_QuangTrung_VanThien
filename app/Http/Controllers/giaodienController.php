@@ -46,8 +46,9 @@ class giaodienController extends Controller
     }
     public function detailProduct($id,$idsp){
         $SP = DB::table('sanphams')->find($idsp);
-        
-        return view('shop.detail',compact('SP','id'));
+        $hinhanh = DB::table('hinhanhsps')->where('masp',$idsp)->limit(4)->get();
+        $check = 1;
+        return view('shop.detail',compact('SP','id','hinhanh','check'));
     }
 
 
