@@ -55,8 +55,12 @@ class hoadonbanController extends Controller
         $data=1;
         $dshoadonban3 = DB::table('hoadonbans')->where('trangthai','!=','0')
                                             ->where('id','=',$id)->get();
+<<<<<<< HEAD
+        $dscthoadonban = DB::table('cthoadonbans')->where('hoadonban_id','=',$id)->get();
+=======
         $dscthoadonban = DB::table('cthoadonbans')
                                             ->where('hoadonban_id','=',$id)->get();
+>>>>>>> 84a65fd567abf98a4e0a71e4a366578d282da687
         return view('admin.quanlyadmin.hoadonban.view',compact('dshoadonban3','dscthoadonban'), ['cuccung' => $data]);
     } 
 }

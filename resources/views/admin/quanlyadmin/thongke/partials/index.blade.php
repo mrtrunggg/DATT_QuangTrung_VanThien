@@ -19,14 +19,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin1/plugins/images/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/plugins/images/favicon.png')}}">
     <!-- Custom CSS -->
-    <link href="{{ asset('admin1/plugins/bower_components/chartist/dist/chartist.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('admin1/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css')}}">
+    <link href="{{ asset('admin/plugins/bower_components/chartist/dist/chartist.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css')}}">
     <!-- Custom CSS -->
-<<<<<<< HEAD
-    <link href="{{ asset('admin1/css/style.min.css')}}" rel="stylesheet">
-=======
     <link href="{{ asset('admin/css/style.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
       <script>
@@ -40,7 +37,6 @@
   } );
   </script>
 
->>>>>>> 967a4aa8f896cc7c375f90c9722058c8f9032e19
 </head>
 
 <body>
@@ -67,21 +63,15 @@
         @yield('content')
 
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
     <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
+        const ctx = document.getElementById('hoandon').getContext('2d');
+        const hoandon = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
+                labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],
                 datasets: [{
-                    label: 'Thống kê tài khoản được tạo trong tháng',
-                    data: ,
+                    label: 'Revenue statistics',
+                    data: <?= json_encode($cuccung) ?>,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -110,33 +100,69 @@
             }
         });
     </script>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
     <!-- thong ke -->
+    <script>
+        const a = document.getElementById('ngay').getContext('2d');
+        const ngay = new Chart(a, {
+            type: 'line',
+            data: {
+                labels: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+                datasets: [{
+                    label: 'Profit',
+                    data: <?= json_encode($line) ?>,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 
-
-    <script src="{{ asset('admin1/plugins/bower_components/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('admin/plugins/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="{{ asset('admin1/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('admin1/js/app-style-switcher.js')}}"></script>
-    <script src="{{ asset('admin1/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
+    <script src="{{ asset('admin/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('admin/js/app-style-switcher.js')}}"></script>
+    <script src="{{ asset('admin/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
     <!--Wave Effects -->
-    <script src="{{ asset('admin1/js/waves.js')}}"></script>
+    <script src="{{ asset('admin/js/waves.js')}}"></script>
     <!--Menu sidebar -->
-    <script src="{{ asset('admin1/js/sidebarmenu.js')}}"></script>
+    <script src="{{ asset('admin/js/sidebarmenu.js')}}"></script>
     <!--Custom JavaScript -->
-    <script src="{{ asset('admin1/js/custom.js')}}"></script>
+    <script src="{{ asset('admin/js/custom.js')}}"></script>
     <!--This page JavaScript -->
-    <script src="{{ asset('admin1/js/chart.js')}}"></script>
+    <script src="{{ asset('admin/js/chart.js')}}"></script>
     <!--chartis chart-->
-<<<<<<< HEAD
-    <script src="{{ asset('admin1/plugins/bower_components/chartist/dist/chartist.min.js')}}"></script>
-    <script src="{{ asset('admin1/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
-    <script src="{{ asset('admin1/js/pages/dashboards/dashboard1.js')}}"></script>
-=======
     <script src="{{ asset('admin/plugins/bower_components/chartist/dist/chartist.min.js')}}"></script>
     <script src="{{ asset('admin/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
     <script src="{{ asset('admin/js/pages/dashboards/dashboard1.js')}}"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
->>>>>>> 967a4aa8f896cc7c375f90c9722058c8f9032e19
 </body>
 
 </html>

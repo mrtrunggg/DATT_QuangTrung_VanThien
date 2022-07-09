@@ -18,7 +18,8 @@ class adminController extends Controller
                 ->whereYear('created_at', date('Y'))
                 ->groupBy(DB::raw("Month(created_at)"))
                 ->pluck('month');
-        $data = [0,0,0,0,0,0,0,0,0,0,0,0];
+                //dd($monththongke);
+        $data = [0,0,0,0,0,0,0,0,0,0,0,0,0];
         foreach ($monththongke as $index => $month){
             $index;
             $data[--$month] = $thongke[$index];
