@@ -4,18 +4,18 @@
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <a class="navbar-brand" href= {{route('admin.index')}}>
+            <a class="navbar-brand" href= {{route('admin.index22222')}}>
                 <!-- Logo icon -->
                 <b class="logo-icon">
                     <!-- Dark Logo icon -->
                     
-                    <img src={{ asset('admin/plugins/images/logo-icon.png')}} alt="homepage" />
+                    <img src={{ asset('admin1/plugins/images/logo-icon.png')}} alt="homepage" />
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span class="logo-text">
                     <!-- dark Logo text -->
-                    <img src={{ asset('admin/plugins/images/logo-text.png')}} alt="homepage" />
+                    <img src={{ asset('admin1/plugins/images/logo-text.png')}} alt="homepage" />
                 </span>
             </a>
             <!-- ============================================================== -->
@@ -56,6 +56,17 @@
                         <img src="admin/plugins/images/users/varun.jpg" alt="user-img" width="36"
                             class="img-circle"><span class="text-white font-medium">Steave</span></a>
                 </li>
+
+                <li>
+                    <a class="dropdown-item" href="{{ route('admin.logout') }}">
+                        <i class="fa fa-sign-out fa-lg"></i> Logout
+                    </a>
+                </li>
+
+
+
+
+
                 <!-- ============================================================== -->
                 <!-- User profile and search -->
                 <!-- ============================================================== -->

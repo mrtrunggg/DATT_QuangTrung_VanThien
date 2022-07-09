@@ -5,7 +5,7 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="sidebar-item pt-2">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('admin.index')}}
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('admin.index22222')}}
                         aria-expanded="false">
                         <i class="far fa-clock" aria-hidden="true"></i>
                         <span class="hide-menu">Dashboard</span>
