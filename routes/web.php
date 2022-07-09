@@ -91,7 +91,6 @@ Route::post('/forget-password',[taikhoanController::class, 'postForgetPass']);
 Route::get('/get-password/{id}/{token}',[taikhoanController::class, 'getPass'])->name('auth.getPass');
 Route::post('/get-password/{id}/{token}',[taikhoanController::class, 'postGetPass'])->name('auth.postgetPass');
 
-<<<<<<< HEAD
 // sản phẩm
 Route::group(['prefix' => 'sanpham'], function() {
     Route::get('index',[sanphamController::class, 'index'])->name('sanpham');
@@ -123,20 +122,7 @@ Route::group(['prefix' => 'hoadon'], function() {
     Route::post('editTTHdb/{SP}',[hoadonbanController::class, 'editTTHdb']);
     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
 });
-=======
 
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> 84a65fd567abf98a4e0a71e4a366578d282da687
->>>>>>> c5ce0639a1534bc365ac690c7c6ded6e59606607
 // Bình luận
 Route::group(['prefix' => 'Comment'], function(){
     Route::get('index',[quanlyCommentController::class, 'index'])->name('indexcomment');
@@ -180,11 +166,3 @@ Route::group(['prefix' => 'thongke'], function() {
     Route::post('by-date',[thongkeController::class, 'byDate'])->name('TheoNgay');
     
 });
-
-<<<<<<< HEAD
-
-=======
-});
->>>>>>> 84a65fd567abf98a4e0a71e4a366578d282da687
->>>>>>> 967a4aa8f896cc7c375f90c9722058c8f9032e19
->>>>>>> c5ce0639a1534bc365ac690c7c6ded6e59606607

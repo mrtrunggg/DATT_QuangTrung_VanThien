@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Mail;
 use Illuminate\Mail\Message;
 use Hash;
+use Cart;
 use Illuminate\Mail\Mailable;
 class taikhoanController extends Controller
 {
@@ -53,6 +54,7 @@ class taikhoanController extends Controller
     }
 
     public function login(Request $request){
+        Cart::destroy();
         $tk = taikhoan::where('email',$request->email)->first();
         $validator = Validator::make($request->all(),[
             'email'=>'required|email',

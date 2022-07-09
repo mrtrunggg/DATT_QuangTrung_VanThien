@@ -34,7 +34,7 @@
                                             <h5>{{$cart->name}}</h5>
                                         </td>
                                         <td class="price">
-                                            <span>{{number_format($cart->price)}} VNĐ</span>
+                                            <span>{{number_format($cart->price)}} $</span>
                                         </td>
                                         <td class="qty">
                                             <form method="post" action="{{route('updatecart',$id)}}">
@@ -53,7 +53,7 @@
                                         </td>
                                         <td class="price">
                                             <span>
-                                                {{number_format($cart->price * $cart->qty)}} VNĐ
+                                                {{number_format($cart->price * $cart->qty)}} $
                                             </span>
                                        </td>
                                        <td>

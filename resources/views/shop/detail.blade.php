@@ -12,17 +12,29 @@
                 <div class="row">
                     <div class="col-12 col-lg-7">
                         <div class="single_product_thumb">
-                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                            <div id="product_details_slider"  class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url({{asset('uploads/'.$SP->hinhanh)}});">
+                                    <li  style="display:none" data-target="#product_details_slider" data-slide-to="0" style="background-image: url({{asset('uploads/'.$SP->hinhanh)}});">
                                     </li>
+                                @foreach($hinhanh as $sanpham)
+                                    <li  data-target="#product_details_slider" data-slide-to="{{$check}}" style="background-image: url({{asset('filename/'.$sanpham->tenhinhanh)}});">
+                                    {{$check ++}}
+                                    </li>
+                                    @endforeach
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <a class="gallery_img" href="{{asset('uploads/'.$SP->hinhanh)}}">
-                                            <img class="d-block w-100" src="{{asset('uploads/'.$SP->hinhanh)}}" alt="First slide">
+                                            <img class="d-block w-100" src="{{asset('uploads/'.$SP->hinhanh)}}">
                                         </a>
                                     </div>
+                                    @foreach($hinhanh as $sanpham)
+                                    <div class="carousel-item">
+                                        <a class="gallery_img" href="{{asset('filename/'.$sanpham->tenhinhanh)}}">
+                                            <img class="d-block w-100" src="{{asset('filename/'.$sanpham->tenhinhanh)}}">
+                                        </a>
+                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -32,7 +44,7 @@
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">Price: {{number_format($SP->giaban)}} VNĐ</p>
+                                <p class="product-price">Price: {{number_format($SP->giaban)}} $</p>
                                 <a href="{{route('detail',$id)}}">
                                     <h6>{{$SP->tensp}}</h6>
                                 </a>
@@ -50,7 +62,14 @@
                                     </div>
                                 </div>
                                 <!-- Avaiable -->
-                                <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
+                                @if($SP->soluong <= 0)
+                                    <p class="avaibility"><i class="fa fa-circle" style="color:red"></i> Out of stock</p>
+                                
+                                @else
+                                    <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
+                                
+                                @endif
+
                             </div>
 
                             <div class="short_overview my-5">
@@ -69,7 +88,14 @@
                                         <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
-                                <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
+                                @if($SP->soluong <= 0)
+                                <button disabled type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
+                                
+                                @else
+                                <button  type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
+                                
+                                @endif
+                                
                             </form>
 
                         </div>
