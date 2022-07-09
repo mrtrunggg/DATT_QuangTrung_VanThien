@@ -49,6 +49,7 @@
                         aria-expanded="false">
                         <i class="fas fa-file-image" aria-hidden="true"></i>
                         <span class="hide-menu">Image</span>
+<<<<<<< HEAD
                     </a>
                 </li>
                 <li class="sidebar-item pt-2">
@@ -56,6 +57,8 @@
                         aria-expanded="false">
                         <i class="fas fa-chart-line" aria-hidden="true"></i>
                         <span class="hide-menu">Statistical</span>
+=======
+>>>>>>> 84a65fd567abf98a4e0a71e4a366578d282da687
                     </a>
                 </li>
             </ul>

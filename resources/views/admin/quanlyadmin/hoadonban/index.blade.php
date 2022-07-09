@@ -70,44 +70,17 @@
                                                     {{$SP->thongtinnguoinhan}}    
                                                 </td>
                                                 <td>
-                                                    <input type="hidden" value="{{$SP->id}}" name="id_edit">
-                                                    <select name="trangthai" id="thay-doi-tt-hd">
-                                                        <option value="1" <?php if($SP->trangthai == '1'){echo("selected");}?>>Waiting for processing</option>
-                                                        <option value="2" <?php if($SP->trangthai == '2'){echo("selected");}?>>Processed</option>                                                    
-                                                    </select>
+                                                    @if($SP->trangthai==1)
+                                                        <button type="submit" class="btn btn-primary thay-doi-tt-hd btnthaydoi " data-id="{{$SP->id}}">
+                                                            Confirm
+                                                        </button>
+                                                    @endif  
+                                                    @if($SP->trangthai==2)
+                                                        <button type="submit" class="btn btn-primary thay-doi-tt-hd btnthaydoi " disabled>
+                                                            Confirmed
+                                                        </button>
+                                                    @endif 
                                                 </td>
-                                                <script type="text/javascript">
-                                                    $.ajaxSetup({
-                                                        headers: {
-                                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                                        }
-                                                    });
-                                                    $('#thay-doi-tt-hd').on('change', function(){
-                                                        
-                                                        const id = $('input[name="id_edit"]').val();
-                                                        const trangthai = $('select[name="trangthai"]').val();
-                                                        $.ajax({
-                                                            headers: {
-                                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                                            },
-                                                            type:"post",
-                                                            url: '/hoadon/editTTHdb/' + id,
-                                                            data:{
-                                                                id: id,
-                                                                trangthai: trangthai,
-                                                                _token: '{{csrf_token()}}'
-                                                            },
-                                                            dataType:"json",
-                                                            success: function (data) {
-                                                                console.log(data);
-                                                                },
-                                                            error: function (data, textStatus, errorThrown) {
-                                                                console.log(data);
-
-                                                            },
-                                                        })
-                                                    })
-                                                </script>
                                                 <td class="column2">
                                                     <a href="{{route('viewcthd',['SP'=>$SP->id])}}"  >View |</a>
                                                     <a href="{{route('xylyxoaHDB',['SP'=>$SP->id])}}" onclick="return confirm('Bạn có muốn xoá không?')">Delete</a>  
@@ -146,6 +119,49 @@
 </div>
 
 
+<script type="text/javascript">
+    function showaddhehehe() {
+        var btn = document.getElementsByClassName("btnthaydoi");
+        btn.disabled = true;
+        btn.innerText = 'Confirmed...'
+        alert(btn)
+    }
+
+    $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('.thay-doi-tt-hd').on('click', function(){
+
+        var id =$(this).attr('data-id');
+        
+        $.ajax({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:"post",
+            url: '/hoadon/editTTHdb/' + id,
+            data:{
+                id: id,
+                trangthai: 2,
+                _token: '{{csrf_token()}}'
+            },
+            dataType:"json",
+
+            
+            success: function (data) {
+                console.log(data);
+                
+                location.reload(true);
+                },
+            error: function (data, textStatus, errorThrown) {
+                console.log(data);
+                location.reload(false);
+            },
+        })
+    })
+</script>
 
 
 

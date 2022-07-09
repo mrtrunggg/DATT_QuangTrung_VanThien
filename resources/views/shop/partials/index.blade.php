@@ -71,17 +71,17 @@
             <nav class="amado-nav">
                 <ul>
                     
-                    <li class="active"><a href="{{route('home',$id)}}">Home</a></li>
+                    <li><a href="{{route('home',$id)}}">Home</a></li>
                     <li><a href="{{route('shop',$id)}}">Shop</a></li>                 
                     <li><a href="{{route('checkout',$id)}}">Checkout</a></li>
                     <li><a href="{{route('homeAccount',$id)}}">Account</a></li>
                 </ul>
             </nav>
             <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
+            {{-- <div class="amado-btn-group mt-30 mb-100">
                 <a href="#" class="btn amado-btn mb-15">%Discount%</a>
                 <a href="#" class="btn amado-btn active">New this week</a>
-            </div>
+            </div> --}}
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
                 <a href="{{route('showCart',$id)}}" class="cart-nav"><img src="{{asset('amado-master/img/core-img/cart.png')}}" alt=""> Cart</a>
@@ -153,7 +153,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
-                                        <li class="nav-item active">
+                                        <li class="nav-item">
                                             <a class="nav-link" href="{{route('home',$id)}}">Home</a>
                                         </li>
                                         <li class="nav-item">

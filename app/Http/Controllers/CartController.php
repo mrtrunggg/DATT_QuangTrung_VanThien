@@ -63,9 +63,11 @@ class CartController extends Controller
 
     public function saveCheckout(Request $req, $id){
         $content = Cart::content();
+        
         foreach($content as $check)
         {
-            $idsp = DB::table('sanphams')->where('tensp','=',$check->name)->first();
+            $idsp = DB::table('sanphams')->where('tensp','like',$check->name)->first();
+
             if($idsp->soluong < $check ->qty)
             {
                 return redirect()->route('showCart',$id)->with('erro','Product "'.$idsp->tensp.'" only "'.$idsp->soluong.'" products in stock, please choose less quantity!');

@@ -16,7 +16,7 @@
                         <div class="cart-table clearfix">
                             <table class="table table-responsive">
                                 <thead>
-                                    <tr>
+                                    <tr class="flexth">
                                         <th></th>
                                         <th>Name</th>
                                         <th>Price</th>

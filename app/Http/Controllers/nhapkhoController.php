@@ -154,6 +154,27 @@ class nhapkhoController extends Controller
         return response()->json(['data'=>'removed'],200);
     }
 
+    function editTTHdb(Request $req){       
+        $HDB = hoadonnhap::find($req->id);
+        $HDB->trangthai = $req->trangthai;
+        $HDB -> update();
+        
+        $x = DB::table('cthoadonnhaps')->where('hoadonnhap_id','=',$HDB->id)->get(); 
+        foreach($x as $b){
+               
+            $cthdb = cthoadonnhap::find($b->id);
+            $cthdb -> trangthai = $req->trangthai;
+            $cthdb -> update();
+            
+
+            $sp = sanpham::find($b->sanpham_id);
+            $sp->soluong = $sp->soluong + $b->soluong;
+            $sp -> update();
+        }
+      
+        // @dd($HDB);
+        return response()->json($HDB);
+    } 
 
     // $Tk = sanpham::find($id);
     //     return response()->json($Tk);

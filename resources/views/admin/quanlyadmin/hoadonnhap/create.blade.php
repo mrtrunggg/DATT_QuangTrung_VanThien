@@ -27,9 +27,9 @@
                 <a href="{{route('indexNK')}}" class="btn btn-primary pull-right">Back</a>
             </div>
             <div>
-                <button type="button" class="btn btn-primary btn_showne" data-bs-toggle="modal" data-bs-target="#exampleModalSP">
+                {{-- <button type="button" class="btn btn-primary btn_showne" data-bs-toggle="modal" data-bs-target="#exampleModalSP">
                     Add Product
-                </button>
+                </button> --}}
             </div>
         </div>
        

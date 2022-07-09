@@ -12,7 +12,7 @@ use Illuminate\Auth\SessionGuard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Cart;
 use Illuminate\Mail\Message;
 use Illuminate\Mail\Mailable;
