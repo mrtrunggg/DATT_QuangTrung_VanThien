@@ -31,8 +31,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="search-content">
-                        <form action="#" method="get">
-                            <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                        <form action="{{route('search',$id)}}" method="get">
+                            <input type="search" name="search"  placeholder="Type your keyword...">
                             <button type="submit"><img src="{{asset('amado-master/img/core-img/search.png')}}" alt=""></button>
                         </form>
                     </div>
@@ -85,17 +85,10 @@
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
                 <a href="{{route('showCart',$id)}}" class="cart-nav"><img src="{{asset('amado-master/img/core-img/cart.png')}}" alt=""> Cart</a>
-                <a href="#" class="fav-nav"><img src="{{asset('amado-master/img/core-img/favorites.png')}}" alt=""> Favourite</a>
                 <a href="#" class="search-nav"><img src="{{asset('amado-master/img/core-img/search.png')}}" alt=""> Search</a>
                 <a href="{{route('auth.loginShow')}}"> Log out</a>
             </div>
             <!-- Social Button -->
-            <div class="social-info d-flex justify-content-between">
-                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            </div>
         </header>
         <!-- Header Area End -->
 
@@ -104,6 +97,7 @@
     
     
     <!-- ##### Newsletter Area Start ##### -->
+<<<<<<< HEAD
     {{-- <section class="newsletter-area section-padding-100-0">
         <div class="container">
             <div class="row align-items-center">
@@ -126,6 +120,9 @@
             </div>
         </div>
     </section> --}}
+=======
+
+>>>>>>> e451f5145b8a6d3f90f16416f6c65d7454d3ab85
     <!-- ##### Newsletter Area End ##### -->
 <!-- ##### Footer Area Start ##### -->
  <footer class="footer_area clearfix w-100">

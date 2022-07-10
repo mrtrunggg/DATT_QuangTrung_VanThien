@@ -73,7 +73,7 @@ class AccountController extends Controller
         }
     }
     public function showHistory($id){
-        $hd = DB::table('hoadonbans')->where('khachhang_id','=',$id)->get();
+        $hd = DB::table('hoadonbans')->where('khachhang_id','=',$id)->orderBy('id','DESC')->get();
         return view('userAccount.show-history',compact('id','hd'));
     }
     public function huydonhang($id,$hds){
