@@ -67,16 +67,18 @@ class taikhoanController extends Controller
         }
         $remember = $request->remember;
         if (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '0' ], $remember)) {
-            return redirect()->route('auth.show')->with('message', 'Tài khoản đã bị khóa');
+            return redirect()->route('auth.show')->with('message', 'Account has been locked');
         }
-        if (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '0'], $remember)) {
+        elseif (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '0'], $remember)) {
             return redirect()->route('home',$tk->id);
         }
-        if (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '1' ], $remember)) {
+        elseif (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '1' ], $remember)) {
             return redirect()->route('thongke');
         }
-        if (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '2' ], $remember)) {
+        elseif (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '2' ], $remember)) {
             return view('thongke');
+        }else{
+            return redirect()->route('auth.login')->with('message', 'Wrong account or password');
         }
     }
 

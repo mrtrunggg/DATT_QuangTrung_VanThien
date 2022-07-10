@@ -29,6 +29,9 @@
         <!-- Start Page Content -->
         <!-- ============================================================== -->
         <!-- Row -->
+
+
+
         <div class="row">
             <!-- Column -->
          
@@ -57,7 +60,7 @@
                                                 <option value="Trousers">Trousers</option>
                                                 <option value="Jeans">Jeans</option>
                                             </select>
-                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="col-md-6 p-0">Color</label>
@@ -70,6 +73,7 @@
                                                 <option value="Violet">Violet</option>
                                                 <option value="White">White</option>
                                                 <option value="Black">Black</option>
+                                                <option value="Orange">Orange</option>
                                             </select> </div>
                                 </div>
                                 <div class="form-group mb-2">

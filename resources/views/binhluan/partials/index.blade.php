@@ -31,8 +31,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="search-content">
-                        <form action="#" method="get">
-                            <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                        <form action="{{route('search',$id)}}" method="get">
+                            <input type="search" name="search"  placeholder="Type your keyword...">
                             <button type="submit"><img src="{{asset('amado-master/img/core-img/search.png')}}" alt=""></button>
                         </form>
                     </div>
@@ -78,14 +78,11 @@
                 </ul>
             </nav>
             <!-- Button Group -->
-            <div class="amado-btn-group mt-30 mb-100">
-                <a href="#" class="btn amado-btn mb-15">%Discount%</a>
-                <a href="#" class="btn amado-btn active">New this week</a>
-            </div>
+
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
                 <a href="{{route('showCart',$id)}}" class="cart-nav"><img src="{{asset('amado-master/img/core-img/cart.png')}}" alt=""> Cart</a>
-                <a href="#" class="fav-nav"><img src="{{asset('amado-master/img/core-img/favorites.png')}}" alt=""> Favourite</a>
+
                 <a href="#" class="search-nav"><img src="{{asset('amado-master/img/core-img/search.png')}}" alt=""> Search</a>
                 <a href="{{route('auth.loginShow')}}"> Log out</a>
             </div>

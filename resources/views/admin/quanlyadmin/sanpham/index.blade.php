@@ -29,6 +29,27 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
+
+<div style="display:flex; margin-bottom:20px;">
+        <form action="{{route('timkiemsp')}}" method="get" style="margin-right: 20px">
+            <input type="search" name="search" placeholder="Type your keyword...">
+            <button type="submit">Search</i></button>
+        </form>
+
+        <form action="{{route('timkiemloaisp')}}" method="get">
+                <select name="searchloaisp" style="height: 27px; width: 150px;">
+                    <option value="">Product type search</option>
+                    <option value="T-shirt">T-shirt</option>
+                    <option value="Coart">Coat</option>
+                    <option value="Shirt">Shirt</option>
+                    <option value="Shorts">Shorts</option>
+                    <option value="Trousers">Trousers</option>
+                    <option value="Spandex pants">Spandex pants</option>
+                </select>
+            <button type="submit">Search</button>
+        </form>
+</div>
+        
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
@@ -44,6 +65,7 @@
                         <table class="table text-nowrap">
                             <thead>
                                 <tr>
+                                    <th class="border-top-0">Number order</th>
                                     <th class="border-top-0">Name Product</th>
                                     <th class="border-top-0">Product Type</th>
                                     <th class="border-top-0">Color</th>
@@ -60,7 +82,10 @@
                             </thead>
                             <tbody>
                                 @foreach ($dsSanpham as $SP)
-                                            <tr>                   
+                                            <tr>                
+                                                <td>
+                                                    {{++$i}}
+                                                </td>   
                                                 <td>
                                                     {{$SP->tensp}}    
                                                 </td>
@@ -97,9 +122,9 @@
                                                 <td>
                                                    
                                                     @if($SP->trangthai == 0)
-                                                    <p>Not in stock</p>
+                                                    <p>Inactive</p>
                                                     @else
-                                                    <p>In stock</p>
+                                                    <p>Active</p>
                                                     @endif    
                                                 </td>
                                                 <td class="column2">
@@ -114,6 +139,7 @@
                 </div>
             </div>
         </div>
+        {{$dsSanpham->links()}}
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->

@@ -39,16 +39,17 @@ class thongkeController extends Controller
     $data = [0,0,0,0,0,0,0,0,0,0,0,0];
     $line = [0,0,0,0,0,0,0,0,0,0,0,0];
           //dd($monththongke);
+
     foreach ($monththongke as $index => $month){
-
-
+        $doanhthuban = 0;
         $tiennhap = sanpham::join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
         ->select('cthoadonbans.sanpham_id','cthoadonbans.soluong','sanphams.giaban','sanphams.dongianhap','cthoadonbans.trangthai',(DB::raw("Month(cthoadonbans.updated_at) as month")))
         ->whereYear('cthoadonbans.updated_at', date('Y'))
+        ->where('cthoadonbans.trangthai','=','2')
         ->where(DB::raw("Month(cthoadonbans.updated_at)"),'=', $month)
         ->get();
- 
-        $doanhthuban = 0;
+
+
         foreach ($tiennhap as $tinhtien){
             $doanhthuban = $doanhthuban + (($tinhtien->soluong * $tinhtien->giaban) - ($tinhtien->soluong  * $tinhtien->dongianhap));
         }

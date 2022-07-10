@@ -10,7 +10,7 @@
     <!--  Catagories  -->
     <div class="catagories-menu">
         <ul>
-            <li class="active"><a href="{{route('shop',$id)}}">Products available</a></li>
+            <li ><a href="{{route('shop',$id)}}">Products available</a></li>
             <li><a href="{{route('aosomi',$id)}}">T-Shirt</a></li>
             <li><a href="{{route('aokhoac',$id)}}">Coat</a></li>
             <li><a href="{{route('aothun',$id)}}">Shirt</a></li>

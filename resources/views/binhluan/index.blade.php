@@ -26,7 +26,7 @@
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">Price: {{number_format($SP->giaban)}} VNĐ</p>
+                                <p class="product-price">Price: {{number_format($SP->giaban)}} $</p>
                                 <a href="{{route('detail',$id)}}">
                                     <h6>{{$SP->tensp}}</h6>
                                 </a>
@@ -44,7 +44,13 @@
                                     </div>
                                 </div>
                                 <!-- Avaiable -->
+                                @if($SP->soluong <= 0)
+                                <p class="avaibility"><i class="fa fa-circle" style="color:red"></i> Out of stock</p>
+                            
+                            @else
                                 <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
+                            
+                            @endif
                             </div>
 
                             <div class="short_overview my-5">
