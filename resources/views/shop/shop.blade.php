@@ -1,7 +1,7 @@
 @extends('shop.partialsshop.index')
 @section('contentshop')
                 <div class="row">
-                    @foreach($SP as $sanpham)
+                    @forelse($SP as $sanpham)
                      <!-- Single Product Area -->
                     <div class="col-12 col-sm-6 col-md-12 col-xl-6">
                         <div class="single-product-wrapper">
@@ -17,7 +17,7 @@
                                 <!-- Product Meta Data -->
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">Price: {{number_format($sanpham->giaban)}} VNĐ</p>
+                                    <p class="product-price">Price: {{number_format($sanpham->giaban)}} $</p>
                                     <a href="#">
                                         <h6>{{$sanpham->tensp}}</h6>
                                     </a>
@@ -46,7 +46,9 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <h4>No products</h4>
+                    @endforelse
 
                 </div>
     @endsection

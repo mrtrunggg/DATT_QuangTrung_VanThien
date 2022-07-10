@@ -67,7 +67,7 @@
                                         <td><a class="btn fontsizebtn amado-btn w-100" href="{{route('huy',['id'=>$id,'hds'=>$sp->id])}}">Cancel order</a></td><td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['id'=>$id,'bill'=>$sp->id])}}">View</a></td>
                                         @else
                                         <td>Approval</td>
-                                        <td><a class="btn fontsizebtn amado-btn w-100" href="{{route('huy',['id'=>$id,'hds'=>$sp->id])}}">Cancel order</a></td><td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['id'=>$id,'bill'=>$sp->id])}}">View</a></td>
+                                        <td></td><td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['id'=>$id,'bill'=>$sp->id])}}">View</a></td>
                                         @endif
                                         @empty
                                         <td>No bills</td>

@@ -34,7 +34,7 @@
                                             <h5>{{$cart->name}}</h5>
                                         </td>
                                         <td class="price">
-                                            <span>{{number_format($cart->price)}} VNĐ</span>
+                                            <span>{{number_format($cart->price)}} $</span>
                                         </td>
                                         <td class="qty">
                                             <form method="post" action="{{route('updatecart',$id)}}">
@@ -53,7 +53,7 @@
                                         </td>
                                         <td class="price">
                                             <span>
-                                                {{number_format($cart->price * $cart->qty)}} VNĐ
+                                                {{number_format($cart->price * $cart->qty)}} $
                                             </span>
                                        </td>
                                     </tr>
@@ -70,17 +70,17 @@
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
-                                <li><span>subtotal:</span> <span>{{Cart::subtotal()}} VNĐ</span></li>
+                                <li><span>subtotal:</span> <span>{{Cart::subtotal()}} $</span></li>
                                 <li><span>delivery:</span> <span>Free</span></li>
-                                <li><span>total:</span> <span>{{Cart::subtotal()}} VNĐ</span></li>
+                                <li><span>total:</span> <span>{{Cart::subtotal()}} $</span></li>
                             </ul>
 
                             <div class="cart-btn mt-100">
-                            @if($hda->trangthai == 1 ||$hda->trangthai == 2)
+                            @if($hda->trangthai == 1)
                             <a href="{{route('huy',['id'=>$id,'hds'=>$bill])}}" class="btn amado-btn w-100">Cancel order</a>
                             @elseif($hda->trangthai == 0)
                             <a href="{{route('datlai',['id'=>$id,'hds'=>$bill])}}" class="btn amado-btn w-100">Reorder</a>
-                            @endif
+                           @endif
                             </div>
 
                         </div>

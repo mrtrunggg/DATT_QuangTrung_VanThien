@@ -47,13 +47,20 @@ Route::get('/home/{id}',[giaodienController::class, 'home'])->name('home');
 Route::get('/cart/{id}',[giaodienController::class, 'cart'])->name('cart');
 
 Route::get('/shop/{id}',[giaodienController::class, 'shop'])->name('shop');
-Route::get('shop/shirt/{id}',[giaodienController::class, 'shopao'])->name('shopao');
-Route::get('shop/trousers/{id}',[giaodienController::class, 'shopquan'])->name('shopquan');
+
+
+Route::get('shop/T-shirt/{id}',[giaodienController::class, 'aosomi'])->name('aosomi');
+Route::get('shop/shirt/{id}',[giaodienController::class, 'aothun'])->name('aothun');
+Route::get('shop/Coat/{id}',[giaodienController::class, 'aokhoac'])->name('aokhoac');
+Route::get('shop/Trousers/{id}',[giaodienController::class, 'quandai'])->name('quandai');
+Route::get('shop/Shorts/{id}',[giaodienController::class, 'quandui'])->name('quandui');
+Route::get('shop/Jeans/{id}',[giaodienController::class, 'quanjean'])->name('quanjean');
 
 
 Route::get('/detail-product/{id}',[giaodienController::class, 'detail'])->name('detail');
 Route::get('detail/{id}/{idsp}',[giaodienController::class, 'detailProduct'])->name('detailproduct');
-
+//tim kiem
+Route::get('search/{id}',[giaodienController::class, 'timKiem'])->name('search');
 
 //Account
 Route::get('/account/{id}',[AccountController::class,'homeAccount'])->name('homeAccount');
@@ -68,6 +75,7 @@ Route::get('/Transaction-history/{id}',[AccountController::class,'showHistory'])
 Route::get('/Transaction-history/view-bill/{id}/{bill}',[AccountController::class, 'viewBill'])->name('viewbill');
 Route::get('/Transaction-history/huy/{id}/{hds}',[AccountController::class,'huydonhang'])->name('huy');
 Route::get('/Transaction-history/datlai/{id}/{hds}',[AccountController::class,'datlaidon'])->name('datlai');
+
 
 //Binh luan
 Route::get('/Review/{id}/{sp}',[BinhluanController::class,'create'])->name('writeReview');

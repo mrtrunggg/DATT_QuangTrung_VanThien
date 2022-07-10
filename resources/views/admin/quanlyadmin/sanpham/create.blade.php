@@ -55,7 +55,7 @@
                                                 <option value="Shirt">Shirt</option>
                                                 <option value="Shorts">Shorts</option>
                                                 <option value="Trousers">Trousers</option>
-                                                <option value="Spandex pants">Spandex pants</option>
+                                                <option value="Jeans">Jeans</option>
                                             </select>
                                         </div>
                                 </div>

@@ -95,7 +95,7 @@
                     @endif
                     @endforeach
                      @empty
-                     <p>hello</p>
+                     <p>No comment</p>
                      @endforelse
                     </table>
                 </div>
