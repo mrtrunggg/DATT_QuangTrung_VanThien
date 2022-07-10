@@ -19,7 +19,6 @@ class CreateHoadonbansTable extends Migration
 
             $table->integer('nhanvien_id')->nullable()->unsigned();
 
-            $table->integer('nhanvien_id')->unsigned()->nullable();
 
             $table->string('ngaylap');
             $table->integer('tongtien');

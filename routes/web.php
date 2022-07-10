@@ -109,10 +109,6 @@ Route::group(['prefix' => 'sanpham'], function() {
     Route::get('delete/{SP}',[sanphamController::class, 'xulydelete'])->name('xoasp');
 });
 
-<<<<<<< HEAD
-
-
-
 // sản phẩm
 Route::group(['prefix' => 'sanpham'], function() {
     Route::get('index',[sanphamController::class, 'index'])->name('sanpham');
@@ -145,8 +141,6 @@ Route::group(['prefix' => 'hoadon'], function() {
     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
 });
 
-
-=======
 //tai khoan ne
 Route::group(['prefix' => 'taikhoan'], function() {
     Route::get('index',[qltaikhoanController::class, 'index'])->name('indexTk');
@@ -169,16 +163,12 @@ Route::group(['prefix' => 'hoadon'], function() {
     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
 });
 
->>>>>>> 588736bc6e9561a3e4cf4767876ca7dad6b2fa25
 // Bình luận
 Route::group(['prefix' => 'Comment'], function(){
     Route::get('index',[quanlyCommentController::class, 'index'])->name('indexcomment');
     Route::post('reply-comment',[quanlyCommentController::class, 'repComment'])->name('repcomment');
 });
-<<<<<<< HEAD
 
-=======
->>>>>>> 588736bc6e9561a3e4cf4767876ca7dad6b2fa25
 // quản lý nhập kho nè
 Route::group(['prefix' => 'hoadonnhap'], function() {
     Route::get('index',[nhapkhoController::class, 'index'])->name('indexNK');
@@ -213,9 +203,5 @@ Route::group(['prefix' => 'hinhanh'], function() {
 Route::group(['prefix' => 'thongke'], function() {
     Route::get('index',[thongkeController::class, 'index'])->name('thongke');
     Route::post('by-date',[thongkeController::class, 'byDate'])->name('TheoNgay');
-<<<<<<< HEAD
 });
-=======
-    
-});
->>>>>>> 588736bc6e9561a3e4cf4767876ca7dad6b2fa25
+
