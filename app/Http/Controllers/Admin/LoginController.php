@@ -36,7 +36,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('admin.dashboard.index');
+        return view("'admin.dashboard.index'");
     }
 
 
@@ -80,18 +80,18 @@ class LoginController extends Controller
                 'password' => $request->password
             ], $request->get('remember')))
             {
-                return redirect()->intended(route('admin.dashboard'));
+                return redirect()->intended(route('thongke'));
             }
 
             if(Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '1' ], $remember ))
             {
-                return view('admin.index');
+                return redirect()->intended(route('thongke'));
             }
 
             if(Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '2
             ' ], $remember ))
             {
-                return view('admin.index');
+                return redirect()->intended(route('thongke'));
             }
 
 
@@ -99,11 +99,12 @@ class LoginController extends Controller
             return back()->withInput($request->only('email', 'remember'));
         }
 
+
         public function logout(Request $request)
         {
             Auth::guard('admin')->logout();
             $request->session()->invalidate();
-            return redirect()->route('admin.login');
+            return redirect()->route('auth.login');
         }
 
 

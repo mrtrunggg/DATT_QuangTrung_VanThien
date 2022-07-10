@@ -26,7 +26,10 @@ class quanlyCommentController extends Controller
         $data=1;
         $dsbinhluan = DB::table('binhluans')->orderBy('ngaybl','DESC')->get();
         $dsbl = DB::table('taikhoans')->join('binhluans','taikhoans.id','=','binhluans.taikhoan_id')->orderBy('ngaybl','DESC')->get();
-        return view('admin.quanlyadmin.binhluan.index',compact('dsbinhluan','dsbl'),  ['cuccung' => $data]);
+      
+        $tensp = DB::table('sanphams')->where('trangthai','!=','0')->get();
+      
+        return view('admin.quanlyadmin.binhluan.index',compact('dsbinhluan','dsbl','tensp'),  ['cuccung' => $data]);
     }
     public function repComment(Request $req){
         $data = $req -> all();

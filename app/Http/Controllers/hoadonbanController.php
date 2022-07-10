@@ -17,7 +17,8 @@ class hoadonbanController extends Controller
     {
         $data=1;
         $dshoadonban = DB::table('hoadonbans')->where('trangthai','!=','0')->get();   
-        return view('admin.quanlyadmin.hoadonban.index',compact('dshoadonban'),  ['cuccung' => $data]);
+        $tenkh= DB::table('taikhoans')->where('trangthai','!=','0')->get();
+        return view('admin.quanlyadmin.hoadonban.index',compact('dshoadonban','tenkh'),  ['cuccung' => $data]);
     }
 
     function xulydelete($id){       
@@ -53,9 +54,23 @@ class hoadonbanController extends Controller
     
     function view($id){       
         $data=1;
+<<<<<<< HEAD
+        $dshoadonban3 = DB::table('hoadonbans')->where('trangthai','!=','0')
+                                            ->where('id','=',$id)->get();
+
+        $dscthoadonban = DB::table('cthoadonbans')->where('hoadonban_id','=',$id)->get();
+
+        $dscthoadonban = DB::table('cthoadonbans')
+                                            ->where('hoadonban_id','=',$id)->get();
+        $tenkh= DB::table('taikhoans')->where('trangthai','!=','0')->get();
+        $tensp= DB::table('sanphams')->where('trangthai','!=','0')->get();
+
+        return view('admin.quanlyadmin.hoadonban.view',compact('dshoadonban3','dscthoadonban','tenkh','tensp'), ['cuccung' => $data]);
+=======
         $dshoadonban3 = DB::table('hoadonbans')->where('trangthai','!=','0')                                          ->where('id','=',$id)->get();
         $dscthoadonban = DB::table('cthoadonbans')->where('hoadonban_id','=',$id)->get();
         $dscthoadonban = DB::table('cthoadonbans')                                          ->where('hoadonban_id','=',$id)->get();
         return view('admin.quanlyadmin.hoadonban.view',compact('dshoadonban3','dscthoadonban'), ['cuccung' => $data]);
+>>>>>>> 588736bc6e9561a3e4cf4767876ca7dad6b2fa25
     } 
 }

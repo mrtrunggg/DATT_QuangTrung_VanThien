@@ -73,10 +73,10 @@ class taikhoanController extends Controller
             return redirect()->route('home',$tk->id);
         }
         if (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '1' ], $remember)) {
-            return redirect()->route('admin.index');
+            return redirect()->route('thongke');
         }
         if (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '2' ], $remember)) {
-            return view('admin.index');
+            return view('thongke');
         }
     }
 

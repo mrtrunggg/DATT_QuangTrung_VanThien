@@ -151,11 +151,12 @@
                 </thead>
             </table>
         </div>
-       
-        <button type="button"  data-url="{{ route('xylythemHDN')}}" id="form-add-tong-hd" class="btn btn-success">
-            <a style="color: black" href="{{route('indexNK')}}">Success</a>
-        </button>
 
+        <a class="btn btn-success" href="{{route('indexNK')}}">
+            <button type="button"  data-url="{{ route('xylythemHDN')}}" id="form-add-tong-hd" class="btn btn-success">
+            
+            </button>
+        Success</a>
 
 
         <!-- Row -->

@@ -26,13 +26,13 @@ class thongkeController extends Controller
 
         $thongke = hoadonban::select(DB::raw("sum(tongtien) as count"))
         ->whereYear('updated_at', date('Y'))
-        ->where('trangthai','1')
+        ->where('trangthai','2')
         ->groupBy(DB::raw("Month(updated_at)"))
         ->pluck('count');
 
     $monththongke = hoadonban::select(DB::raw("Month(updated_at) as month"))
         ->whereYear('updated_at', date('Y'))
-        ->where('trangthai','1')
+        ->where('trangthai','2')
         ->groupBy(DB::raw("Month(updated_at)"))
         ->pluck('month');     
 
@@ -54,7 +54,7 @@ class thongkeController extends Controller
         }
     $index;
     $line[--$month] = $doanhthuban;
-    $data[--$month] = $thongke[$index];
+    $data[$month] = $thongke[$index];
     }
     return view('admin.quanlyadmin.thongke.index', ['cuccung' =>$data,'line'=>$line]);
     }

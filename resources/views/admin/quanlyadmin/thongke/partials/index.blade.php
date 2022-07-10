@@ -19,12 +19,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/plugins/images/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin1/plugins/images/favicon.png')}}">
     <!-- Custom CSS -->
-    <link href="{{ asset('admin/plugins/bower_components/chartist/dist/chartist.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('admin/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css')}}">
+    <link href="{{ asset('admin1/plugins/bower_components/chartist/dist/chartist.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('admin1/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css')}}">
     <!-- Custom CSS -->
-    <link href="{{ asset('admin/css/style.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin1/css/style.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
       <script>
   $( function() {
@@ -145,23 +145,23 @@
         });
     </script>
 
-    <script src="{{ asset('admin/plugins/bower_components/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('admin1/plugins/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="{{ asset('admin/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('admin/js/app-style-switcher.js')}}"></script>
-    <script src="{{ asset('admin/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
+    <script src="{{ asset('admin1/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('admin1/js/app-style-switcher.js')}}"></script>
+    <script src="{{ asset('admin1/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
     <!--Wave Effects -->
-    <script src="{{ asset('admin/js/waves.js')}}"></script>
+    <script src="{{ asset('admin1/js/waves.js')}}"></script>
     <!--Menu sidebar -->
-    <script src="{{ asset('admin/js/sidebarmenu.js')}}"></script>
+    <script src="{{ asset('admin1/js/sidebarmenu.js')}}"></script>
     <!--Custom JavaScript -->
-    <script src="{{ asset('admin/js/custom.js')}}"></script>
+    <script src="{{ asset('admin1/js/custom.js')}}"></script>
     <!--This page JavaScript -->
-    <script src="{{ asset('admin/js/chart.js')}}"></script>
+    <script src="{{ asset('admin1/js/chart.js')}}"></script>
     <!--chartis chart-->
-    <script src="{{ asset('admin/plugins/bower_components/chartist/dist/chartist.min.js')}}"></script>
-    <script src="{{ asset('admin/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
-    <script src="{{ asset('admin/js/pages/dashboards/dashboard1.js')}}"></script>
+    <script src="{{ asset('admin1/plugins/bower_components/chartist/dist/chartist.min.js')}}"></script>
+    <script src="{{ asset('admin1/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
+    <script src="{{ asset('admin1/js/pages/dashboards/dashboard1.js')}}"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 </body>
 
