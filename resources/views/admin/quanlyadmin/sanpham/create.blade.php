@@ -29,6 +29,9 @@
         <!-- Start Page Content -->
         <!-- ============================================================== -->
         <!-- Row -->
+
+
+
         <div class="row">
             <!-- Column -->
          
@@ -57,7 +60,7 @@
                                                 <option value="Trousers">Trousers</option>
                                                 <option value="Spandex pants">Spandex pants</option>
                                             </select>
-                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="col-md-6 p-0">Color</label>

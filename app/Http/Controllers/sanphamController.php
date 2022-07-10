@@ -13,10 +13,23 @@ class sanphamController extends Controller
     function index()
     {
         $data=1;
-        $dsSanpham = DB::table('sanphams')->where('trangthai','=','1')->get();   
-        return view('admin.quanlyadmin.sanpham.index',compact('dsSanpham'),  ['cuccung' => $data]);
+        $dsSanpham = DB::table('sanphams')->where('trangthai','=','1')->paginate(5);
+
+        return view('admin.quanlyadmin.sanpham.index',compact('dsSanpham'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);
     }
 
+    function timkiem(Request $req)
+    {
+        $data=1;
+        $dsSanpham = DB::table('sanphams')->where('trangthai','=','1')->where('tensp','like','%'.$req->search.'%')->paginate(5);;   
+        return view('admin.quanlyadmin.sanpham.index',compact('dsSanpham'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);;
+    }
+    function timkiemloaisp(Request $req)
+    {
+        $data=1;
+        $dsSanpham = DB::table('sanphams')->where('trangthai','=','1')->where('loaisp','like','%'.$req->searchloaisp.'%')->paginate(5);;   
+        return view('admin.quanlyadmin.sanpham.index',compact('dsSanpham'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);;
+    }
     function create()
     {
         $data=1;
@@ -25,7 +38,7 @@ class sanphamController extends Controller
         // return view('admin.quanlyadmin.sanpham.create',compact('dsLoaisanpham','dsNhacungcap'));
         return view('admin.quanlyadmin.sanpham.create',['cuccung' => $data]);
     }
-
+    
     function xulycreate(Request $req){
         
         if($req->has('hinhanh')){
@@ -55,6 +68,38 @@ class sanphamController extends Controller
         $dsSanpham = sanpham::all();
        return redirect()->route('sanpham',compact('dsSanpham'));
     }
+
+    function xulycreateHDN(Request $req){
+        
+        if($req->has('hinhanh')){
+            $file = $req->hinhanh;
+            $ext = $req->hinhanh->extension();
+            $file_name = time().'-'.$req->size.'-'.'prtoduct'.'-'.$req->color.'.'.$ext;
+            $file->move(public_path('uploads'), $file_name);
+        }
+        if($req->hinhanh == Null){
+            $file_name = Null;
+        }
+        $req->merge(['image'=>$file_name]);
+        $SP = new sanpham();
+        $SP->tensp = $req->tensp;
+        $SP->loaisp = $req->loaisp;
+        $SP->mausac = $req->color;
+        $SP->kichthuoc = $req->size;
+        $SP->hinhanh = $req->image;
+        $SP->soluong = $req->soluong;
+        $SP->giaban = $req->giaban;
+        $SP->discount = $req->discount;
+        $SP->giakhuyenmai = $req->giakhuyenmai;
+        $SP->mota = $req->desc;
+        $SP->dongianhap = $req->dongianhap;
+        $SP->trangthai = 1;
+        $SP -> save();
+        $dsSanpham = sanpham::all();
+       return redirect()->route('formthemHDN',compact('dsSanpham'));
+    }
+
+
 
  
     function edit($id)

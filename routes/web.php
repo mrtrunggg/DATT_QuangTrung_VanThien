@@ -96,18 +96,21 @@ Route::group(['prefix' => 'sanpham'], function() {
     Route::get('index',[sanphamController::class, 'index'])->name('sanpham');
     Route::get('create',[sanphamController::class, 'create'])->name('themsp');
     Route::post('xulycreate',[sanphamController::class, 'xulycreate'])->name('xulythemsp');
+    Route::post('xulycreateHDN',[sanphamController::class, 'xulycreateHDN'])->name('xulythemspHDN');
     Route::get('edit/{SP}',[sanphamController::class, 'edit'])->name('suasp');
     Route::post('edit/{SP}',[sanphamController::class, 'xulyedit'])->name('xulysuasp');
     Route::get('delete/{SP}',[sanphamController::class, 'xulydelete'])->name('xoasp');
 });
 
-<<<<<<< HEAD
+
 
 
 
 // sản phẩm
 Route::group(['prefix' => 'sanpham'], function() {
     Route::get('index',[sanphamController::class, 'index'])->name('sanpham');
+    Route::get('timkiem',[sanphamController::class, 'timkiem'])->name('timkiemsp');
+    Route::get('timkiemloaisp',[sanphamController::class, 'timkiemloaisp'])->name('timkiemloaisp');
     Route::get('create',[sanphamController::class, 'create'])->name('themsp');
     Route::post('xulycreate',[sanphamController::class, 'xulycreate'])->name('xulythemsp');
     Route::get('edit/{SP}',[sanphamController::class, 'edit'])->name('suasp');
@@ -138,7 +141,6 @@ Route::group(['prefix' => 'hoadon'], function() {
 });
 
 
-=======
 //tai khoan ne
 Route::group(['prefix' => 'taikhoan'], function() {
     Route::get('index',[qltaikhoanController::class, 'index'])->name('indexTk');
@@ -161,16 +163,15 @@ Route::group(['prefix' => 'hoadon'], function() {
     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
 });
 
->>>>>>> 588736bc6e9561a3e4cf4767876ca7dad6b2fa25
+
 // Bình luận
 Route::group(['prefix' => 'Comment'], function(){
     Route::get('index',[quanlyCommentController::class, 'index'])->name('indexcomment');
     Route::post('reply-comment',[quanlyCommentController::class, 'repComment'])->name('repcomment');
 });
-<<<<<<< HEAD
 
-=======
->>>>>>> 588736bc6e9561a3e4cf4767876ca7dad6b2fa25
+
+
 // quản lý nhập kho nè
 Route::group(['prefix' => 'hoadonnhap'], function() {
     Route::get('index',[nhapkhoController::class, 'index'])->name('indexNK');
@@ -205,9 +206,7 @@ Route::group(['prefix' => 'hinhanh'], function() {
 Route::group(['prefix' => 'thongke'], function() {
     Route::get('index',[thongkeController::class, 'index'])->name('thongke');
     Route::post('by-date',[thongkeController::class, 'byDate'])->name('TheoNgay');
-<<<<<<< HEAD
+
 });
-=======
-    
-});
->>>>>>> 588736bc6e9561a3e4cf4767876ca7dad6b2fa25
+
+

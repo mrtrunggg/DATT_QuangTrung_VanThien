@@ -104,7 +104,7 @@
     
     
     <!-- ##### Newsletter Area Start ##### -->
-    <section class="newsletter-area section-padding-100-0">
+    {{-- <section class="newsletter-area section-padding-100-0">
         <div class="container">
             <div class="row align-items-center">
                 <!-- Newsletter Text -->
@@ -125,10 +125,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- ##### Newsletter Area End ##### -->
 <!-- ##### Footer Area Start ##### -->
- <footer class="footer_area clearfix">
+ <footer class="footer_area clearfix w-100">
         <div class="container">
             <div class="row align-items-center">
                 <!-- Single Widget Area -->

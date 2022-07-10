@@ -27,9 +27,9 @@
                 <a href="{{route('indexNK')}}" class="btn btn-primary pull-right">Back</a>
             </div>
             <div>
-                {{-- <button type="button" class="btn btn-primary btn_showne" data-bs-toggle="modal" data-bs-target="#exampleModalSP">
+                <button type="button" class="btn btn-primary btn_showne" data-bs-toggle="modal" data-bs-target="#exampleModalSP">
                     Add Product
-                </button> --}}
+                </button>
             </div>
         </div>
        
@@ -181,7 +181,120 @@
     <!-- End footer -->
     <!-- ============================================================== -->
 
+{{-- add product --}}
+<div class="modal fade" id="exampleModalSP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+       <div class="modal-content">
+        <p class="badge bg-primary text-wrap font-weight fontdetail">Add Product</p>
+        <div class="col-lg-12 col-xlg-9 col-md-12">
+            <form method="POST" action="{{route('xulythemspHDN')}}" enctype="multipart/form-data">
+                @csrf
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-horizontal form-material">
+                            <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">Name Product</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input type="text" placeholder=" " name="tensp"
+                                        class="form-control p-0 border-0"> </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">Product Type</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                        <select name="loaisp">
+                                            <option value="T-shirt">T-shirt</option>
+                                            <option value="Coart">Coat</option>
+                                            <option value="Shirt">Shirt</option>
+                                            <option value="Shorts">Shorts</option>
+                                            <option value="Trousers">Trousers</option>
+                                            <option value="Spandex pants">Spandex pants</option>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-md-6 p-0">Color</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                        <select name="color">
+                                            <option value="Red">Red</option>
+                                            <option value="Yellow">Yellow</option>
+                                            <option value="Blue">Blue</option>
+                                            <option value="Green">Green</option>
+                                            <option value="Violet">Violet</option>
+                                            <option value="White">White</option>
+                                            <option value="Black">Black</option>
+                                        </select> </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-md-6 p-0">Size</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    <input type="text" placeholder=" " name="size"
+                                        class="form-control p-0 border-0"> </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-md-6 p-0">Picture</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    <input type="file" placeholder=" " name="hinhanh"
+                                        class="form-control p-0 border-0"> </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-4 p-0">Quantily</label>
+                                        <div class="col-md-0 border-bottom p-0">
+                                            <input type="number" placeholder=" " name="soluong"
+                                                class="form-control p-0 border-1"> </div>
+                                    </div>     
+                                </div>
+                                <div class="col">
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-4 p-0">Price</label>
+                                        <div class="col-md-0 border-bottom p-0">
+                                            <input type="number" placeholder=" " name="giaban"
+                                                class="form-control p-0 border-1"> </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-4 p-0">Discount</label>
+                                        <div class="col-md-0 border-bottom p-0">
+                                            <input type="number" placeholder=" " name="discount"
+                                                class="form-control p-0 border-1"> </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-0 p-0">Promotional Price</label>
+                                        <div class="col-md-0 border-bottom p-0">
+                                            <input type="number" placeholder=" " name="giakhuyenmai"
+                                                class="form-control p-0 border-1"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">Describe</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <textarea rows="5" name="desc" class="form-control p-0 border-0"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-md-6 p-0">Import Unit Price</label>
+                                <div class="col-md-6 border-bottom p-0">
+                                    <input type="number" placeholder=" " name="dongianhap"
+                                        class="form-control p-0 border-0"> </div>
+                            </div>
 
+                            <div class="form-group mb-4">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-success">Add</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>    
+            </form>    
+        </div>
+    </div>
+</div>
 
 
 
