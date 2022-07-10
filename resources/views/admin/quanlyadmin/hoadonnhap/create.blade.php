@@ -152,10 +152,8 @@
             </table>
         </div>
 
-        <a class="btn btn-success" href="{{route('indexNK')}}">
-            <button type="button"  data-url="{{ route('xylythemHDN')}}" id="form-add-tong-hd" class="btn btn-success">
+        <a class="btn btn-success" data-url="{{ route('xylythemHDN')}}" id="form-add-tong-hd" href="{{route('indexNK')}}">
             
-            </button>
         Success</a>
 
 

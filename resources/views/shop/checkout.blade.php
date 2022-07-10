@@ -48,9 +48,9 @@
                         <div class="cart-summary">
                             <h5>Cart Total</h5>
                             <ul class="summary-table">
-                            <li><span>subtotal:</span> <span>{{Cart::subtotal()}} VNĐ</span></li>
-                                <li><span>delivery:</span> <span>Miễn phí</span></li>
-                                <li><span>total:</span> <span>{{Cart::subtotal()}} VNĐ</span></li>
+                            <li><span>subtotal:</span> <span>{{Cart::subtotal()}} $</span></li>
+                                <li><span>delivery:</span> <span>Free</span></li>
+                                <li><span>total:</span> <span>{{Cart::subtotal()}} $</span></li>
                                 @if(Cart::subtotal() == 0)
                                 <input type="hidden" name = "check" value="1">
                                 @else
@@ -92,7 +92,7 @@
                                             <h5>{{$cart->name}}</h5>
                                         </td>
                                         <td class="price">
-                                            <span>{{number_format($cart->price)}} VNĐ</span>
+                                            <span>{{number_format($cart->price)}} $</span>
                                         </td>
                                         <td class="qty">
                                             <form method="post" action="{{route('updatecart',$id)}}">
@@ -111,7 +111,7 @@
                                         </td>
                                         <td class="price">
                                             <span>
-                                                {{number_format($cart->price * $cart->qty)}} VNĐ
+                                                {{number_format($cart->price * $cart->qty)}} $
                                             </span>
                                        </td>
                                        <td>

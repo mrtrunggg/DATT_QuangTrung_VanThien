@@ -73,6 +73,7 @@
                                                 <option value="Violet">Violet</option>
                                                 <option value="White">White</option>
                                                 <option value="Black">Black</option>
+                                                <option value="Orange">Orange</option>
                                             </select> </div>
                                 </div>
                                 <div class="form-group mb-2">

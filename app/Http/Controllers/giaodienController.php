@@ -31,15 +31,15 @@ class giaodienController extends Controller
 
 
     public function aosomi($id){
-        $SP = DB::table('sanphams')->where('loaisp','like','%T-Shirt%')->get();
+        $SP = DB::table('sanphams')->where('loaisp','=','T-Shirt')->get();
         return view('shop.shop',compact('id','SP'));
     }
     public function aothun($id){
-        $SP = DB::table('sanphams')->where('loaisp','like','%Shirt%')->get();
+        $SP = DB::table('sanphams')->where('loaisp','=','Shirt')->get();
         return view('shop.shop',compact('id','SP'));
     }
     public function aokhoac($id){
-        $SP = DB::table('sanphams')->where('loaisp','like','%Coat%')->get();
+        $SP = DB::table('sanphams')->where('loaisp','like','%Coart%')->get();
         return view('shop.shop',compact('id','SP'));
     }
     public function quandai($id){

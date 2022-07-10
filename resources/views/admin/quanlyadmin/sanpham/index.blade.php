@@ -122,9 +122,9 @@
                                                 <td>
                                                    
                                                     @if($SP->trangthai == 0)
-                                                    <p>Not in stock</p>
+                                                    <p>Inactive</p>
                                                     @else
-                                                    <p>In stock</p>
+                                                    <p>Active</p>
                                                     @endif    
                                                 </td>
                                                 <td class="column2">

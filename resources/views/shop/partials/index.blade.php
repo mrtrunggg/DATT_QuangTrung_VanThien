@@ -97,7 +97,7 @@
     
     
     <!-- ##### Newsletter Area Start ##### -->
-<<<<<<< HEAD
+
     {{-- <section class="newsletter-area section-padding-100-0">
         <div class="container">
             <div class="row align-items-center">
@@ -120,9 +120,9 @@
             </div>
         </div>
     </section> --}}
-=======
 
->>>>>>> e451f5145b8a6d3f90f16416f6c65d7454d3ab85
+
+
     <!-- ##### Newsletter Area End ##### -->
 <!-- ##### Footer Area Start ##### -->
  <footer class="footer_area clearfix w-100">

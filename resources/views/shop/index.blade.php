@@ -7,7 +7,7 @@
         
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix">
-        <a href="shop.html">
+        <a href="{{route('aosomi',$id)}}">
           <img src="{{asset('filename/aothun.jpeg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
@@ -20,7 +20,7 @@
 
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix">
-        <a href="shop.html">
+        <a href="{{route('aokhoac',$id)}}">
           <img src="{{asset('filename/aokhoac.jpg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
@@ -33,52 +33,54 @@
 
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix">
-        <a href="shop.html">
+        <a href="{{route('aothun',$id)}}">
           <img src="{{asset('filename/aosomi.jpeg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
             <div class="line"></div>
             {{-- <p>From $180</p> --}}
-            <h4>Shirt</h4>
+            <h4>
+              Shirt
+            </h4>
           </div>
         </a>
       </div>
 
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix" style="height: 601px;">
-        <a href="shop.html">
+        <a href="{{route('quandai',$id)}}">
           <img style="height: 100%" src="{{asset('filename/quantay.jpg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
             <div class="line"></div>
             {{-- <p>From $180</p> --}}
-            <h4>Shorts</h4>
+            <h4>Trousers</h4>
           </div>
         </a>
       </div>
 
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix" style="height: 547px;">
-        <a href="shop.html">
+        <a href="{{route('quanjean',$id)}}">
           <img style="height: 100%" src="{{asset('filename/quanthundai.jpg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
             <div class="line"></div>
             {{-- <p>From $18</p> --}}
-            <h4>Spandex pants</h4>
+            <h4>Jeans</h4>
           </div>
         </a>
       </div>
 
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix">
-        <a href="shop.html">
+        <a href="{{route('quandui',$id)}}">
           <img src="{{asset('filename/goods_69_434850.jpg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
             <div class="line"></div>
             {{-- <p>From $320</p> --}}
-            <h4>Trousers</h4>
+            <h4>Shorts</h4>
           </div>
         </a>
       </div>
