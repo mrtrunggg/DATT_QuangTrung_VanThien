@@ -19,16 +19,22 @@ class nhapkhoController extends Controller
     function index()
     {
         $data=1;
-        $dshoadonnhap = DB::table('hoadonnhaps')->where('trangthai','!=','0')->get();   
-        return view('admin.quanlyadmin.hoadonnhap.index',compact('dshoadonnhap'),  ['cuccung' => $data]);
+        $dshoadonnhap = DB::table('hoadonnhaps')->where('trangthai','!=','0')->paginate(5);   
+        return view('admin.quanlyadmin.hoadonnhap.index',compact('dshoadonnhap'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);;
     }
 
-    function indexnhanvien()
+    function timkiem(Request $req)
     {
+
         $data=1;
-        $dshoadonnhap = DB::table('hoadonnhaps')->where('trangthai','!=','0')->get();   
-        return view('admin.quanlyadmin.hoadonnhap.index',compact('dshoadonnhap'),  ['cuccung' => $data]);
+        $dshoadonnhap = DB::table('hoadonnhaps')->where('trangthai','!=','0')->where('trangthai','=',$req->search)->paginate(10);   
+        return view('admin.quanlyadmin.hoadonnhap.index',compact('dshoadonnhap'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);;
     }
+
+
+
+
+  
     
     function create()
     {
