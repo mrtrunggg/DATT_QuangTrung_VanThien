@@ -29,6 +29,15 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
+        <div style="display:flex; margin-bottom:20px;">
+            <form action="{{route('timkiemnhapkho')}}" method="get" style="margin-right: 20px">
+                <select name="search" style="height: 27px; width: 150px;">
+                    <option value="1">Confirm</option>
+                    <option value="2">Confirmed</option>
+                </select>
+                <button type="submit">Search</i></button>
+            </form>
+        </div>
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
@@ -101,6 +110,7 @@
                 </div>
             </div>
         </div>
+        {{$dshoadonnhap->links()}}
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->

@@ -29,6 +29,16 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
+
+        <form action="{{route('timkiemsanpham')}}" method="get" style="padding-bottom: 20px">
+            <select name="search" style="height: 27px; width: 150px;">
+                @foreach($tensp as $a)
+                    <option value="{{$a->id}}">{{$a->tensp}}</option>
+                @endforeach 
+            </select>   
+           
+            <button type="submit">Search</button>
+        </form>
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
@@ -131,7 +141,7 @@
                 </div>
             </div>
         </div>
-        {{$dsbinhluan->links()}}
+        {{$dsbl->links()}}
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->

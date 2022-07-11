@@ -154,6 +154,8 @@ Route::group(['prefix' => 'Comment'], function(){
     Route::post('reply-comment',[quanlyCommentController::class, 'repComment'])->name('repcomment');
     
     Route::post('editTTBL/{SP}',[quanlyCommentController::class, 'editTTBL']);
+    
+    Route::get('timkiem',[quanlyCommentController::class, 'timkiem'])->name('timkiemsanpham');
 });
 
 
@@ -161,6 +163,7 @@ Route::group(['prefix' => 'Comment'], function(){
 // quản lý nhập kho nè
 Route::group(['prefix' => 'hoadonnhap'], function() {
     Route::get('index',[nhapkhoController::class, 'index'])->name('indexNK');
+    Route::get('timkiem',[nhapkhoController::class, 'timkiem'])->name('timkiemnhapkho');
     Route::get('create',[nhapkhoController::class, 'create'])->name('formthemHDN');
     Route::post('xulycreate',[nhapkhoController::class, 'xulycreate'])->name('xylythemHDN');
     // Route::get('edit/{TK}',[nhapkhoController::class, 'edit'])->name('SuaTK');
