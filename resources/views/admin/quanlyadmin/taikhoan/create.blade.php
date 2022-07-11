@@ -86,7 +86,7 @@
                                     <label class="col-sm-12">Account Type</label>
                                     <div class="col-sm-12 border-bottom">
                                         <select class="form-select shadow-none p-0 border-0 form-control-line" name="loaitk" id="loaitk">
-                                            <option value="0">User</option>
+
                                             <option value="1">Staff</option> 
                                             <option value="2">Manage</option>
                                         </select>

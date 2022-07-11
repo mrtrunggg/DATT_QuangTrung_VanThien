@@ -21,11 +21,19 @@ class hinhanhController extends Controller
     {
         $data=1;
         $tensp= DB::table('sanphams')->where('trangthai','!=','0')->get();
-        $dshinhanh = DB::table('hinhanhsps')->where('trangthai','!=','0')->get();   
-        return view('admin.quanlyadmin.hinhanh.index',compact('dshinhanh','tensp'),  ['cuccung' => $data]);
+        $dshinhanh = DB::table('hinhanhsps')->where('trangthai','!=','0')->paginate(5);   
+        return view('admin.quanlyadmin.hinhanh.index',compact('dshinhanh','tensp'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);
     }
 
-    
+    function timkiem(Request $req)
+    {
+
+        $data=1;
+        $tensp= DB::table('sanphams')->where('trangthai','!=','0')->get();
+        $dshinhanh = DB::table('hinhanhsps')->where('trangthai','!=','0')->where('masp','=',$req->search)->paginate(5);   
+        return view('admin.quanlyadmin.hinhanh.index',compact('dshinhanh','tensp'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);
+    }
+
     function create()
     {
         $data=1;

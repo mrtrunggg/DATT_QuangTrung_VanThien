@@ -29,6 +29,27 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
+
+        <div style="display:flex; margin-bottom:20px;">
+            <form action="{{route('timkiemtenhd')}}" method="get" style="margin-right: 20px">
+            
+                <select name="search" style="height: 27px; width: 150px;">
+                    <option value="1">Confirm</option>
+                    <option value="2">Confirmed</option>
+                </select>
+                <button type="submit">Search</i></button>
+            </form>
+    
+            <form action="{{route('timkiemloaihd')}}" method="get">
+                <select name="searchloaisp" style="height: 27px; width: 150px;">
+                    @foreach($tenkh as $a)
+                        <option value="{{$a->id}}">{{$a->tendangnhap}}</option>
+                    @endforeach 
+                </select>   
+               
+                <button type="submit">Search</button>
+            </form>
+        </div>
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
@@ -97,6 +118,7 @@
                 </div>
             </div>
         </div>
+        {{$dshoadonban->links()}}
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->
@@ -145,7 +167,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type:"post",
-            url: '/hoadon/editTTHdb/' + id,
+            url: '/admin/hoadon/editTTHdb/' + id,
             data:{
                 id: id,
                 trangthai: 2,

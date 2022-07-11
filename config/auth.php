@@ -40,9 +40,9 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'taikhoan' => [
+        'taikhoans' => [
             'driver' => 'session',
-            'provider' => 'taikhoan',
+            'provider' => 'taikhoans',
         ],
         'admin' => [
             'driver' => 'session',
@@ -72,13 +72,13 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'taikhoan' => [
+        'taikhoans' => [
             'driver' => 'eloquent',
             'model' => App\Models\taikhoan::class,
         ],
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
+            'model' => App\Models\taikhoan::class,
         ],
 
         // 'users' => [

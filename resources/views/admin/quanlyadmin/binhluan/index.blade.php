@@ -36,9 +36,7 @@
             <div class="col-sm-12">
                 <div class="white-box">
 
-                    <p>
-                        <a href="{{route('themsp')}}" class="btn btn-primary pull-right">Add Product</a>
-                    </p>
+                    
                    
                     <div class="table-responsive">
                         <table class="table text-nowrap">
@@ -49,7 +47,8 @@
                                     <th class="border-top-0">Email</th>
                                     <th class="border-top-0">Describe</th>
                                     <th class="border-top-0">Product</th>
-                                    <th class="border-top-0">Date</th>                                  
+                                    <th class="border-top-0">Date</th>
+                                    <th class="border-top-0">Status</th>                                  
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,6 +65,7 @@
                                                 <td>
                                                     {{$BL->email}}    
                                                 </td>
+                                                
                                                 <td>
                                                     {{$BL->mota}}
                                                     <ul>
@@ -78,11 +78,20 @@
                                                         </li>
                                                         @endif
                                                         @endforeach
-                                                    </ul>    
-                                                </br><textarea class="form-control reply_comment_{{$BL->id}}"rows="3"></textarea>
-                                                </br><button class="btn btn-default btn-xs btn-reply-comment" 
-                                                data-product_id = "{{$BL->sanpham_id}}"
-                                                data-comment_id ="{{$BL->id}}">Rep</button>                                            
+                                                    </ul> 
+                                                    @if($BL->trangthai==1)
+                                                    <textarea class="form-control reply_comment_{{$BL->id}}"rows="3"></textarea>
+                                                    <button class="btn btn-default btn-xs btn-reply-comment" 
+                                                    data-product_id = "{{$BL->sanpham_id}}"
+                                                    data-comment_id ="{{$BL->id}}">Rep</button> 
+                                                    @endif  
+                                                    @if($BL->trangthai==0)
+                                                    <textarea class="form-control reply_comment_{{$BL->id}}"rows="3" readonly></textarea>
+                                                    <button disabled class="btn btn-default btn-xs btn-reply-comment" 
+                                                    data-product_id = "{{$BL->sanpham_id}}"
+                                                    data-comment_id ="{{$BL->id}}">Rep</button> 
+                                                    @endif    
+                                                                                               
                                                 </td>
                                                 <td>
                                                     @foreach ($tensp as $TSP)
@@ -94,6 +103,25 @@
                                                 <td>
                                                     {{$BL->ngaybl}}    
                                                 </td>
+                                                <td>
+                                                    @if($BL->trangthai == 0)
+                                                    <p>Disable</p>
+                                                    @else
+                                                    <p>Able</p>
+                                                    @endif  
+                                                </td>
+                                                <td>
+                                                    @if($BL->trangthai==1)
+                                                    <button type="submit" class="btn btn-primary thay-doi-tt-hd btnthaydoi " data-id="{{$BL->id}}">
+                                                        Comment lock
+                                                    </button>
+                                                    @endif  
+                                                    @if($BL->trangthai==0)
+                                                        <button type="submit" class="btn btn-primary thay-doi-tt-hd btnthaydoi " disabled>
+                                                            Comments banned
+                                                        </button>
+                                                    @endif 
+                                                </td>
                                             </tr>
                                             @endif              
                                     @endforeach  
@@ -103,6 +131,7 @@
                 </div>
             </div>
         </div>
+        {{$dsbinhluan->links()}}
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->
@@ -128,6 +157,39 @@
     <!-- ============================================================== -->
 </div>
 <script type ="text/javascript">
+
+$('.thay-doi-tt-hd').on('click', function(){
+
+    var id =$(this).attr('data-id');
+
+    $.ajax({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type:"post",
+        url: '/admin/Comment/editTTBL/' + id,
+        data:{
+            id: id,
+            trangthai: 0,
+            _token: '{{csrf_token()}}'
+        },
+        dataType:"json",
+
+        
+        success: function (data) {
+            console.log(data);
+            
+            location.reload(true);
+            },
+        error: function (data, textStatus, errorThrown) {
+            console.log(data);
+            location.reload(false);
+        },
+    })
+})
+
+
+
     $('.btn-reply-comment').click(function(){
 
 
@@ -136,14 +198,15 @@
 
         var sanpham_id = $(this).data('product_id');
         $.ajax({
-            url:"{{url('/Comment/reply-comment')}}",
+            url:'/admin/Comment/reply-comment/',
             type: "POST",
             headers:{
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            data:{mota:mota,id:id,sanpham_id:sanpham_id},
+            data:{mota:mota,id:id,sanpham_id:sanpham_id, trangthai:1,},
             success:function(data){
                 $('.reply_comment_'+id).val('');
+                location.reload(true);
             }
         });
     })

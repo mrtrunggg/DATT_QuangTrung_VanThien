@@ -1,10 +1,12 @@
 <header class="topbar" data-navbarbg="skin5">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <div class="navbar-header" data-logobg="skin6">
+           
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <a class="navbar-brand" href= {{route('admin.index22222')}}>
+            
+            <a class="navbar-brand" href= {{route('admin.dashboard')}}>
                 <!-- Logo icon -->
                 <b class="logo-icon">
                     <!-- Dark Logo icon -->
@@ -51,7 +53,11 @@
                 <!-- ============================================================== -->
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
+          
+                    <p style="color: #ffff; margin-top: 20px; padding-right: 30px;"> Hello {{auth()->guard('admin')->user()->tendangnhap}} </p>
+              
                 
+         
 
                 <li class="logout-btn">
                     <a class="dropdown-item" href="{{ route('admin.logout') }}">

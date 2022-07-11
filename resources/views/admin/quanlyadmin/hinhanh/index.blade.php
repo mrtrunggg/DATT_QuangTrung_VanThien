@@ -29,6 +29,18 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
+
+        <div style="display:flex; margin-bottom:20px;">
+            <form action="{{route('timkiemha')}}" method="get" style="margin-right: 20px">
+                <select name="search" style="height: 27px; width: 150px;">
+                    @foreach($tensp as $t)
+                        <option value="{{$t->id}}">{{$t->tensp}}</option>
+                    @endforeach
+                </select>
+                <button type="submit">Search</i></button>
+            </form>
+    
+        </div>
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
@@ -71,6 +83,9 @@
                 </div>
             </div>
         </div>
+
+
+        {{$dshinhanh->links()}}
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->

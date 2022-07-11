@@ -14,8 +14,21 @@ class qltaikhoanController extends Controller
     function index()
     {
         $data=1;
-        $dstaikhoan = DB::table('taikhoans')->where('trangthai','=','1')->get();   
-        return view('admin.quanlyadmin.taikhoan.index',compact('dstaikhoan'),  ['cuccung' => $data]);
+        $dstaikhoan = DB::table('taikhoans')->paginate(8);   
+        return view('admin.quanlyadmin.taikhoan.index',compact('dstaikhoan'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *8);
+    }
+
+    function timkiem(Request $req)
+    {
+        $data=1;
+        $dstaikhoan = DB::table('taikhoans')->where('tendangnhap','like','%'.$req->search.'%')->paginate(10);   
+        return view('admin.quanlyadmin.taikhoan.index',compact('dstaikhoan'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
+    }
+    function timkiemloaisp(Request $req)
+    {
+        $data=1;
+        $dstaikhoan = DB::table('taikhoans')->where('loaitk','like','%'.$req->searchloaisp.'%')->paginate(10);;   
+        return view('admin.quanlyadmin.taikhoan.index',compact('dstaikhoan'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
     }
 
     function create()
@@ -86,6 +99,16 @@ class qltaikhoanController extends Controller
         $dstaikhoan = taikhoan::all();
        return redirect()->route('indexTk',compact('dstaikhoan'));
     }
+
+
+    function editTTTK(Request $req){       
+        $HDB = taikhoan::find($req->id);
+        $HDB->trangthai = $req->trangthai;
+        $HDB -> update();
+    
+        // @dd($HDB);
+        return response()->json($HDB);
+    } 
 
     function xulydelete($id){       
         $Tk = taikhoan::find($id);

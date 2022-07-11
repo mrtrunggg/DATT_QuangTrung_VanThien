@@ -21,14 +21,14 @@ class sanphamController extends Controller
     function timkiem(Request $req)
     {
         $data=1;
-        $dsSanpham = DB::table('sanphams')->where('trangthai','=','1')->where('tensp','like','%'.$req->search.'%')->paginate(5);;   
-        return view('admin.quanlyadmin.sanpham.index',compact('dsSanpham'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);;
+        $dsSanpham = DB::table('sanphams')->where('trangthai','=','1')->where('tensp','like','%'.$req->search.'%')->paginate(10);   
+        return view('admin.quanlyadmin.sanpham.index',compact('dsSanpham'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
     }
     function timkiemloaisp(Request $req)
     {
         $data=1;
-        $dsSanpham = DB::table('sanphams')->where('trangthai','=','1')->where('loaisp','like','%'.$req->searchloaisp.'%')->paginate(5);;   
-        return view('admin.quanlyadmin.sanpham.index',compact('dsSanpham'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);;
+        $dsSanpham = DB::table('sanphams')->where('trangthai','=','1')->where('loaisp','like','%'.$req->searchloaisp.'%')->paginate(10);;   
+        return view('admin.quanlyadmin.sanpham.index',compact('dsSanpham'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
     }
     function create()
     {

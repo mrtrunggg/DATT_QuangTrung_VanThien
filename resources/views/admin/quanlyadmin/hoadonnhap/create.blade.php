@@ -391,7 +391,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type:"get",
-            url: '/hoadonnhap/timidsp/' + id,
+            url: '/admin/hoadonnhap/timidsp/' + id,
             dataType:"json",
             success: function (response) {
                 console.log(response);
@@ -410,7 +410,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type:"get",
-            url: '/hoadonnhap/timidsp/' + id,
+            url: '/admin/hoadonnhap/timidsp/' + id,
             dataType:"json",
             success: function (response) {
                 console.log(response);
@@ -434,7 +434,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type:"get",
-            url: '/hoadonnhap/timidsp/' + id,
+            url: '/admin/hoadonnhap/timidsp/' + id,
             dataType:"json",
             success: function (response) {
                 console.log(response);
@@ -566,7 +566,7 @@
                 var cellVal1 = oCells.item(2).innerHTML;
                 
                 $.ajax({
-                    url: '/hoadonnhap/xulycreatectsp/',
+                    url: '/admin/hoadonnhap/xulycreatectsp/',
                     type:"POST",
                     data:{
                         soluong:soluong,
