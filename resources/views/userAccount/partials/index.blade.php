@@ -67,15 +67,15 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="{{route('home',$id)}}"><img src="{{asset('amado-master/img/core-img/logo.png')}}" alt=""></a>
+                <a href="{{route('home-index')}}"><img src="{{asset('amado-master/img/core-img/logo.png')}}" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li><a href="{{route('homeAccount',$id)}}">Information</a></li>
-                    <li><a href="{{route('changepassword',$id)}}">Change Password</a></li>
-                    <li><a href="{{route('showhistory',$id)}}">Transaction history</a></li>
-                    <li><a href="{{route('auth.login')}}">Logout</a></li>
+                    <li><a href="{{route('homeAccount')}}">Information</a></li>
+                    <li><a href="{{route('changepassword')}}">Change Password</a></li>
+                    <li><a href="{{route('showhistory')}}">Transaction history</a></li>
+                    <li><a href="{{ route('out') }}">Logout</a></li>
                 </ul>
             </nav>
             <!-- Button Group -->

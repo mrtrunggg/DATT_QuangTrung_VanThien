@@ -36,7 +36,7 @@ swal("{{session()->get('erro')}}","Fill full the information!","warning");
                             <div class="product-meta-data">
                                 <div class="line"></div>
                                 <p class="product-price">Price: {{number_format($SP->giaban)}} $</p>
-                                <a href="{{route('detail',$id)}}">
+                                <a href="{{route('detail')}}">
                                     <h6>{{$SP->tensp}}</h6>
                                 </a>
                                 <!-- Ratings & Review -->
@@ -49,7 +49,7 @@ swal("{{session()->get('erro')}}","Fill full the information!","warning");
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div> -->
                                     <div class="review">
-                                        <a href="{{route('writeReview',['id'=>$id,'sp'=>$SP->id])}}">Write A Review</a>
+                                        <a href="{{route('writeReview',['sp'=>$SP->id])}}">Write A Review</a>
                                     </div>
                                 </div>
                                 <!-- Avaiable -->
@@ -124,7 +124,7 @@ swal("{{session()->get('erro')}}","Fill full the information!","warning");
                     </table>
                 </div>
             </div>
-            <form action="{{route('xulycreate',['id'=>$id,'sp'=>$SP->id])}}" method="post">
+            <form action="{{route('xulycreate',['sp'=>$SP->id])}}" method="post">
             @csrf
                     <div class="col-12 col-lg-8">
                         <div class="checkout_details_area mt-50 clearfix">

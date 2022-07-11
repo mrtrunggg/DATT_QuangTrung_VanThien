@@ -21,7 +21,7 @@ use Carbon\Carbon;
 session_start();
 class CartController extends Controller
 {
-    public function saveCart(Request $req,$id){
+    public function saveCart(Request $req){
         $productID = $req->product_id_hidden;
         $quantity = $req->quantity;
 
@@ -38,32 +38,31 @@ class CartController extends Controller
         $data['options']['image'] = $product_info->hinhanh;
         //dd($data);
         Cart::add($data);
-        return redirect()->route('showCart',$id);
+        return redirect()->route('showCart');
     }
-    public function showCart($id){
+    public function showCart(){
         $content = Cart::content();
-        $KH = DB::table('taikhoans')->find($id);
-        return view('cart.showcart',compact('id','content','KH'));
+        return view('cart.showcart',compact('content'));
     }
-    public function deleteCart($id,$idSP){
-        Cart::update($idSP,0);
-        return redirect()->route('showCart',$id);
+    public function deleteCart($idsp){
+        Cart::update($idsp,0);
+        return redirect()->route('showCart');
     }
-    public function updateCart(Request $req,$id){
+    public function updateCart(Request $req){
         $rowId = $req->rowID;
         $qty = $req->cart_quantity;
         Cart::update($rowId,$qty);
-        return redirect()->route('showCart',$id);
+        return redirect()->route('showCart');
         
     }
 
-    public function checkout($id){
+    public function checkout(){
         $content = Cart::content();
-        $KH = DB::table('taikhoans')->find($id);
-        return view('shop.checkout',compact('id','content','KH'));
+        $KH = DB::table('taikhoans')->find(Auth::user()->id);
+        return view('shop.checkout',compact('content','KH'));
     }
 
-    public function saveCheckout(Request $req, $id){
+    public function saveCheckout(Request $req){
         $content = Cart::content();
         
         foreach($content as $check)
@@ -72,14 +71,14 @@ class CartController extends Controller
 
             if($idsp->soluong < $check ->qty)
             {
-                return redirect()->route('showCart',$id)->with('erro','Product '.$idsp->tensp.' only '.$idsp->soluong.' products in stock, please choose less quantity!');
+                return redirect()->route('showCart')->with('erro','Product '.$idsp->tensp.' only '.$idsp->soluong.' products in stock, please choose less quantity!');
             }
         }
 
         $thongtin = Null;
-        $tk = DB::table('taikhoans')->find($id);
+        $tk = DB::table('taikhoans')->find(Auth::user()->id);
         if($req->check == 1){
-            return redirect()->route('checkout',$id)->with('erro1','Please select product before ordering!');
+            return redirect()->route('checkout')->with('erro1','Please select product before ordering!');
         }
         else{
         if($req ->fullname == Null){
@@ -96,10 +95,10 @@ class CartController extends Controller
             $thongtin = $thongtin.' - '.$req->email;
         }
         if($req->address == Null){
-            return redirect()->route('checkout',$id)->with('erro1','Please enter your delivery address');
+            return redirect()->route('checkout')->with('erro1','Please enter your delivery address');
         }
         elseif($req->phoneNo == Null){
-            return redirect()->route('checkout',$id)->with('erro1','Please enter the phone number!');
+            return redirect()->route('checkout')->with('erro1','Please enter the phone number!');
         }
         else{
         $thongtin = $thongtin.' - '.$req->address;
@@ -112,7 +111,7 @@ class CartController extends Controller
         }
         $tongtien = 0;
         $NewHD = new hoadonban();
-        $NewHD ->khachhang_id = $id;
+        $NewHD ->khachhang_id = Auth::user()->id;
         $NewHD -> ngaylap = Carbon::now();
         $NewHD -> mota = $req->comment;
         $NewHD ->thongtinnguoinhan = $thongtin;
@@ -135,9 +134,8 @@ class CartController extends Controller
         $NewHD -> tongtien = $tongtien;
         $NewHD ->save();
         Cart::destroy();
-        $hd = DB::table('hoadonbans')->where('khachhang_id','=',$id)->orderBy('id','DESC')->get();
-
-        return redirect()->route('showhistory',compact('id','hd'))->with('succes','Order Success!');
+        $id = Auth::user()->id;
+        return redirect()->route('showhistory',compact('id'))->with('succes','Order Success!');
        }
     }
     

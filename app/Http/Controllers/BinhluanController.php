@@ -23,23 +23,26 @@ use Illuminate\Support\Collection;
 use Carbon\Carbon;
 class BinhluanController extends Controller
 {
-    public function create($id,$sp){
+    public function create($sp){
         $SP = DB::table('sanphams')->find($sp);
         $binhluan = DB::table('taikhoans')->join('binhluans','binhluans.taikhoan_id','=','taikhoans.id')->where('sanpham_id','=',$sp)->orderBy('binhluans.trangthai','DESC')->get();
         $dsbinhluan = DB::table('binhluans')->get();
-        return view('binhluan.index',compact('id','SP','binhluan','dsbinhluan'));
+        return view('binhluan.index',compact('SP','binhluan','dsbinhluan'));
+    }
+    public function checkne(){
+        return redirect()->route('user-login')->with('erro','Please log in!');
     }
 
-    public function xulyCreate(Request $req,$id,$sp){
+    public function xulyCreate(Request $req,$sp){
        
         if($req->comment == Null){
             $SP = DB::table('sanphams')->find($sp);
             $binhluan = DB::table('binhluans')->join('taikhoans','binhluans.taikhoan_id','=','taikhoans.id')->where('sanpham_id','=',$sp)->orderBy('binhluans.trangthai','DESC')->get();
-            return redirect()->route('writeReview',['id'=>$id,'sp'=>$sp])->with('erro','Please enter comment text!');
+            return redirect()->route('writeReview',['sp'=>$sp])->with('erro','Please enter comment text!');
         }
         else{
             $newComment = New binhluan();
-            $newComment -> taikhoan_id = $id;
+            $newComment -> taikhoan_id = Auth::user()->id;
             $newComment -> sanpham_id = $sp;
             $newComment ->trangthai = 1;
             $newComment -> mota = $req->comment;
@@ -48,7 +51,7 @@ class BinhluanController extends Controller
             $newComment -> save();
             $SP = DB::table('sanphams')->find($sp);
             $binhluan = DB::table('binhluans')->join('taikhoans','binhluans.taikhoan_id','=','taikhoans.id')->where('sanpham_id','=',$sp)->orderBy('binhluans.trangthai','DESC')->get();
-            return redirect()->route('writeReview',['id'=>$id,'sp'=>$sp])->with('success','Comment successfully sent!');
+            return redirect()->route('writeReview',['sp'=>$sp])->with('success','Comment successfully sent!');
         }
     }
 }

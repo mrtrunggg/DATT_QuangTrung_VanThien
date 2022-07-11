@@ -11,7 +11,7 @@
                             @endif
 <div class="cart-table-area section-padding-100">
             <div class="container-fluid">
-            <form action="{{route('savecheckout',$id)}}" method="post">
+            <form action="{{route('savecheckout')}}" method="post">
                                 @csrf
 
 
@@ -97,7 +97,7 @@
                                             <span>{{number_format($cart->price)}} $</span>
                                         </td>
                                         <td class="qty">
-                                            <form method="post" action="{{route('updatecart',$id)}}">
+                                            <form method="post" action="{{route('updatecart')}}">
                                                 @csrf
                                             <div class="qty-btn d-flex">
                                         
@@ -117,7 +117,7 @@
                                             </span>
                                        </td>
                                        <td>
-                                        <a href="{{route('deletecart',['id'=>$id,'idSP'=>$cart->rowId])}}"><i class="fa fa-times"></i></a>
+                                        <a href="{{route('deletecart',['idsp'=>$cart->rowId])}}"><i class="fa fa-times"></i></a>
                                        </td>
                                     </tr>
                                     @empty

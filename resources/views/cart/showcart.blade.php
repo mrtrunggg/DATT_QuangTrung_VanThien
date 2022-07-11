@@ -40,7 +40,7 @@
                                             <span>{{number_format($cart->price)}} $</span>
                                         </td>
                                         <td class="qty">
-                                            <form method="post" action="{{route('updatecart',$id)}}">
+                                            <form method="post" action="{{route('updatecart')}}">
                                                 @csrf
                                             <div class="qty-btn d-flex">
                                         
@@ -60,7 +60,7 @@
                                             </span>
                                        </td>
                                        <td>
-                                        <a href="{{route('deletecart',['id'=>$id,'idSP'=>$cart->rowId])}}"><i class="fa fa-times"></i></a>
+                                        <a href="{{route('deletecart',['idsp'=>$cart->rowId])}}"><i class="fa fa-times"></i></a>
                                        </td>
                                     </tr>
                                     @empty
@@ -81,7 +81,7 @@
                                 <li><span>total:</span> <span>{{Cart::subtotal()}} $</span></li>
                             </ul>
                             <div class="cart-btn mt-100">
-                                <a href="{{route('checkout',$id)}}" class="btn amado-btn w-100">Checkout</a>
+                                <a href="{{route('checkout')}}" class="btn amado-btn w-100">Checkout</a>
                             </div>
                         </div>
                     </div>

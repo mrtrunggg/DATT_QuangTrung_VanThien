@@ -7,7 +7,7 @@
         
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix">
-        <a href="{{route('aosomi',$id)}}">
+        <a href="{{route('aosomi')}}">
           <img src="{{asset('filename/aothun.jpeg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
@@ -20,7 +20,7 @@
 
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix">
-        <a href="{{route('aokhoac',$id)}}">
+      <a href="{{route('aokhoac')}}">
           <img src="{{asset('filename/aokhoac.jpg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
@@ -33,7 +33,7 @@
 
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix">
-        <a href="{{route('aothun',$id)}}">
+      <a href="{{route('aothun')}}">
           <img src="{{asset('filename/aosomi.jpeg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
@@ -48,7 +48,7 @@
 
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix" style="height: 601px;">
-        <a href="{{route('quandai',$id)}}">
+      <a href="{{route('quandai')}}">
           <img style="height: 100%" src="{{asset('filename/quantay.jpg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
@@ -61,7 +61,7 @@
 
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix" style="height: 547px;">
-        <a href="{{route('quanjean',$id)}}">
+      <a href="{{route('quanjean')}}">
           <img style="height: 100%" src="{{asset('filename/quanthundai.jpg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">
@@ -74,7 +74,7 @@
 
       <!-- Single Catagory -->
       <div class="single-products-catagory clearfix">
-        <a href="{{route('quandui',$id)}}">
+      <a href="{{route('quandui')}}">
           <img src="{{asset('filename/goods_69_434850.jpg')}}" alt="" />
           <!-- Hover Content -->
           <div class="hover-content">

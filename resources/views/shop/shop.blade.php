@@ -7,7 +7,7 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                            <a href="{{route('detailproduct',['id'=>$id,'idsp'=>$sanpham->id])}}"><img src="{{asset('uploads/'.$sanpham->hinhanh)}}" alt=""></a>
+                            <a href="{{route('detailproduct',$sanpham->id)}}"><img src="{{asset('uploads/'.$sanpham->hinhanh)}}" alt=""></a>
                                 <!-- Hover Thumb -->
                                 <!-- <img class="hover-img" src="{{asset('amado-master/img/product-img/product2.jpg')}}" alt=""> -->
                             </div>
@@ -31,8 +31,11 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div> -->
-
-                            <form class="cart clearfix" method="post" action="{{route('saveCart',$id)}}">
+                            @if(Auth::check())
+                            <form class="cart clearfix" method="post" action="{{route('saveCart')}}">
+                            @else
+                            <form class="cart clearfix" action="{{route('checkdn')}}">
+                            @endif
                                 @csrf
                                 <div class="cart-btn d-flex mb-50">
                                         <input type="hidden" name="quantity" value="1">

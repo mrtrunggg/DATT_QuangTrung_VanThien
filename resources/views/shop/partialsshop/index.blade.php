@@ -10,13 +10,13 @@
     <!--  Catagories  -->
     <div class="catagories-menu">
         <ul>
-            <li ><a href="{{route('shop',$id)}}">Products available</a></li>
-            <li><a href="{{route('aosomi',$id)}}">T-Shirt</a></li>
-            <li><a href="{{route('aokhoac',$id)}}">Coat</a></li>
-            <li><a href="{{route('aothun',$id)}}">Shirt</a></li>
-            <li><a href="{{route('quandai',$id)}}">Trousers</a></li>
-            <li><a href="{{route('quandui',$id)}}">Shorts</a></li>
-            <li><a href="{{route('quanjean',$id)}}">Jeans</a></li>
+            <li ><a href="{{route('shop')}}">Products available</a></li>
+            <li><a href="{{route('aosomi')}}">T-Shirt</a></li>
+            <li><a href="{{route('aokhoac')}}">Coat</a></li>
+            <li><a href="{{route('aothun')}}">Shirt</a></li>
+            <li><a href="{{route('quandai')}}">Trousers</a></li>
+            <li><a href="{{route('quandui')}}">Shorts</a></li>
+            <li><a href="{{route('quanjean')}}">Jeans</a></li>
         </ul>
     </div>
 </div>

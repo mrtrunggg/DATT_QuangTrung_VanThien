@@ -10,7 +10,7 @@
                             <script>
                                 swal("{{session()->get('notice')}}","You have successfully changed your information!","success");
                             </script>
-                            @endi
+                            @endif
                             <div class="cart-title flex-hinhanh">
                                 <h2>Welcome {{$user->tendangnhap}} !</h2>
                                 <div class="avarta-hinhanh">
@@ -60,7 +60,7 @@
                                 </div>
                             </form>
                             <div class="amado-btn-group mt-30 mb-100">
-                              <a href="{{route('changeinformation',$id)}}" class="btn amado-btn mb-15">Change Information</a>
+                              <a href="{{route('changeinformation')}}" class="btn amado-btn mb-15">Change Information</a>
                             </div>
                         </div>
                     </div>

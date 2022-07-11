@@ -37,7 +37,7 @@
                                             <span>{{number_format($cart->price)}} $</span>
                                         </td>
                                         <td class="qty">
-                                            <form method="post" action="{{route('updatecart',$id)}}">
+                                            <form method="post" action="{{route('updatecart')}}">
                                                 @csrf
                                             <div class="qty-btn d-flex">
                                         
@@ -77,9 +77,9 @@
 
                             <div class="cart-btn mt-100">
                             @if($hda->trangthai == 1)
-                            <a href="{{route('huy',['id'=>$id,'hds'=>$bill])}}" class="btn amado-btn w-100">Cancel order</a>
+                            <a href="{{route('huy',['hds'=>$bill])}}" class="btn amado-btn w-100">Cancel order</a>
                             @elseif($hda->trangthai == 0)
-                            <a href="{{route('datlai',['id'=>$id,'hds'=>$bill])}}" class="btn amado-btn w-100">Reorder</a>
+                            <a href="{{route('datlai',['hds'=>$bill])}}" class="btn amado-btn w-100">Reorder</a>
                            @endif
                             </div>
 

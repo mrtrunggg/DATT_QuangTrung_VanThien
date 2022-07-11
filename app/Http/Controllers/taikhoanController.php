@@ -99,8 +99,9 @@ class taikhoanController extends Controller
         $id = taikhoan::where('email',$reg->email)->first();
         $token = strtoupper(Str::random(10));
         $id->remember_token = $token;
+
         $id->save();
-        
+
         Mail::send('emails.check_email_forget',compact('id'), function($email) use($id){
              $email->subject("MyShopping - Password retrieval");
              $email->to($id->email, $id->tendangnhap);
@@ -113,6 +114,7 @@ class taikhoanController extends Controller
              //đặt lại mật khẩu
 
     public function getPass(taikhoan $id, $token){
+       // dd($id);
         if($id->remember_token == $token)
            return view('getPass',compact('id','token'));
     }
@@ -125,6 +127,6 @@ class taikhoanController extends Controller
         $id->remember_token = $token;
         $id->password = $pass;
         $id->save();
-        return redirect()->route('auth.login')->with('message','Thay đổi mật khẩu thành công');
+        return redirect()->route('user-login')->with('message','Change password successfully');
     }
 }

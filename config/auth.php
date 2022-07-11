@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -36,17 +37,13 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-        'taikhoans' => [
-            'driver' => 'session',
-            'provider' => 'taikhoans',
-        ],
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
+            ],
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
         ],
     ],
 
@@ -68,15 +65,12 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-        'taikhoans' => [
+        
+        'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\taikhoan::class,
         ],
-        'admins' => [
+        'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\taikhoan::class,
         ],
@@ -103,19 +97,13 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-        'taikhoan' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
         'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
