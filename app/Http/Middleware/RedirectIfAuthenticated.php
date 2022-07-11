@@ -31,21 +31,6 @@ class RedirectIfAuthenticated
             }
             break;
         }
-
-        switch($guard){
-            case 'taikhoan':
-            if (Auth::guard($guard)->check()) {
-                return redirect('/admin');
-            }
-            break;
-            default:
-            if (Auth::guard($guard)->check()) {
-                return redirect('/');
-            }
-            break;
-        }
-
-
             return $next($request);
         }
     }

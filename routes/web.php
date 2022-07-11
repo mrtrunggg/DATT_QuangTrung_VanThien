@@ -1,6 +1,9 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin;
+use App\Http\Controllers\user;
+use App\Http\Controllers\user\LoginController;
+use App\Http\Controllers\thongkeController;
 use App\Http\Controllers\taikhoanController;
 use App\Http\Controllers\qltaikhoanController;
 use App\Http\Controllers\adminController;
@@ -11,12 +14,16 @@ use App\Http\Controllers\nhapkhoController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\quanlyCommentController;
-use App\Http\Controllers\BinhluanController;
-use App\Http\Controllers\thongkeController;
-use App\Models\taikhoan;
-use App\Http\Controllers;
 use App\Http\Controllers\hinhanhController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BinhluanController;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\taikhoan;
+use App\Models\hoadonban;
+use App\Models\sanpham;
+use App\Models\cthoadonban;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 Auth::routes();
 
 /*
@@ -30,192 +37,82 @@ Auth::routes();
 |
 */
 // gửi mail
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+    Route::get('login', [user\UserController::class, 'showLoginForm'])->name('user-login');
+    Route::post('login', [user\UserController::class, 'login'])->name('post.user.login');
+    Route::get('user-out', [user\UserController::class, 'out'])->name('out');
+    Route::get('/', function () {
+        //dd(Auth::guard('users')->id());
+        return view('shop.index');
+    })->name('home-index');
 // Route::get('/',[taikhoanController::class, 'show'])->name('auth.show');
 // Route::post('/',[taikhoanController::class, 'store'])->name('auth.post');
 // Route::get('/login',[taikhoanController::class, 'loginShow'])->name('auth.loginShow');
 // Route::post('/login',[taikhoanController::class, 'login'])->name('auth.login');
 
+//Route::get('/cart',[giaodienController::class, 'cart'])->name('cart');
+Route::group(['middleware' => ['auth:web']], function(){
+    Route::get('/Review/{sp}',[BinhluanController::class,'create'])->name('writeReview');
+    Route::post('/Review/{sp}',[BinhluanController::class,'xulyCreate'])->name('xulycreate');
+
+    Route::get('/show-cart',[CartController::class, 'showCart'])->name('showCart');
+
+    Route::post('/save-cart',[CartController::class, 'saveCart'])->name('saveCart');
+    Route::get('delete-cart/{idsp}',[CartController::class, 'deleteCart'])->name('deletecart');
+Route::post('/update-cart',[CartController::class, 'updateCart'])->name('updatecart');
+
+Route::get('/change-information',[AccountController::class,'changeInformation'])->name('changeinformation');
+Route::post('/change-information',[AccountController::class,'postChangeInformation'])->name('postchangeinformation');
+
+Route::get('/change-password',[AccountController::class,'changePassword'])->name('changepassword');
+Route::post('/change-password',[AccountController::class,'postChangePassword'])->name('postchangepassword');
+
+Route::get('/account',[AccountController::class,'homeAccount'])->name('homeAccount');
 
 
+Route::get('/check-out',[CartController::class, 'checkout'])->name('checkout');
+Route::post('/check-out',[CartController::class, 'saveCheckout'])->name('savecheckout');
+
+
+});
 //home
-// Route::get('/home/{id}',[giaodienController::class, 'home'])->name('home');
-// Route::get('/cart/{id}',[giaodienController::class, 'cart'])->name('cart');
-
-// Route::get('/shop/{id}',[giaodienController::class, 'shop'])->name('shop');
-
-
-// Route::get('shop/T-shirt/{id}',[giaodienController::class, 'aosomi'])->name('aosomi');
-// Route::get('shop/shirt/{id}',[giaodienController::class, 'aothun'])->name('aothun');
-// Route::get('shop/Coat/{id}',[giaodienController::class, 'aokhoac'])->name('aokhoac');
-// Route::get('shop/Trousers/{id}',[giaodienController::class, 'quandai'])->name('quandai');
-// Route::get('shop/Shorts/{id}',[giaodienController::class, 'quandui'])->name('quandui');
-// Route::get('shop/Jeans/{id}',[giaodienController::class, 'quanjean'])->name('quanjean');
-
-
-// Route::get('/detail-product/{id}',[giaodienController::class, 'detail'])->name('detail');
-// Route::get('detail/{id}/{idsp}',[giaodienController::class, 'detailProduct'])->name('detailproduct');
-// //tim kiem
-// Route::get('search/{id}',[giaodienController::class, 'timKiem'])->name('search');
-
-// //Account
-// Route::get('/account/{id}',[AccountController::class,'homeAccount'])->name('homeAccount');
-
-// Route::get('/change-information/{id}',[AccountController::class,'changeInformation'])->name('changeinformation');
-// Route::post('/change-information/{id}',[AccountController::class,'postChangeInformation'])->name('postchangeinformation');
-
-// Route::get('/change-password/{id}',[AccountController::class,'changePassword'])->name('changepassword');
-// Route::post('/change-password/{id}',[AccountController::class,'postChangePassword'])->name('postchangepassword');
-
-// Route::get('/Transaction-history/{id}',[AccountController::class,'showHistory'])->name('showhistory');
-// Route::get('/Transaction-history/view-bill/{id}/{bill}',[AccountController::class, 'viewBill'])->name('viewbill');
-// Route::get('/Transaction-history/huy/{id}/{hds}',[AccountController::class,'huydonhang'])->name('huy');
-// Route::get('/Transaction-history/datlai/{id}/{hds}',[AccountController::class,'datlaidon'])->name('datlai');
-
-
-// //Binh luan
-// Route::get('/Review/{id}/{sp}',[BinhluanController::class,'create'])->name('writeReview');
-// Route::post('/Review/{id}/{sp}',[BinhluanController::class,'xulyCreate'])->name('xulycreate');
-
-// //cart 
-// Route::get('/show-cart/{id}',[CartController::class, 'showCart'])->name('showCart');
-
-// Route::post('/save-cart/{id}',[CartController::class, 'saveCart'])->name('saveCart');
-// Route::get('delete-cart/{id}/{idSP}',[CartController::class, 'deleteCart'])->name('deletecart');
-// Route::post('/update-cart/{id}',[CartController::class, 'updateCart'])->name('updatecart');
-
-// Route::get('/check-out/{id}',[CartController::class, 'checkout'])->name('checkout');
-// Route::post('/check-out/{id}',[CartController::class, 'saveCheckout'])->name('savecheckout');
-
-
-// Quên mật khẩu
 Route::get('/forget-password',[taikhoanController::class, 'forgetPass'])->name('auth.forgetPass');
 Route::post('/forget-password',[taikhoanController::class, 'postForgetPass']);
 //Mã token của quên mật khẩu: mã tài khoản + mã token đã gửi
 Route::get('/get-password/{id}/{token}',[taikhoanController::class, 'getPass'])->name('auth.getPass');
 Route::post('/get-password/{id}/{token}',[taikhoanController::class, 'postGetPass'])->name('auth.postgetPass');
 
-// sản phẩm
-// Route::group(['prefix' => 'sanpham'], function() {
-//     Route::get('index',[sanphamController::class, 'index'])->name('sanpham');
-//     Route::get('create',[sanphamController::class, 'create'])->name('themsp');
-//     Route::post('xulycreate',[sanphamController::class, 'xulycreate'])->name('xulythemsp');
-//     Route::post('xulycreateHDN',[sanphamController::class, 'xulycreateHDN'])->name('xulythemspHDN');
-//     Route::get('edit/{SP}',[sanphamController::class, 'edit'])->name('suasp');
-//     Route::post('edit/{SP}',[sanphamController::class, 'xulyedit'])->name('xulysuasp');
-//     Route::get('delete/{SP}',[sanphamController::class, 'xulydelete'])->name('xoasp');
-// });
+Route::get('/checkdn',[BinhluanController::class, 'checkne'])->name('checkdn');
+
+Route::get('/shop',[giaodienController::class, 'shop'])->name('shop');
+Route::get('/T-shirt',[giaodienController::class, 'aosomi'])->name('aosomi');
+Route::get('/shirt',[giaodienController::class, 'aothun'])->name('aothun');
+Route::get('/Coat',[giaodienController::class, 'aokhoac'])->name('aokhoac');
+Route::get('/Trousers',[giaodienController::class, 'quandai'])->name('quandai');
+Route::get('/Shorts',[giaodienController::class, 'quandui'])->name('quandui');
+Route::get('/Jeans',[giaodienController::class, 'quanjean'])->name('quanjean');
+
+
+Route::get('/detail-product',[giaodienController::class, 'detail'])->name('detail');
+Route::get('detail/{idsp}',[giaodienController::class, 'detailProduct'])->name('detailproduct');
+
+//tim kiem
+Route::get('search',[giaodienController::class, 'timKiem'])->name('search');
+
+//Account
 
 
 
+Route::get('/Transaction-history',[AccountController::class,'showHistory'])->name('showhistory');
+Route::get('/Transaction-history/view-bill/{bill}',[AccountController::class, 'viewBill'])->name('viewbill');
+Route::get('/Transaction-history/huy/{hds}',[AccountController::class,'huydonhang'])->name('huy');
+Route::get('/Transaction-history/datlai/{hds}',[AccountController::class,'datlaidon'])->name('datlai');
 
 
-// // sản phẩm
-// Route::group(['prefix' => 'sanpham'], function() {
-//     Route::get('index',[sanphamController::class, 'index'])->name('sanpham');
-//     Route::get('timkiem',[sanphamController::class, 'timkiem'])->name('timkiemsp');
-//     Route::get('timkiemloaisp',[sanphamController::class, 'timkiemloaisp'])->name('timkiemloaisp');
-//     Route::get('create',[sanphamController::class, 'create'])->name('themsp');
-//     Route::post('xulycreate',[sanphamController::class, 'xulycreate'])->name('xulythemsp');
-//     Route::get('edit/{SP}',[sanphamController::class, 'edit'])->name('suasp');
-//     Route::post('edit/{SP}',[sanphamController::class, 'xulyedit'])->name('xulysuasp');
-//     Route::get('delete/{SP}',[sanphamController::class, 'xulydelete'])->name('xoasp');
-// });
-
-// //tai khoan ne
-// Route::group(['prefix' => 'taikhoan'], function() {
-//     Route::get('index',[qltaikhoanController::class, 'index'])->name('indexTk');
-//     Route::get('create',[qltaikhoanController::class, 'create'])->name('formthemTK');
-//     Route::post('xulycreate',[qltaikhoanController::class, 'xulycreate'])->name('xylythemTK');
-//     Route::get('edit/{TK}',[qltaikhoanController::class, 'edit'])->name('SuaTK');
-//     Route::post('edit/{TK}',[qltaikhoanController::class, 'xulyedit'])->name('xylysuaTK');
-//     Route::get('delete/{TK}',[qltaikhoanController::class, 'xulydelete'])->name('xylyxoaTK');
-// });
-
-// // hoa don ban ne
-// Route::group(['prefix' => 'hoadon'], function() {
-//     Route::get('index',[hoadonbanController::class, 'index'])->name('indexHdb');
-//     // Route::get('create',[hoadonbanController::class, 'create'])->name('formthemTK');
-//     // Route::post('xulycreate',[hoadonbanController::class, 'xulycreate'])->name('xylythemTK');
-//     // Route::get('edit/{TK}',[hoadonbanController::class, 'edit'])->name('SuaTK');
-//     // Route::post('edit/{TK}',[hoadonbanController::class, 'xulyedit'])->name('xylysuaTK');
-//     Route::get('delete/{SP}',[hoadonbanController::class, 'xulydelete'])->name('xylyxoaHDB');
-//     Route::post('editTTHdb/{SP}',[hoadonbanController::class, 'editTTHdb']);
-//     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
-// });
+//Binh luan
 
 
-// //tai khoan ne
-// Route::group(['prefix' => 'taikhoan'], function() {
-//     Route::get('index',[qltaikhoanController::class, 'index'])->name('indexTk');
-//     Route::get('create',[qltaikhoanController::class, 'create'])->name('formthemTK');
-//     Route::post('xulycreate',[qltaikhoanController::class, 'xulycreate'])->name('xylythemTK');
-//     Route::get('edit/{TK}',[qltaikhoanController::class, 'edit'])->name('SuaTK');
-//     Route::post('edit/{TK}',[qltaikhoanController::class, 'xulyedit'])->name('xylysuaTK');
-//     Route::get('delete/{TK}',[qltaikhoanController::class, 'xulydelete'])->name('xylyxoaTK');
-// });
-
-// // hoa don ban ne
-// Route::group(['prefix' => 'hoadon'], function() {
-//     Route::get('index',[hoadonbanController::class, 'index'])->name('indexHdb');
-//     // Route::get('create',[hoadonbanController::class, 'create'])->name('formthemTK');
-//     // Route::post('xulycreate',[hoadonbanController::class, 'xulycreate'])->name('xylythemTK');
-//     // Route::get('edit/{TK}',[hoadonbanController::class, 'edit'])->name('SuaTK');
-//     // Route::post('edit/{TK}',[hoadonbanController::class, 'xulyedit'])->name('xylysuaTK');
-//     Route::get('delete/{SP}',[hoadonbanController::class, 'xulydelete'])->name('xylyxoaHDB');
-//     Route::post('editTTHdb/{SP}',[hoadonbanController::class, 'editTTHdb']);
-//     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
-// });
-
-
-// // Bình luận
-// Route::group(['prefix' => 'Comment'], function(){
-//     Route::get('index',[quanlyCommentController::class, 'index'])->name('indexcomment');
-//     Route::post('reply-comment',[quanlyCommentController::class, 'repComment'])->name('repcomment');
-// });
+//cart 
 
 
 
-// // quản lý nhập kho nè
-// Route::group(['prefix' => 'hoadonnhap'], function() {
-//     Route::get('index',[nhapkhoController::class, 'index'])->name('indexNK');
-//     Route::get('create',[nhapkhoController::class, 'create'])->name('formthemHDN');
-//     Route::post('xulycreate',[nhapkhoController::class, 'xulycreate'])->name('xylythemHDN');
-//     // Route::get('edit/{TK}',[nhapkhoController::class, 'edit'])->name('SuaTK');
-//     // Route::post('edit/{TK}',[nhapkhoController::class, 'xulyedit'])->name('xylysuaTK');
-//     Route::post('delete/{SP}',[nhapkhoController::class, 'xulydelete']);
-//     Route::post('editTTHdb/{SP}',[nhapkhoController::class, 'editTTHdb']);
-//     Route::get('view/{SP}',[nhapkhoController::class, 'view'])->name('viewHDN');
-//     Route::get('viewct/{SP}', [nhapkhoController::class, 'viewct'])->name('viewCTHDN');
-//     Route::post('xulycreatectsp',[nhapkhoController::class, 'xulycreatectsp'])->name('xylythemCTHDN');
-//     Route::get('showctsp/{SP}',[nhapkhoController::class, 'showctsp']);
-//     Route::get('timidsp/{SP}',[nhapkhoController::class, 'timidsp']);
-
-//     Route::post('destroy/{SP}',[nhapkhoController::class, 'destroy'])->name('xylyxoaCTHDN');
-    
-//     Route::get('tongtienne/{SP}',[nhapkhoController::class, 'tongtienne']);
-
-//     Route::get('create2',[nhapkhoController::class, 'create2'])->name('formthemhdn2');
-    
-// });
-
-
-// Route::group(['prefix' => 'hinhanh'], function() {
-//     Route::get('index',[hinhanhController::class, 'index'])->name('indexHA');
-//     Route::get('timkiem',[hinhanhController::class, 'timkiem'])->name('timkiemha');
-//     Route::get('create',[hinhanhController::class, 'create'])->name('themha');
-//     Route::post('xulycreate',[hinhanhController::class, 'xulycreate'])->name('xylythemha');
-//     Route::get('delete/{HA}',[hinhanhController::class, 'deleteha'])->name('xylyxoahahehe');
-// });
-
-// Route::group(['prefix' => 'thongke'], function() {
-//     Route::get('index',[thongkeController::class, 'index'])->name('thongke');
-//     Route::post('by-date',[thongkeController::class, 'byDate'])->name('TheoNgay');
-
-// });
-
-
+// Quên mật khẩu

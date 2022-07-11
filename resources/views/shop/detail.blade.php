@@ -45,7 +45,7 @@
                             <div class="product-meta-data">
                                 <div class="line"></div>
                                 <p class="product-price">Price: {{number_format($SP->giaban)}} $</p>
-                                <a href="{{route('detail',$id)}}">
+                                <a href="{{route('detail')}}">
                                     <h6>{{$SP->tensp}}</h6>
                                 </a>
                                 <!-- Ratings & Review -->
@@ -57,9 +57,17 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div> -->
+                                   
+                                    @if (Auth::check())
+
                                     <div class="review">
-                                        <a href="{{route('writeReview',['id'=>$id,'sp'=>$SP->id])}}">Write A Review</a>
+                                        <a href="{{route('writeReview',$SP->id)}}">Write A Review</a>
                                     </div>
+                                    @else
+                                    <div class="review">
+                                        <a href="{{route('checkdn')}}">Write A Review </a>
+                                    </div>
+                                    @endif
                                 </div>
                                 <!-- Avaiable -->
                                 @if($SP->soluong <= 0)
@@ -77,7 +85,13 @@
                             </div>
 
                             <!-- Add to Cart Form -->
-                            <form class="cart clearfix" method="post" action="{{route('saveCart',$id)}}">
+                            @if(Auth::check())
+                            <form class="cart clearfix" method="post" action="{{route('saveCart')}}">
+                            
+                            @else
+                            <form class="cart clearfix"  action="{{route('checkdn')}}">
+
+                            @endif
                                 @csrf
                                 <div class="cart-btn d-flex mb-50">
                                     <p>Qty</p>
@@ -88,6 +102,7 @@
                                         <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
+
                                 @if($SP->soluong <= 0)
                                 <button disabled type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
                                 
@@ -95,6 +110,7 @@
                                 <button  type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
                                 
                                 @endif
+                                
                                 
                             </form>
 

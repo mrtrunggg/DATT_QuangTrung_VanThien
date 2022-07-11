@@ -46,7 +46,7 @@
                             <div class="product-meta-data">
                                 <div class="line"></div>
                                 <p class="product-price">Price: {{number_format($sanpham->giaban)}} VNĐ</p>
-                                <a href="{{route('detail',$id)}}">
+                                <a href="{{route('detail')}}">
                                     <h6>{{$sanpham->tensp}}</h6>
                                 </a>
                                 <!-- Ratings & Review -->

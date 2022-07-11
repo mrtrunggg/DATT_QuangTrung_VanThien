@@ -1,5 +1,14 @@
 @extends('binhluan.partials.index')
 @section('content')
+@if(session('success'))
+<script>
+swal("{{session()->get('success')}}","Thank you for your comment!","success");
+</script>
+@elseif(session('erro'))
+<script>
+swal("{{session()->get('erro')}}","Fill full the information!","warning");
+</script>
+@endif
   <!-- Product Details Area Start -->
   <div class="single-product-area section-padding-100 clearfix">
             <div class="container-fluid">
@@ -27,7 +36,7 @@
                             <div class="product-meta-data">
                                 <div class="line"></div>
                                 <p class="product-price">Price: {{number_format($SP->giaban)}} $</p>
-                                <a href="{{route('detail',$id)}}">
+                                <a href="{{route('detail')}}">
                                     <h6>{{$SP->tensp}}</h6>
                                 </a>
                                 <!-- Ratings & Review -->
@@ -40,7 +49,7 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div> -->
                                     <div class="review">
-                                        <a href="{{route('writeReview',['id'=>$id,'sp'=>$SP->id])}}">Write A Review</a>
+                                        <a href="{{route('writeReview',['sp'=>$SP->id])}}">Write A Review</a>
                                     </div>
                                 </div>
                                 <!-- Avaiable -->
@@ -65,8 +74,15 @@
                 <div class="Row">
                     <table>
                         @forelse($binhluan as $thongtin)
+
+                     @if($thongtin->trangthai == 0)
                      <div class="col-8 mb-3" style="margin: 15px 0 0 0; border: 1px black solid;">
+                                <b>Comment has been hidden</b>
+                            </div>
+                            @else
+                            <div class="col-8 mb-3" style="margin: 15px 0 0 0; border: 1px black solid;">
                             <div style="display:flex" >
+
                                  <div class="avarta-hinhanh">
                                     @if($thongtin->hinhdaidien == Null)
                                     <img src="{{asset('amado-master/img/core-img/account.jpg')}}" alt="">
@@ -99,14 +115,16 @@
 
                     </div>
                     @endif
+                    
                     @endforeach
+                    @endif
                      @empty
                      <p>No comment</p>
                      @endforelse
                     </table>
                 </div>
             </div>
-            <form action="{{route('xulycreate',['id'=>$id,'sp'=>$SP->id])}}" method="post">
+            <form action="{{route('xulycreate',['sp'=>$SP->id])}}" method="post">
             @csrf
                     <div class="col-12 col-lg-8">
                         <div class="checkout_details_area mt-50 clearfix">

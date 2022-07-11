@@ -5,10 +5,11 @@
                 <div class="row" style="justify-content: center">
                     <div class="col-12 col-lg-8">
                         <div class="checkout_details_area mt-50 clearfix">
+
                             @if(session('succes'))
-                            <div class="alert alert-success">
-                             {{session()->get('succes')}}
-                            </div>
+                            <script>
+                                swal("{{session()->get('notice')}}","You have successfully changed your information!","success");
+                            </script>
                             @endif
                             <div class="cart-title flex-hinhanh">
                                 <h2>Welcome {{$user->tendangnhap}} !</h2>
@@ -59,7 +60,7 @@
                                 </div>
                             </form>
                             <div class="amado-btn-group mt-30 mb-100">
-                              <a href="{{route('changeinformation',$id)}}" class="btn amado-btn mb-15">Change Information</a>
+                              <a href="{{route('changeinformation')}}" class="btn amado-btn mb-15">Change Information</a>
                             </div>
                         </div>
                     </div>

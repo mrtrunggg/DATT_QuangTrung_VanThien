@@ -31,12 +31,12 @@
     <div class="container-fluid">
 
 <div style="display:flex; margin-bottom:20px;">
-        <form action="{{route('timkiemtentk')}}" method="get" style="margin-right: 20px">
+        <form action="{{route('timkiemsp')}}" method="get" style="margin-right: 20px">
             <input type="search" name="search" placeholder="Type your keyword...">
             <button type="submit">Search</i></button>
         </form>
 
-        <form action="{{route('timkiemloaitk')}}" method="get">
+        <form action="{{route('timkiemloaisp')}}" method="get">
                 <select name="searchloaisp" style="height: 27px; width: 150px;">
                     <option value="">Product type search</option>
                     <option value="T-shirt">T-shirt</option>
@@ -82,7 +82,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dsSanpham as $SP)
+                                @forelse ($dsSanpham as $SP)
                                             <tr>                
                                                 <td>
                                                     {{++$i}}
@@ -134,8 +134,12 @@
                                                     <a href="{{route('suasp',['SP'=>$SP->id])}}"  >Edit |</a>
                                                     <a href="{{route('xoasp',['SP'=>$SP->id])}}" onclick="return confirm('Bạn có muốn xoá không?')">Delete</a>  
                                                 </td>
-                                            </tr>              
-                                    @endforeach  
+                                            </tr>  
+                                            @empty
+                                            <td>
+                                                    No products 
+                                            </td>    
+                                    @endforelse  
                             </tbody>
                         </table>
                     </div>

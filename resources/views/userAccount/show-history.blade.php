@@ -21,9 +21,9 @@
                         </div>
                         <div class="cart-table clearfix">
                         @if(session('succes'))
-                        <div class="alert alert-success">
-                            {{session()->get('succes')}}
-                            </div> 
+                            <script>
+    swal("{{session()->get('succes')}}","Please wait for order confirmation.","success");
+    </script>
                             @endif
                             <table class="table table-responsive">
                                 <thead>
@@ -53,21 +53,21 @@
                                         <td>Cancelled</td>
                                       
                                         <td>
-                                            <a class="fontsizebtn btn amado-btn w-100" href="{{route('datlai',['id'=>$id,'hds'=>$sp->id])}}">
+                                            <a class="fontsizebtn btn amado-btn w-100" href="{{route('datlai',['hds'=>$sp->id])}}">
                                                 Reorder
                                             </a>
                                         </td>
                                         <td> 
-                                            <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['id'=>$id,'bill'=>$sp->id])}}">
+                                            <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['bill'=>$sp->id])}}">
                                                 View
                                             </a>
                                         </td>
                                         @elseif($sp->trangthai == 1)
                                         <td>Awaiting Approval</td>
-                                        <td><a class="btn fontsizebtn amado-btn w-100" href="{{route('huy',['id'=>$id,'hds'=>$sp->id])}}">Cancel order</a></td><td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['id'=>$id,'bill'=>$sp->id])}}">View</a></td>
+                                        <td><a class="btn fontsizebtn amado-btn w-100" href="{{route('huy',['hds'=>$sp->id])}}">Cancel order</a></td><td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['bill'=>$sp->id])}}">View</a></td>
                                         @else
                                         <td>Approval</td>
-                                        <td></td><td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['id'=>$id,'bill'=>$sp->id])}}">View</a></td>
+                                        <td></td><td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['bill'=>$sp->id])}}">View</a></td>
                                         @endif
                                         @empty
                                         <td>No bills</td>
@@ -79,3 +79,5 @@
                     </div>
 
 @endsection
+
+            

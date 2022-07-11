@@ -8,11 +8,14 @@
                         <div class="cart-title mt-50">
                             <h2>Shopping Cart</h2>
                         </div>
+
+                        
                         @if(session('erro'))
-                            <div class="alert alert-danger">
-                            {{session()->get('erro')}}
-                            </div> 
+                        <script>
+                                swal("Error","{{session()->get('erro')}}","error");
+                            </script>
                         @endif
+
                         <div class="cart-table clearfix">
                             <table class="table table-responsive">
                                 <thead>
@@ -37,7 +40,7 @@
                                             <span>{{number_format($cart->price)}} $</span>
                                         </td>
                                         <td class="qty">
-                                            <form method="post" action="{{route('updatecart',$id)}}">
+                                            <form method="post" action="{{route('updatecart')}}">
                                                 @csrf
                                             <div class="qty-btn d-flex">
                                         
@@ -57,7 +60,7 @@
                                             </span>
                                        </td>
                                        <td>
-                                        <a href="{{route('deletecart',['id'=>$id,'idSP'=>$cart->rowId])}}"><i class="fa fa-times"></i></a>
+                                        <a href="{{route('deletecart',['idsp'=>$cart->rowId])}}"><i class="fa fa-times"></i></a>
                                        </td>
                                     </tr>
                                     @empty
@@ -78,7 +81,7 @@
                                 <li><span>total:</span> <span>{{Cart::subtotal()}} $</span></li>
                             </ul>
                             <div class="cart-btn mt-100">
-                                <a href="{{route('checkout',$id)}}" class="btn amado-btn w-100">Checkout</a>
+                                <a href="{{route('checkout')}}" class="btn amado-btn w-100">Checkout</a>
                             </div>
                         </div>
                     </div>
