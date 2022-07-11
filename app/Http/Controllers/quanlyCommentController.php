@@ -37,6 +37,7 @@ class quanlyCommentController extends Controller
         $binhluan -> mota = $data['mota'];
         $binhluan -> sanpham_id = $data['sanpham_id'];
         $binhluan -> traloibinhluan_id = $data['id'];
+        $binhluan -> trangthai = 1;
         $binhluan ->ngaybl = Carbon::now();
         $binhluan ->save();
     }

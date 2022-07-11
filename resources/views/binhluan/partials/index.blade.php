@@ -17,6 +17,8 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="{{asset('amado-master/css/core-style.css')}}">
     <link rel="stylesheet" href="{{asset('amado-master/style.css')}}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ 
     
 
 </head>
@@ -106,7 +108,7 @@
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="{{asset('amado-master/js/jquery/jquery-2.2.4.min.js')}}"></script>
-    <!-- Popper js -->
+   <!-- Popper js -->
     <script src="{{asset('amado-master/js/popper.min.js')}}"></script>
     <!-- Bootstrap js -->
     <script src="{{asset('amado-master/js/bootstrap.min.js')}}"></script>

@@ -1,18 +1,20 @@
 @extends('shop.partials.index')
 @section('content')
+@if(session('erro1'))
+                             <script>
+                                swal("{{session()->get('erro1')}}","Please enter the correct information!","warning");
+                            </script>
+                            @elseif(session('erro'))
+                            <script>
+                                swal("{{session()->get('erro')}}","Please enter the correct information!","warning");
+                            </script>
+                            @endif
 <div class="cart-table-area section-padding-100">
             <div class="container-fluid">
             <form action="{{route('savecheckout',$id)}}" method="post">
                                 @csrf
-@if(session('erro'))
-<div class="alert alert-success">
-    {{session()->get('erro')}}
-</div> 
-@elseif(session('erro1'))
-<div class="alert alert-danger">
-    {{session()->get('erro1')}}
-</div> 
-@endif
+
+
                 <div class="row">
                     <div class="col-12 col-lg-8">
                         <div class="checkout_details_area mt-50 clearfix">
@@ -24,16 +26,16 @@
 
                                 <div class="row">
                                     <div class="col-12 mb-3">
-                                        <input type="text" class="form-control" name="fullName"  placeholder="Full Name" >
+                                        <input type="text" class="form-control" name="fullName"  placeholder="Full Name" value="{{$KH->tendangnhap}}">
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <input type="email" class="form-control" name="email" placeholder="Email" >
+                                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{$KH->email}}" >
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <input type="text" class="form-control" name="address" placeholder="Address" >
+                                        <input type="text" class="form-control" name="address" placeholder="Address" value="{{$KH->diachi}}">
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <input type="number" class="form-control" name="phoneNo" min="0" placeholder="Phone No" >
+                                        <input type="number" class="form-control" name="phoneNo" min="0" placeholder="Phone No" value="{{$KH->dienthoai}}">
                                     </div>
                                     <div class="col-12 mb-3">
                                         <textarea name="comment" class="form-control w-100" name="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>

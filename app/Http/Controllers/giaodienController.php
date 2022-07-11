@@ -19,58 +19,70 @@ class giaodienController extends Controller
 {
     public function home($id){
         $SP = DB::table('sanphams')->get();
-        return view('shop.index',compact('SP','id'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('shop.index',compact('SP','id','KH'));
     }
     public function cart($id){
-        return view('shop.cart',compact('id'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('shop.cart',compact('id','KH'));
     }
     public function shop($id){
         $SP = DB::table('sanphams')->get();
-        return view('shop.shop',compact('id','SP'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('shop.shop',compact('id','SP','KH'));
     }
 
 
     public function aosomi($id){
+        $KH = DB::table('taikhoans')->find($id);
         $SP = DB::table('sanphams')->where('loaisp','=','T-Shirt')->get();
-        return view('shop.shop',compact('id','SP'));
+        return view('shop.shop',compact('id','SP','KH'));
     }
     public function aothun($id){
         $SP = DB::table('sanphams')->where('loaisp','=','Shirt')->get();
-        return view('shop.shop',compact('id','SP'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('shop.shop',compact('id','SP','KH'));
     }
     public function aokhoac($id){
         $SP = DB::table('sanphams')->where('loaisp','like','%Coart%')->get();
-        return view('shop.shop',compact('id','SP'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('shop.shop',compact('id','SP','KH'));
     }
     public function quandai($id){
         $SP = DB::table('sanphams')->where('loaisp','like','%Trousers%')->get();
-        return view('shop.shop',compact('id','SP'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('shop.shop',compact('id','SP','KH'));
     }
     public function quandui($id){
         $SP = DB::table('sanphams')->where('loaisp','like','%Shorts%')->get();
-        return view('shop.shop',compact('id','SP'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('shop.shop',compact('id','SP','KH'));
     }
     public function quanjean($id){
         $SP = DB::table('sanphams')->where('loaisp','like','%Jeans%')->get();
-        return view('shop.shop',compact('id','SP'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('shop.shop',compact('id','SP','KH'));
     }
 
 
 
     public function detail($id){
         $SP = DB::table('sanphams')->get();
-        return view('shop.detail-product',compact('SP','id'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('shop.detail-product',compact('SP','id','KH'));
     }
     public function detailProduct($id,$idsp){
+        $KH = DB::table('taikhoans')->find($id);
         $SP = DB::table('sanphams')->find($idsp);
         $hinhanh = DB::table('hinhanhsps')->where('masp',$idsp)->limit(4)->get();
         $check = 1;
-        return view('shop.detail',compact('SP','id','hinhanh','check'));
+        return view('shop.detail',compact('SP','id','hinhanh','check','KH'));
     }
 
     public function timKiem(Request $req,$id){
+        $KH = DB::table('taikhoans')->find($id);
         $SP = DB::table('sanphams')->where('tensp','like','%'.$req->search.'%')->get();
-        return view('shop.shop',compact('id','SP'));
+        return view('shop.shop',compact('id','SP','KH'));
     }
 
 

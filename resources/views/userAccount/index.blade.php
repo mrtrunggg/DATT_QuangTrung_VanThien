@@ -5,11 +5,12 @@
                 <div class="row" style="justify-content: center">
                     <div class="col-12 col-lg-8">
                         <div class="checkout_details_area mt-50 clearfix">
+
                             @if(session('succes'))
-                            <div class="alert alert-success">
-                             {{session()->get('succes')}}
-                            </div>
-                            @endif
+                            <script>
+                                swal("{{session()->get('notice')}}","You have successfully changed your information!","success");
+                            </script>
+                            @endi
                             <div class="cart-title flex-hinhanh">
                                 <h2>Welcome {{$user->tendangnhap}} !</h2>
                                 <div class="avarta-hinhanh">

@@ -21,9 +21,9 @@
                         </div>
                         <div class="cart-table clearfix">
                         @if(session('succes'))
-                        <div class="alert alert-success">
-                            {{session()->get('succes')}}
-                            </div> 
+                            <script>
+    swal("{{session()->get('succes')}}","Please wait for order confirmation.","success");
+    </script>
                             @endif
                             <table class="table table-responsive">
                                 <thead>
@@ -79,3 +79,5 @@
                     </div>
 
 @endsection
+
+            

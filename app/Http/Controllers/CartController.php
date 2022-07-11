@@ -42,7 +42,8 @@ class CartController extends Controller
     }
     public function showCart($id){
         $content = Cart::content();
-        return view('cart.showcart',compact('id','content'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('cart.showcart',compact('id','content','KH'));
     }
     public function deleteCart($id,$idSP){
         Cart::update($idSP,0);
@@ -58,7 +59,8 @@ class CartController extends Controller
 
     public function checkout($id){
         $content = Cart::content();
-        return view('shop.checkout',compact('id','content'));
+        $KH = DB::table('taikhoans')->find($id);
+        return view('shop.checkout',compact('id','content','KH'));
     }
 
     public function saveCheckout(Request $req, $id){
@@ -70,7 +72,7 @@ class CartController extends Controller
 
             if($idsp->soluong < $check ->qty)
             {
-                return redirect()->route('showCart',$id)->with('erro','Product "'.$idsp->tensp.'" only "'.$idsp->soluong.'" products in stock, please choose less quantity!');
+                return redirect()->route('showCart',$id)->with('erro','Product '.$idsp->tensp.' only '.$idsp->soluong.' products in stock, please choose less quantity!');
             }
         }
 
@@ -95,6 +97,9 @@ class CartController extends Controller
         }
         if($req->address == Null){
             return redirect()->route('checkout',$id)->with('erro1','Please enter your delivery address');
+        }
+        elseif($req->phoneNo == Null){
+            return redirect()->route('checkout',$id)->with('erro1','Please enter the phone number!');
         }
         else{
         $thongtin = $thongtin.' - '.$req->address;
@@ -130,8 +135,10 @@ class CartController extends Controller
         $NewHD -> tongtien = $tongtien;
         $NewHD ->save();
         Cart::destroy();
-        return redirect()->route('checkout',$id)->with('erro','Order Success!');
-    }
+        $hd = DB::table('hoadonbans')->where('khachhang_id','=',$id)->orderBy('id','DESC')->get();
+
+        return redirect()->route('showhistory',compact('id','hd'))->with('succes','Order Success!');
+       }
     }
     
 }

@@ -8,11 +8,14 @@
                         <div class="cart-title mt-50">
                             <h2>Shopping Cart</h2>
                         </div>
+
+                        
                         @if(session('erro'))
-                            <div class="alert alert-danger">
-                            {{session()->get('erro')}}
-                            </div> 
+                        <script>
+                                swal("Error","{{session()->get('erro')}}","error");
+                            </script>
                         @endif
+
                         <div class="cart-table clearfix">
                             <table class="table table-responsive">
                                 <thead>

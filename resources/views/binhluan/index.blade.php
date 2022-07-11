@@ -1,5 +1,14 @@
 @extends('binhluan.partials.index')
 @section('content')
+@if(session('success'))
+<script>
+swal("{{session()->get('success')}}","Thank you for your comment!","success");
+</script>
+@elseif(session('erro'))
+<script>
+swal("{{session()->get('erro')}}","Fill full the information!","warning");
+</script>
+@endif
   <!-- Product Details Area Start -->
   <div class="single-product-area section-padding-100 clearfix">
             <div class="container-fluid">
@@ -65,8 +74,15 @@
                 <div class="Row">
                     <table>
                         @forelse($binhluan as $thongtin)
+
+                     @if($thongtin->trangthai == 0)
                      <div class="col-8 mb-3" style="margin: 15px 0 0 0; border: 1px black solid;">
+                                <b>Comment has been hidden</b>
+                            </div>
+                            @else
+                            <div class="col-8 mb-3" style="margin: 15px 0 0 0; border: 1px black solid;">
                             <div style="display:flex" >
+
                                  <div class="avarta-hinhanh">
                                     @if($thongtin->hinhdaidien == Null)
                                     <img src="{{asset('amado-master/img/core-img/account.jpg')}}" alt="">
@@ -99,7 +115,9 @@
 
                     </div>
                     @endif
+                    
                     @endforeach
+                    @endif
                      @empty
                      <p>No comment</p>
                      @endforelse
