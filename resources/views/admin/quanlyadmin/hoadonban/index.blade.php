@@ -49,7 +49,10 @@
                
                 <button type="submit">Search</button>
             </form>
-
+            <form action="{{route('timkiemtheongay')}}" method="get" style="margin-left:20px">
+                <input type="date" value="<?php echo date('y-m-d'); ?>" name="layngay">  
+                <button type="submit">Search</button>
+            </form>
             
         </div>
         <!-- ============================================================== -->
@@ -72,7 +75,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dshoadonban as $SP)
+                                @forelse ($dshoadonban as $SP)
                                             <tr>                   
                                                 <td>
                                                     @foreach ($tenkh as $TSP)
@@ -112,8 +115,12 @@
                                                     <a href="{{route('viewcthd',['SP'=>$SP->id])}}"  >View |</a>
                                                     <a href="{{route('xylyxoaHDB',['SP'=>$SP->id])}}" onclick="return confirm('Bạn có muốn xoá không?')">Delete</a>  
                                                 </td>
-                                            </tr>              
-                                    @endforeach  
+                                            </tr>
+                                            @empty
+                                            <td>
+                                                No Bill
+                                            </td>              
+                                    @endforelse  
                             </tbody>
                         </table>
                     </div>

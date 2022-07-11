@@ -36,8 +36,13 @@ class hoadonbanController extends Controller
         return view('admin.quanlyadmin.hoadonban.index',compact('dshoadonban','tenkh'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
     }
 
-
-
+    function timkiemtheongay(Request $req)
+    {
+        $data=1;
+        $dshoadonban = DB::table('hoadonbans')->where('trangthai','!=','0')->where('updated_at','like','%'.$req->layngay.'%')->paginate(10);
+        $tenkh= DB::table('taikhoans')->where('trangthai','!=','0')->where('loaitk','=','0')->get(); 
+        return view('admin.quanlyadmin.hoadonban.index',compact('dshoadonban','tenkh'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
+    }
     function xulydelete($id){       
         $HDB = Hoadonban::find($id);
         $HDB -> trangthai = 0;

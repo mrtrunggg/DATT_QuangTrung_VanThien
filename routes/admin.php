@@ -138,6 +138,7 @@ Route::group(['prefix' => 'hoadon'], function() {
     Route::get('index',[hoadonbanController::class, 'index'])->name('indexHdb');
     Route::get('timkiem',[hoadonbanController::class, 'timkiem'])->name('timkiemtenhd');
     Route::get('timkiemngaynhaphd',[hoadonbanController::class, 'timkiemngaynhaphd'])->name('timkiemloaihd');
+    Route::get('timkiemtheongay',[hoadonbanController::class, 'timkiemtheongay'])->name('timkiemtheongay');
     // Route::get('create',[hoadonbanController::class, 'create'])->name('formthemTK');
     // Route::post('xulycreate',[hoadonbanController::class, 'xulycreate'])->name('xylythemTK');
     // Route::get('edit/{TK}',[hoadonbanController::class, 'edit'])->name('SuaTK');
