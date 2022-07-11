@@ -45,10 +45,10 @@ class taikhoanController extends Controller
                 $newtaikhoan->email = $request -> email;
                 $newtaikhoan->password = bcrypt($request -> password);
                 $newtaikhoan -> save();
-                return redirect()->route('auth.show')->with('message', 'Bạn đã tạo tài khoản thành công');
+                return redirect()->route('user-login')->with('erro', 'You have successfully created an account');
 
             }else{
-                return redirect()->route('auth.login')->with('message', 'Bạn đã tạo tài khoản thất bại');
+                return redirect()->route('user-login')->with('erro', 'You have failed to create an account');
             }
         }
     }
@@ -78,7 +78,7 @@ class taikhoanController extends Controller
         elseif (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '2' ], $remember)) {
             return view('thongke');
         }else{
-            return redirect()->route('auth.login')->with('message', 'Wrong account or password');
+            return redirect()->route('user-login')->with('message', 'Wrong account or password');
         }
     }
 

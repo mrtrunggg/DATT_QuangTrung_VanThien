@@ -44,15 +44,17 @@ Auth::routes();
         //dd(Auth::guard('users')->id());
         return view('shop.index');
     })->name('home-index');
-// Route::get('/',[taikhoanController::class, 'show'])->name('auth.show');
-// Route::post('/',[taikhoanController::class, 'store'])->name('auth.post');
+
 // Route::get('/login',[taikhoanController::class, 'loginShow'])->name('auth.loginShow');
 // Route::post('/login',[taikhoanController::class, 'login'])->name('auth.login');
-
+Route::get('/sign-up',[taikhoanController::class, 'show'])->name('auth-show');
+Route::post('/sign-up',[taikhoanController::class, 'store'])->name('auth-post');
 //Route::get('/cart',[giaodienController::class, 'cart'])->name('cart');
 Route::group(['middleware' => ['auth:web']], function(){
     Route::get('/Review/{sp}',[BinhluanController::class,'create'])->name('writeReview');
     Route::post('/Review/{sp}',[BinhluanController::class,'xulyCreate'])->name('xulycreate');
+
+
 
     Route::get('/show-cart',[CartController::class, 'showCart'])->name('showCart');
 

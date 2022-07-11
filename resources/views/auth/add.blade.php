@@ -32,7 +32,7 @@
                                 {{ session('message') }}
                         </div>
                     @endif
-                    <form class="login-form" action="{{ route('auth.post') }}" method="POST" role="form">
+                    <form class="login-form" action="{{ route('auth-post') }}" method="POST" role="form">
                         @csrf
                         <div class="mg-dangnhap">
                             <input type="text" class="auth-form-input" placeholder="Name" name="tendangnhap">
@@ -68,7 +68,7 @@
                         </label>
                         <div class="footer-action">
                             <input type="submit" value="Sign Up" class="auth-submit">
-                            <a href="{{ route('auth.loginShow') }}" class="auth-btn-direct">Sign In</a>
+                            <a href="{{ route('user-login') }}" class="auth-btn-direct">Sign In</a>
                         </div>
                     </form>
                 </div>

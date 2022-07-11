@@ -45,14 +45,24 @@ class UserController extends Controller
                 'email' => 'required|email',
                 'password' => 'required|min:6'
             ]);
+            $tk = DB::table('taikhoans')->where('email',$request->email)->get();
             $remember = $request->remember;
-            if (Auth::guard('web')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1','loaitk'=> '0' ], $remember)) {
-                return redirect()->route('home-index')->with('message', 'Logged in successfully!');
+            foreach($tk as $a){
+                if($a->trangthai == 0){
+                    return redirect()->route('user-login')->with('erro', 'Account has been locked!');
+                }
+                else{
+                    if($a->loaitk != 0){
+                        return redirect()->route('user-login')->with('erro', 'Please use customer account!');
+                    }
+                    else{
+                        if(Auth::guard('web')->attempt(['email' =>$request->email, 'password' => $request->password],$remember)){
+                            return redirect()->route('home-index')->with('message', 'Logged in successfully!');                            
+                        }
+                    }
+                }
             }
-            else{
-                return redirect()->route('user-login')->with('erro', 'Account has been locked!');
-            }
-                return ('welcome');
+            return redirect()->route('user-login')->with('erro', 'Login information is incorrect!');
         }
 
 

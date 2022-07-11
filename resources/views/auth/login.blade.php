@@ -33,7 +33,7 @@
                                 {{ session('message') }}
                         </div>
                     @endif
-                    <form class="login-form" action="{{ route('auth.login') }}" method="POST" role="form">
+                    <form class="login-form" action="{{ route('user-login') }}" method="POST" role="form">
                         @csrf
                         <div class="mg-dangnhap">
                             <input class="auth-form-input" type="email" id="email" name="email" placeholder="Email" autofocus value="{{ old('email') }}">
