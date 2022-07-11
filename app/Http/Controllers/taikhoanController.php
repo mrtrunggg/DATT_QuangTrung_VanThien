@@ -66,13 +66,13 @@ class taikhoanController extends Controller
                 ->withInput();
         }
         $remember = $request->remember;
-        if (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '0' ], $remember)) {
+        if (Auth::guard('taikhoans')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '0' ], $remember)) {
             return redirect()->route('auth.show')->with('message', 'Account has been locked');
         }
-        elseif (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '0'], $remember)) {
+        elseif (Auth::guard('taikhoans')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '0'], $remember)) {
             return redirect()->route('home',$tk->id);
         }
-        elseif (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '1' ], $remember)) {
+        elseif (Auth::guard('taikhoans')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '1' ], $remember)) {
             return redirect()->route('thongke');
         }
         elseif (Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '2' ], $remember)) {

@@ -29,6 +29,24 @@
     <!-- Container fluid  -->
     <!-- ============================================================== -->
     <div class="container-fluid">
+
+        <div style="display:flex; margin-bottom:20px;">
+            <form action="{{route('timkiemtentk')}}" method="get" style="margin-right: 20px">
+                <input type="search" name="search" placeholder="Type your keyword...">
+                <button type="submit">Search</i></button>
+            </form>
+    
+            <form action="{{route('timkiemloaitk')}}" method="get">
+                    <select name="searchloaisp" style="height: 27px; width: 150px;">
+                        <option value="0">User</option>
+                        <option value="1">Staff</option> 
+                        <option value="2">Manage</option>
+                    </select>
+                <button type="submit">Search</button>
+            </form>
+    </div>
+
+
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
@@ -95,7 +113,18 @@
                                                     @else
                                                     <p>Enable</p>
                                                     @endif
-                                                
+                                                </td>
+                                                <td>
+                                                    @if($TK->trangthai==1)
+                                                        <button type="submit" class="btn btn-primary thay-doi-tt-hd btnthaydoi " data-id="{{$TK->id}}">
+                                                            Lock Account
+                                                        </button>
+                                                    @endif  
+                                                    @if($TK->trangthai==0)
+                                                        <button type="submit" class="btn btn-primary thay-doi-tt-hd btnthaydoi " disabled>
+                                                            Banned
+                                                        </button>
+                                                    @endif 
                                                 </td>
                                                 <td class="column2">
                                                     <a href="{{route('SuaTK',['TK'=>$TK->id])}}"  >Edit |</a>
@@ -109,6 +138,7 @@
                 </div>
             </div>
         </div>
+        {{$dstaikhoan->links()}}
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->
@@ -135,7 +165,39 @@
 </div>
 
 
+<script>
+    $('.thay-doi-tt-hd').on('click', function(){
 
+    var id =$(this).attr('data-id');
+
+    $.ajax({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type:"post",
+        url: '/admin/taikhoan/editTTTK/' + id,
+        data:{
+            id: id,
+            trangthai: 0,
+            _token: '{{csrf_token()}}'
+        },
+        dataType:"json",
+
+        
+        success: function (data) {
+            console.log(data);
+            
+            location.reload(true);
+            },
+        error: function (data, textStatus, errorThrown) {
+            console.log(data);
+            location.reload(false);
+        },
+    })
+})
+
+
+</script>
 
 
 @endsection

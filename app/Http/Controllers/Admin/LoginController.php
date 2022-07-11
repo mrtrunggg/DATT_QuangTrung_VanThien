@@ -68,35 +68,37 @@ class LoginController extends Controller
     //     }
     // }
 
+        // public function login(Request $request)
+        // {
+        //     $remember = $request->remember;
+        //     $this->validate($request, [
+        //         'email' => 'required|email',
+        //         'password' => 'required|min:6'
+        //     ]);
+        //     if (Auth::guard('admin')->attempt([
+        //         'email' => $request->email,
+        //         'password' => $request->password
+        //     ], $request->get('remember')))
+        //     {
+        //         return redirect()->intended(route('thongke'));
+        //     }
+        //     return back()->withInput($request->only('email', 'remember'));
+        // }
+
         public function login(Request $request)
         {
-            $remember = $request->remember;
             $this->validate($request, [
                 'email' => 'required|email',
                 'password' => 'required|min:6'
             ]);
             if (Auth::guard('admin')->attempt([
                 'email' => $request->email,
-                'password' => $request->password
-            ], $request->get('remember')))
-            {
-                return redirect()->intended(route('thongke'));
+                'password' => $request->password,
+                'trangthai' => 1
+            ], $request->get('remember'))) {
+                return redirect()->intended(route('admin.dashboard'));
             }
-
-            if(Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '1' ], $remember ))
-            {
-                return redirect()->intended(route('thongke'));
-            }
-
-            if(Auth::guard('taikhoan')->attempt(['email' =>$request->email, 'password' => $request->password, 'trangthai'=> '1', 'loaitk'=> '2
-            ' ], $remember ))
-            {
-                return redirect()->intended(route('thongke'));
-            }
-
-
-
-            return back()->withInput($request->only('email', 'remember'));
+                return back()->withInput($request->only('email', 'remember'));
         }
 
 
@@ -104,8 +106,11 @@ class LoginController extends Controller
         {
             Auth::guard('admin')->logout();
             $request->session()->invalidate();
-            return redirect()->route('auth.login');
+            Auth::logout();
+            return redirect()->route('admin.login');
         }
+
+        
 
 
 }

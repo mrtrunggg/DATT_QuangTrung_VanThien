@@ -199,7 +199,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type:"post",
-            url: '/hoadonnhap/editTTHdb/' + id,
+            url: '/admin/hoadonnhap/editTTHdb/' + id,
             data:{
                 id: id,
                 trangthai: 2,
@@ -246,7 +246,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type:"post",
-            url: '/hoadonnhap/delete/' + id,
+            url: '/admin/hoadonnhap/delete/' + id,
             data:{
                 id: id,
                 _token: $('meta[name="crfs-token"]').attr('content')

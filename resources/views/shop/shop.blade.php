@@ -51,6 +51,7 @@
                     @endforelse
 
                 </div>
+                {{$SP->links()}}
     @endsection
     <script>
        $(function(){

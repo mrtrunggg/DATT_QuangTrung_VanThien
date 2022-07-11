@@ -27,13 +27,19 @@ class giaodienController extends Controller
         return view('shop.cart',compact('id','KH'));
     }
     public function shop($id){
+<<<<<<< HEAD
         $SP = DB::table('sanphams')->get();
         $KH = DB::table('taikhoans')->find($id);
         return view('shop.shop',compact('id','SP','KH'));
+=======
+        $SP = DB::table('sanphams')->paginate(8);
+        return view('shop.shop',compact('id','SP'))->with('i', (request()->input('page', 1) -1) *8);
+>>>>>>> 404114f3d4d926da2f77ae9879ef5db4b94694f4
     }
 
 
     public function aosomi($id){
+<<<<<<< HEAD
         $KH = DB::table('taikhoans')->find($id);
         $SP = DB::table('sanphams')->where('loaisp','=','T-Shirt')->get();
         return view('shop.shop',compact('id','SP','KH'));
@@ -62,6 +68,30 @@ class giaodienController extends Controller
         $SP = DB::table('sanphams')->where('loaisp','like','%Jeans%')->get();
         $KH = DB::table('taikhoans')->find($id);
         return view('shop.shop',compact('id','SP','KH'));
+=======
+        $SP = DB::table('sanphams')->where('loaisp','=','T-Shirt')->paginate(8);
+        return view('shop.shop',compact('id','SP'))->with('i', (request()->input('page', 1) -1) *8);
+    }
+    public function aothun($id){
+        $SP = DB::table('sanphams')->where('loaisp','=','Shirt')->paginate(8);
+        return view('shop.shop',compact('id','SP'))->with('i', (request()->input('page', 1) -1) *8);
+    }
+    public function aokhoac($id){
+        $SP = DB::table('sanphams')->where('loaisp','like','%Coart%')->paginate(8);
+        return view('shop.shop',compact('id','SP'))->with('i', (request()->input('page', 1) -1) *8);
+    }
+    public function quandai($id){
+        $SP = DB::table('sanphams')->where('loaisp','like','%Trousers%')->paginate(8);
+        return view('shop.shop',compact('id','SP'))->with('i', (request()->input('page', 1) -1) *8);
+    }
+    public function quandui($id){
+        $SP = DB::table('sanphams')->where('loaisp','like','%Shorts%')->paginate(8);
+        return view('shop.shop',compact('id','SP'))->with('i', (request()->input('page', 1) -1) *8);
+    }
+    public function quanjean($id){
+        $SP = DB::table('sanphams')->where('loaisp','like','%Jeans%')->paginate(8);
+        return view('shop.shop',compact('id','SP'))->with('i', (request()->input('page', 1) -1) *8);
+>>>>>>> 404114f3d4d926da2f77ae9879ef5db4b94694f4
     }
 
 
@@ -80,9 +110,14 @@ class giaodienController extends Controller
     }
 
     public function timKiem(Request $req,$id){
+<<<<<<< HEAD
         $KH = DB::table('taikhoans')->find($id);
         $SP = DB::table('sanphams')->where('tensp','like','%'.$req->search.'%')->get();
         return view('shop.shop',compact('id','SP','KH'));
+=======
+        $SP = DB::table('sanphams')->where('tensp','like','%'.$req->search.'%')->paginate(8);
+        return view('shop.shop',compact('id','SP'))->with('i', (request()->input('page', 1) -1) *8);
+>>>>>>> 404114f3d4d926da2f77ae9879ef5db4b94694f4
     }
 
 

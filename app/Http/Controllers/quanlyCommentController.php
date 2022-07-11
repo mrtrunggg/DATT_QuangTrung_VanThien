@@ -24,13 +24,14 @@ class quanlyCommentController extends Controller
 {
     public function index(){
         $data=1;
-        $dsbinhluan = DB::table('binhluans')->orderBy('ngaybl','DESC')->get();
-        $dsbl = DB::table('taikhoans')->join('binhluans','taikhoans.id','=','binhluans.taikhoan_id')->orderBy('ngaybl','DESC')->get();
+        $dsbinhluan = DB::table('binhluans')->orderBy('ngaybl','DESC')->paginate(5);
+        $dsbl = DB::table('taikhoans')->join('binhluans','taikhoans.id','=','binhluans.taikhoan_id')->orderBy('ngaybl','DESC')->paginate(5);
       
         $tensp = DB::table('sanphams')->where('trangthai','!=','0')->get();
       
-        return view('admin.quanlyadmin.binhluan.index',compact('dsbinhluan','dsbl','tensp'),  ['cuccung' => $data]);
+        return view('admin.quanlyadmin.binhluan.index',compact('dsbinhluan','dsbl','tensp'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);
     }
+
     public function repComment(Request $req){
         $data = $req -> all();
         $binhluan = new binhluan();
@@ -39,6 +40,15 @@ class quanlyCommentController extends Controller
         $binhluan -> traloibinhluan_id = $data['id'];
         $binhluan -> trangthai = 1;
         $binhluan ->ngaybl = Carbon::now();
+        $binhluan ->trangthai = 1;
         $binhluan ->save();
     }
+
+    function editTTBL(Request $req){       
+        $HDB = binhluan::find($req->id);
+        $HDB->trangthai = $req->trangthai;
+        $HDB -> update();
+        return response()->json($HDB);
+    }
+    
 }

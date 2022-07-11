@@ -69,7 +69,7 @@
                                     <label class="col-md-6 p-0">Avatar</label>
                                     <div class="col-md-6 border-bottom p-0">
                                         <input type="file" placeholder=" " name="hinhdaidien"
-                                            class="form-control p-0 border-0" value="{{$thongtin->hinhdaidien}}" > </div>
+                                            class="form-control p-0 border-0" value="{{$thongtin->hinhdaidien}}" ></div>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="col-md-6 p-0">Full Name</label>
@@ -87,7 +87,6 @@
                                     <label class="col-sm-12">Account Type</label>
                                     <div class="col-sm-12 border-bottom">
                                         <select class="form-select shadow-none p-0 border-0 form-control-line" name="loaitk" id="loaitk">
-                                            <option value="0" <?php if($thongtin->loaitk == '0'){echo("selected");}?>>User</option>
                                             <option value="1" <?php if($thongtin->loaitk == '1'){echo("selected");}?>>Staff</option> 
                                             <option value="2" <?php if($thongtin->loaitk == '2'){echo("selected");}?>>Manage</option>
                                         </select>
@@ -97,8 +96,8 @@
                                     <label class="col-sm-12">Status</label>
                                     <div class="col-sm-12 border-bottom">
                                         <select class="form-select shadow-none p-0 border-0 form-control-line" name="trangthai" id="trangthai">
-                                            <option value="1">Activate</option>
-                                            <option value="0">Inactive</option> 
+                                            <option value="1" <?php if($thongtin->trangthai == '1'){echo("selected");}?> >Activate</option>
+                                            <option value="0" <?php if($thongtin->trangthai == '0'){echo("selected");}?>>Inactive</option> 
                                         </select>
                                     </div>
                                 </div>
