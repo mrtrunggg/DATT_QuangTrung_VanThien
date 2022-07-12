@@ -34,9 +34,9 @@
                         </div>
                         <p class="auth-sgt">or sign in with:</p>
                     </div>
-                    @if (session('message'))
+                    @if (session('erro'))
                         <div class="alert alert-danger" role="alert">
-                                {{ session('message') }}
+                                {{ session('erro') }}
                         </div>
                     @endif
                     <form class="login-form" action="{{ route('post.user.login') }}" method="POST" role="form">
@@ -63,7 +63,7 @@
                         </label>
                         <div class="footer-action">
                             <input type="submit" value="Sign In" class="auth-submit">
-                            <a href="#" class="auth-btn-direct">Sign Up</a>
+                            <a href="{{route('auth-show')}}" class="auth-btn-direct">Sign Up</a>
                         </div>
                     </form>
                     <div class="auth-forgot-password">

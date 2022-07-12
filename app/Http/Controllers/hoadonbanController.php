@@ -17,7 +17,7 @@ class hoadonbanController extends Controller
     {
         $data=1;
         $dshoadonban = DB::table('hoadonbans')->where('trangthai','!=','0')->orderBy('updated_at','DESC')->paginate(5);   
-        $tenkh= DB::table('taikhoans')->where('trangthai','!=','0')->where('loaitk','=','0')->get();
+        $tenkh= DB::table('taikhoans')->where('loaitk','=','0')->get();
         return view('admin.quanlyadmin.hoadonban.index',compact('dshoadonban','tenkh'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);
     }
 

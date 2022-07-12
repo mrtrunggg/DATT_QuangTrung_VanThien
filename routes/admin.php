@@ -35,6 +35,31 @@ Route::group(['prefix' => '/'], function () {
             ->groupBy(DB::raw("Month(updated_at)"))
             ->pluck('count');
 
+            $tongdoanhthu = DB::table('sanphams')
+            ->select('thanhtien','cthoadonbans.soluong','sanphams.dongianhap')
+            ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
+            ->where('cthoadonbans.trangthai','=','2')
+            ->get();
+    
+        $tongsanphamkk = DB::table('sanphams')->where('trangthai','=','1')->get();
+        $tongtienmuahang = DB::table('hoadonnhaps')
+        ->select(DB::raw("sum(tongtien) as tongtien"))
+        ->where('trangthai','=','2')
+        ->groupBy('trangthai')
+        ->get();
+            $thongtienne = 0;
+            $loinhuanne = 0;
+            $tonkhone = 0;
+            //dd($tongdoanhthu);
+            foreach($tongdoanhthu as $tongtien){
+                $thongtienne += $tongtien->thanhtien;
+                $loinhuanne += $tongtien->thanhtien - ($tongtien->soluong * $tongtien->dongianhap);
+            }
+    
+            foreach($tongsanphamkk as $tongsp){
+                $tonkhone += $tongsp->soluong;
+            }
+
         $monththongke = hoadonban::select(DB::raw("Month(updated_at) as month"))
             ->whereYear('updated_at', date('Y'))
             ->where('trangthai','2')
@@ -48,27 +73,63 @@ Route::group(['prefix' => '/'], function () {
 
 
         $tiennhap = sanpham::join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
-            ->select('cthoadonbans.sanpham_id','cthoadonbans.soluong','sanphams.giaban','sanphams.dongianhap','cthoadonbans.trangthai',(DB::raw("Month(cthoadonbans.updated_at) as month")))
+            ->select('cthoadonbans.sanpham_id','cthoadonbans.thanhtien','cthoadonbans.soluong','sanphams.giaban','sanphams.dongianhap','cthoadonbans.trangthai',(DB::raw("Month(cthoadonbans.updated_at) as month")))
             ->whereYear('cthoadonbans.updated_at', date('Y'))
+            ->where('cthoadonbans.trangthai','=','2')
             ->where(DB::raw("Month(cthoadonbans.updated_at)"),'=', $month)
             ->get();
  
         $doanhthuban = 0;
         foreach ($tiennhap as $tinhtien){
-            $doanhthuban = $doanhthuban + (($tinhtien->soluong * $tinhtien->giaban) - ($tinhtien->soluong  * $tinhtien->dongianhap));
+            $doanhthuban += $tinhtien->thanhtien - ($tinhtien->soluong  * $tinhtien->dongianhap);
         }
     $index;
     $line[--$month] = $doanhthuban;
     $data[$month] = $thongke[$index];
     }
-        return view('admin.quanlyadmin.thongke.index', ['cuccung' =>$data,'line'=>$line]);
+    //dd( $line);
+        return view('admin.quanlyadmin.thongke.index', compact('tonkhone','thongtienne','loinhuanne','tongtienmuahang'), ['cuccung' =>$data,'line'=>$line]);
     })->name('admin.index22222');
 
     Route::group(['middleware' => ['auth:admin']], function () {
 
 
         Route::get('/', function () {
+            $tongdoanhthu = DB::table('sanphams')
+            ->select('thanhtien','cthoadonbans.soluong','sanphams.dongianhap')
+            ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
+            ->where('cthoadonbans.trangthai','=','2')
+            ->get();
             
+        $tongsanphamkk = DB::table('sanphams')->where('trangthai','=','1')->get();
+        $tongtienmuahang = DB::table('hoadonnhaps')
+        ->select(DB::raw("sum(tongtien) as tongtien"))
+        ->where('trangthai','=','2')
+        ->groupBy('trangthai')
+        ->get();
+    
+            $thongtienne = 0;
+            $loinhuanne = 0;
+            $tonkhone = 0;
+            //dd($tongdoanhthu);
+            foreach($tongdoanhthu as $tongtien){
+                $thongtienne += $tongtien->thanhtien;
+                $loinhuanne += $tongtien->thanhtien - ($tongtien->soluong * $tongtien->dongianhap);
+            }
+    
+            foreach($tongsanphamkk as $tongsp){
+                $tonkhone += $tongsp->soluong;
+            }
+
+        $monththongke = hoadonban::select(DB::raw("Month(updated_at) as month"))
+            ->whereYear('updated_at', date('Y'))
+            ->where('trangthai','2')
+            ->groupBy(DB::raw("Month(updated_at)"))
+            ->pluck('month');     
+
+        $data = [0,0,0,0,0,0,0,0,0,0,0,0];
+        $line = [0,0,0,0,0,0,0,0,0,0,0,0];
+            //dd($monththongke);
             $thongke = hoadonban::select(DB::raw("sum(tongtien) as count"))
             ->whereYear('updated_at', date('Y'))
             ->where('trangthai','2')
@@ -86,20 +147,22 @@ Route::group(['prefix' => '/'], function () {
             //dd($monththongke);
             foreach ($monththongke as $index => $month){
                 $tiennhap = sanpham::join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
-                    ->select('cthoadonbans.sanpham_id','cthoadonbans.soluong','sanphams.giaban','sanphams.dongianhap','cthoadonbans.trangthai',(DB::raw("Month(cthoadonbans.updated_at) as month")))
+                    ->select('cthoadonbans.sanpham_id','cthoadonbans.thanhtien','cthoadonbans.soluong','sanphams.giaban','sanphams.dongianhap','cthoadonbans.trangthai',(DB::raw("Month(cthoadonbans.updated_at) as month")))
                     ->whereYear('cthoadonbans.updated_at', date('Y'))
+                    ->where('cthoadonbans.trangthai','=','2')
                     ->where(DB::raw("Month(cthoadonbans.updated_at)"),'=', $month)
                     ->get();
                 $doanhthuban = 0;
                 foreach ($tiennhap as $tinhtien){
-                    $doanhthuban = $doanhthuban + (($tinhtien->soluong * $tinhtien->giaban) - ($tinhtien->soluong  * $tinhtien->dongianhap));
+                    $doanhthuban += $tinhtien->thanhtien - ($tinhtien->soluong  * $tinhtien->dongianhap);
                 }
-            
+                //dd( $monththongke);
             $index;
             $line[--$month] = $doanhthuban;
             $data[$month] = $thongke[$index];
             }
-            return view('admin.quanlyadmin.thongke.index', ['cuccung' =>$data,'line'=>$line]);
+
+            return view('admin.quanlyadmin.thongke.index', compact('tonkhone','thongtienne','loinhuanne','tongtienmuahang'), ['cuccung' =>$data,'line'=>$line]);
         })->name('admin.dashboard');
     });
 });
@@ -198,6 +261,10 @@ Route::group(['prefix' => 'thongke'], function() {
     Route::get('index',[thongkeController::class, 'index'])->name('thongke');
     Route::post('by-date',[thongkeController::class, 'byDate'])->name('TheoNgay');
 
+    Route::get('doanhthu',[thongkeController::class, 'tksanpham'])->name('tksanpham');
+    Route::get('timkiemspne',[thongkeController::class, 'sptimkiemsp'])->name('sptimkiemsp');
+    Route::get('sapxeptheodanhmuc',[thongkeController::class, 'sapxeptheodanhmuc'])->name('sapxeptheodanhmuc');
+    Route::get('danhsachsptheongay',[thongkeController::class, 'danhsachsptheongay'])->name('danhsachsptheongay');
 });
 
 
