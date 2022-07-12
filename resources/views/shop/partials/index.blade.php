@@ -64,14 +64,19 @@
                 <i class="fa fa-close" aria-hidden="true"></i>
             </div>
             <!-- Logo -->
-            <div class="logo">
+            <div class="logo" style="margin-bottom: 60px;">
                 <a href="{{route('home-index')}}"><img src="{{asset('amado-master/img/core-img/logo.png')}}" alt=""></a>
             </div>
-            <div>
+            <div style="margin-bottom: 50px;">
+                
                 @if(Auth::check() )
-
-            Hello {{Auth::user()->tendangnhap}} 
-            @endif
+                    <a style="display:flex; align-items: center;" href="{{route('homeAccount')}}">
+                        <p style="margin-bottom: 0; color: #3f2d2d; font-size: 17px;">{{Auth::user()->tendangnhap}} </p>
+                        <div style="width:50px; height:50px; border-radius: 50px; margin-left: 15px;">
+                            <img style="border-radius: 50px; width:100%" src="{{asset('uploads/'.Auth::user()->hinhdaidien)}}" alt="">
+                        </div>
+                    </a>
+                @endif
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">

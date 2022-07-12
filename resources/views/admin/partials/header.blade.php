@@ -54,8 +54,15 @@
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
           
-                    <p style="color: #ffff; margin-top: 20px; padding-right: 30px;"> Hello {{auth()->guard('admin')->user()->tendangnhap}} </p>
-              
+                
+                <div style="display:flex; align-items: center; margin-right: 20px">
+                {{-- <a style="display:flex; align-items: center;" href="{{route('homeAccount')}}"> --}}
+                    <p style="color: #ffff; margin-top: 20px; padding-right: 20px;">Admin {{auth()->guard('admin')->user()->tendangnhap}}</p>
+                    <div style="width: 40px; height: 40px; border-radius: 50px;">
+                        <img style="border-radius: 50px; width:100%" src="{{asset('uploads/'.auth()->guard('admin')->user()->hinhdaidien)}}" alt="">
+                    </div>
+                {{-- </a> --}}
+                </div>    
                 
          
 

@@ -21,6 +21,7 @@ class CreateBinhluansTable extends Migration
             $table->string('mota');
             $table->string('traloibinhluan_id')->nullable();
             $table->datetime('ngaybl');
+            $table->integer('trangthai')->nullable()->default(1);
             $table->foreign('taikhoan_id')->references('id')->on('taikhoans');
             $table->foreign('sanpham_id')->references('id')->on('sanphams');
             $table->softDeletes(); 
