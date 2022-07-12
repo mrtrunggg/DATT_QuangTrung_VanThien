@@ -43,7 +43,9 @@
             <form action="{{route('timkiemloaihd')}}" method="get">
                 <select name="searchloaisp" style="height: 27px; width: 150px;">
                     @foreach($tenkh as $a)
+                        @if($a->trangthai != 0)
                         <option value="{{$a->id}}">{{$a->tendangnhap}}</option>
+                        @endif
                     @endforeach 
                 </select>   
                
@@ -79,8 +81,12 @@
                                             <tr>                   
                                                 <td>
                                                     @foreach ($tenkh as $TSP)
-                                                        @if ($TSP->id==$SP->khachhang_id)
-                                                            {{$TSP->tendangnhap}}   
+                                                        @if($TSP->trangthai == 0 )
+                                                            This account has been locked
+                                                        @else
+                                                            @if ($TSP->id==$SP->khachhang_id)
+                                                                {{$TSP->tendangnhap}}   
+                                                            @endif
                                                         @endif
                                                     @endforeach    
                                                 </td>

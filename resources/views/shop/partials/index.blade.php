@@ -181,8 +181,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                             <a class="nav-link" href="{{route('shop')}}">Shop</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{route('showCart')}}">Cart</a>
-                                        </li>
+                                            
+                                        
+                                        @if(Auth::check()  )
+                                          <a href="{{route('showCart')}}" class="nav-link"> Cart</a>
+                                        @else
+                                        <a href="{{route('checkdn')}}" class="nav-link"> Cart</a>
+                                         @endif
+                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{route('checkout')}}">Checkout</a>
                                         </li>
