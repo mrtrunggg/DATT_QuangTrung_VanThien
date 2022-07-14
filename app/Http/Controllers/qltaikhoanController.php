@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\taikhoan;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class qltaikhoanController extends Controller
 {
@@ -117,4 +118,81 @@ class qltaikhoanController extends Controller
         $dstaikhoan = DB::table('taikhoans')->where('trangthai','=','1')->get();    
         return redirect()->route('indexTk',compact('dstaikhoan'));
     } 
+
+    function information(){
+        $data=1;
+    
+        return view('admin.quanlyadmin.taikhoan.information',  ['cuccung' => $data]);
+    
+    }
+    
+    function changeinformation(){
+        $data=1;
+    
+        return view('admin.quanlyadmin.taikhoan.changeinformation',  ['cuccung' => $data]);
+    
+    }
+
+
+
+    function xulyeditthongtin(Request $req){  
+
+        if($req->has('hinhdaidien')){
+            $file = $req->hinhdaidien;
+            $ext = $req->hinhdaidien->extension();
+            $file_name = time().'-'.'account'.'.'.$ext;
+            $file->move(public_path('uploads'), $file_name);
+        } 
+        if($req->hinhdaidien == Null){
+            $file_name = Null;
+        }
+        $req->merge(['image'=>$file_name]);
+        $Tk = taikhoan::find(auth()->guard('admin')->user()->id);
+        $Tk->tendangnhap = $req->tendangnhap;
+        $Tk->email = $req->email;
+        $Tk->dienthoai = $req->dienthoai;
+        $Tk->hinhdaidien = $req->image;
+        $Tk->hoten = $req->hoten;
+        $Tk->diachi = $req->diachi;
+        $Tk->loaitk = $req->loaitk;
+        $Tk -> save();    
+        $dstaikhoan = taikhoan::all();
+       return view('admin.quanlyadmin.taikhoan.information');
+    }
+
+
+    
+    function changepassword(){
+        $data=1;
+        return view('admin.quanlyadmin.taikhoan.changepassw',  ['cuccung' => $data]);
+    
+    }
+
+    public function postrchangepasssword(Request $req){
+        $user = DB::table('taikhoans')->find(auth()->guard('admin')->user()->id);
+        if($req->oldpass == Null){
+            return redirect()->route('changepassw')->with('notice1','Please enter old password!');
+        }
+        elseif($req->newpass == Null)
+        {
+            return redirect()->route('changepassw')->with('notice1','Please enter a new password!');
+        }
+        elseif($req->renewpass == Null){
+            return redirect()->route('changepassw')->with('notice1','Please re-enter new password!');
+        }
+        elseif($req->newpass != $req->renewpass){
+            return redirect()->route('changepassw')->with('notice1','Please re-enter the correct new password!');
+        }
+        elseif(!(Hash::check($req->get('oldpass'),$user->password)))
+        {
+            return redirect()->route('changepassw')->with('notice1','The old password is incorrect, please re-enter!');
+        }
+        else{
+            $pass = DB::table('taikhoans')->where('id',auth()->guard('admin')->user()->id)->update(['password'=>bcrypt($req->newpass)]);
+            return redirect()->route('information')->with('notice','Password change successful!');
+
+        }
+    }
+    
+
 }

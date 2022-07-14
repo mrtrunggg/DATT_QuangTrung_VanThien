@@ -75,10 +75,17 @@ swal("{{session()->get('erro')}}","Fill full the information!","warning");
                     <table>
                         @forelse($binhluan as $thongtin)
 
-                     @if($thongtin->trangthai == 0)
+                     @if($thongtin->trangthai == 0 )
+                     @if(Auth::user()->id==$thongtin->taikhoan_id)
                      <div class="col-8 mb-3" style="margin: 15px 0 0 0; border: 1px black solid;">
                                 <b>Comment has been hidden</b>
                             </div>
+                    @else
+                    <div>
+                        
+                    </div>
+
+                    @endif
                             @else
                             <div class="col-8 mb-3" style="margin: 15px 0 0 0; border: 1px black solid;">
                             <div style="display:flex" >

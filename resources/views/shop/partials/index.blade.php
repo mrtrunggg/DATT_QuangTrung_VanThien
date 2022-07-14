@@ -73,7 +73,11 @@
                     <a style="display:flex; align-items: center;" href="{{route('homeAccount')}}">
                         <p style="margin-bottom: 0; color: #3f2d2d; font-size: 17px;">{{Auth::user()->tendangnhap}} </p>
                         <div style="width:50px; height:50px; border-radius: 50px; margin-left: 15px;">
-                            <img style="border-radius: 50px; width:100%" src="{{asset('uploads/'.Auth::user()->hinhdaidien)}}" alt="">
+                            @if(Auth::user()->hinhanh!=null)
+                                <img style="border-radius: 50px; width:100%" src="{{asset('uploads/'.Auth::user()->hinhdaidien)}}" alt="">
+                            @else
+                                <img style="border-radius: 50px; width:100%" src="{{asset('amado-master/img/core-img/account.jpg')}}" alt="">
+                            @endif
                         </div>
                     </a>
                 @endif

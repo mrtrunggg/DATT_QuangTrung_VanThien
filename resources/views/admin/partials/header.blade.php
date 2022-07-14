@@ -54,23 +54,44 @@
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
           
+
+                <div class="dropdown" style="margin-right: 20px">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div style="display:flex; align-items: center">
+                            <p style="color: #ffff; margin-top: 20px; padding-right: 20px;">Admin {{auth()->guard('admin')->user()->tendangnhap}}</p>
+                            <div style="width: 40px; height: 40px; border-radius: 50px;">
+                                @if (auth()->guard('admin')->user()->hinhdaidien != null)
+                                    <img style="border-radius: 50px; width:100%; height: 100%;" src="{{asset('uploads/'.auth()->guard('admin')->user()->hinhdaidien)}}" alt="">
+                                @else
+                                    <img style="border-radius: 50px; width:100%; height: 100%;" src="{{asset('amado-master/img/core-img/admin.png')}}" alt="">
+                                @endif
+                            </div>
+                        </div>    
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('information') }}">
+                                Information
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('changepassw') }}">Change Password</a>
+                        </li>
+                        <li class="">
+                            <a class="dropdown-item" href="{{ route('admin.logout') }}">
+                                <i class="fa fa-sign-out fa-lg"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
                 
-                <div style="display:flex; align-items: center; margin-right: 20px">
-                {{-- <a style="display:flex; align-items: center;" href="{{route('homeAccount')}}"> --}}
-                    <p style="color: #ffff; margin-top: 20px; padding-right: 20px;">Admin {{auth()->guard('admin')->user()->tendangnhap}}</p>
-                    <div style="width: 40px; height: 40px; border-radius: 50px;">
-                        <img style="border-radius: 50px; width:100%" src="{{asset('uploads/'.auth()->guard('admin')->user()->hinhdaidien)}}" alt="">
-                    </div>
-                {{-- </a> --}}
-                </div>    
+                
                 
          
 
-                <li class="logout-btn">
-                    <a class="dropdown-item" href="{{ route('admin.logout') }}">
-                        <i class="fa fa-sign-out fa-lg"></i> Logout
-                    </a>
-                </li>
+                
 
 
 

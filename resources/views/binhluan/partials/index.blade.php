@@ -69,6 +69,26 @@
             <div class="logo">
                 <a href="{{route('home-index')}}"><img src="{{asset('amado-master/img/core-img/logo.png')}}" alt=""></a>
             </div>
+
+            <div style="margin-bottom: 50px;">
+                
+                @if(Auth::check() )
+                    <a style="display:flex; align-items: center;" href="{{route('homeAccount')}}">
+                        <p style="margin-bottom: 0; color: #3f2d2d; font-size: 17px;">{{Auth::user()->tendangnhap}} </p>
+                        <div style="width:50px; height:50px; border-radius: 50px; margin-left: 15px;">
+                            @if(Auth::user()->hinhanh!=null)
+                                <img style="border-radius: 50px; width:100%" src="{{asset('uploads/'.Auth::user()->hinhdaidien)}}" alt="">
+                            @else
+                                <img style="border-radius: 50px; width:100%" src="{{asset('amado-master/img/core-img/account.jpg')}}" alt="">
+                            @endif
+                        </div>
+                    </a>
+                @endif
+            </div>
+
+
+
+
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>

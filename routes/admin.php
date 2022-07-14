@@ -194,6 +194,11 @@ Route::group(['prefix' => 'taikhoan'], function() {
     Route::post('edit/{TK}',[qltaikhoanController::class, 'xulyedit'])->name('xylysuaTK');
     Route::post('editTTTK/{SP}',[qltaikhoanController::class, 'editTTTK']);
     Route::get('delete/{TK}',[qltaikhoanController::class, 'xulydelete'])->name('xylyxoaTK');
+    Route::get('information',[qltaikhoanController::class, 'information'])->name('information');
+    Route::get('changeinformation',[qltaikhoanController::class, 'changeinformation'])->name('changeinfo');
+    Route::post('changeinformation',[qltaikhoanController::class, 'xulyeditthongtin'])->name('editthongtin');
+    Route::get('changepasssword',[qltaikhoanController::class, 'changepassword'])->name('changepassw');
+    Route::post('changepasssword',[qltaikhoanController::class, 'postrchangepasssword'])->name('editthongtinpass');
 });
 
 // hoa don ban ne

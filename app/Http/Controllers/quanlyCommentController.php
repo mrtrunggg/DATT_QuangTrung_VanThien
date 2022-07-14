@@ -41,10 +41,7 @@ class quanlyCommentController extends Controller
         $tensp = DB::table('sanphams')->where('trangthai','!=','0')->get();
       
         return view('admin.quanlyadmin.binhluan.index',compact('dsbinhluan','dsbl','tensp'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
-    
-        
-
-       }
+    }
 
     public function repComment(Request $req){
         $data = $req -> all();
