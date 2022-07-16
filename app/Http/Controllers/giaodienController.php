@@ -22,7 +22,12 @@ class giaodienController extends Controller
     }
     public function shop(){
         $SP = DB::table('sanphams')->paginate(8);
-        return view('shop.shop',compact('SP'))->with('i', (request()->input('page', 1) -1) *8);
+        // ->join('chitietsanphams', 'chitietsanphams.sanpham_id', '=', 'sanphams.id')
+        // ->groupBy('sanphams.id')
+        // ->get();
+        // dd($SP);
+        $ctsanpham = DB::table('chitietsanphams')->first();
+        return view('shop.shop',compact('SP','ctsanpham'))->with('i', (request()->input('page', 1) -1) *8);
     }
 
     public function aosomi(){

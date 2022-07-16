@@ -93,10 +93,11 @@
                             <form class="form-horizontal form-material">
                                 <div class="row">
                                     <div class="col">
-                                        <div class="form-group mb-4">
-                                            <label class="col-md-4 p-0">Product</label>
+                                        <div class="form-group mb-3">
+                                            <label class="col-md-3 p-0">Product</label>
                                             <div class="col-md-12 border-bottom p-0">
                                                 <select class="disb form-select shadow-none p-0 border-0" name="sanpham_id" id="thay-doi-dgn">
+                                                    <option value="">Please choose a product</option>
                                                     @foreach($dssplaphd as $a)
                                                         <option value="{{$a->id}}">{{$a->tensp}}</option>
                                                     @endforeach 
@@ -105,33 +106,47 @@
                                         </div>     
                                     </div>
                                     <div class="col">
-                                        <div class="form-group mb-4">
-                                            <label class="col-md-6 p-0">Import Unit Price</label>
+                                        <div class="form-group mb-3">
+                                            <label class="col-md-3 p-0">Product Detail</label>
                                             <div class="col-md-12 border-bottom p-0">
-                                                <p id="ogiasieunhap"></p>
+                                                <select class="disb form-select shadow-none p-0 border-0" name="ctsanpham_id" id="thay-doi-dgn2">                                          
+                                                        <option value="">Please choose size</option>
+                                                </select>
                                             </div>
                                         </div>     
                                     </div>
                                     <div class="col">
-                                        <div class="form-group mb-4">
-                                            <label class="col-md-4 p-0">Quantily</label>
-                                            <div class="col-md-0 border-bottom p-0">
-                                                <input type="number" placeholder=" " name="soluong" id="ajax-nhapsoluong"
-                                                    class="form-control p-0 border-1"> </div>
+                                        <div class="form-group mb-3">
+                                            <label class="col-md-3 p-0">Import Unit Price</label>
+                                            <div class="col-md-12 border-bottom p-0">
+                                                <input  type="number" placeholder=" " name="dongianhap"
+                                                    class="form-control p-0 border-1 ajax-nhapsoluong"> </div>
+                                            </div>
+                                        </div>     
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group mb-6">
+                                                <label class="col-md-6 p-0">Quantily</label>
+                                                <div class="col-md-10 border-bottom p-0">
+                                                    <input type="number" placeholder=" " name="soluong" id=""
+                                                        class="form-control p-0 border-1 ajax-nhapsoluong"> </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group mb-4">
-                                            <label class="col-md-6 p-0">Into money</label>
-                                            <div class="col-md-12 border-bottom p-0">
-                                                <p id="hientongtien"></p>
-                                            </div>
-                                        </div>     
-                                    </div>
-                                    <p id="idcthdne" style="display: none"></p>
-                                    <div class="col" style="flex: 0 0 0%">
-                                        <button type="submit" id="form-add-cthd" class="btn btn-success">Add</button>
-                                    </div>
+                                        <div class="col">
+                                            <div class="form-group mb-6">
+                                                <label class="col-md-6 p-0">Into money</label>
+                                                <div class="col-md-10 border-bottom p-0">
+                                                    <p id="hientongtien"></p>
+                                                </div>
+                                            </div>     
+                                        </div>
+                                        <p id="idcthdne" style="display: none"></p>
+                                        <div class="col" style="flex: 0 0 0%">
+                                            <button type="submit" id="form-add-cthd" class="btn btn-success">Add</button>
+                                        </div>
+                                    </div>    
+                                    
                                 </div>
                             </form>
                         </div>
@@ -144,17 +159,21 @@
                 <thead>
                     <tr>
                         <th class="border-top-0">Product code</th>
+                        <th class="border-top-0">Product detail code</th>
                         <th class="border-top-0">Quantily</th>
+                        <th class="border-top-0">Import Unit Price</th>
                         <th class="border-top-0">Into money</th>
                         <th class="border-top-0">Status</th>
                     </tr>
                 </thead>
             </table>
+           
+            <a class="btn btn-success" data-url="{{ route('xylythemHDN')}}" id="form-add-tong-hd"  href="{{route('indexNK')}}">
+                Success
+            </a>
         </div>
 
-        <a class="btn btn-success" data-url="{{ route('xylythemHDN')}}" id="form-add-tong-hd" href="{{route('indexNK')}}">
-            
-        Success</a>
+    
 
 
         <!-- Row -->
@@ -277,7 +296,7 @@
                             <div class="form-group mb-2">
                                 <label class="col-md-6 p-0">Import Unit Price</label>
                                 <div class="col-md-6 border-bottom p-0">
-                                    <input type="number" placeholder=" " name="dongianhap"
+                                    <input type="number" placeholder=" "
                                         class="form-control p-0 border-0"> </div>
                             </div>
 
@@ -386,6 +405,9 @@
 
         const id = $('select[name="sanpham_id"]').val();
         
+        $('#thay-doi-dgn2').find('option').not(':first').remove();
+
+
         $.ajax({
             headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -393,60 +415,48 @@
             type:"get",
             url: '/admin/hoadonnhap/timidsp/' + id,
             dataType:"json",
-            success: function (response) {
-                console.log(response);
-                $('p#ogiasieunhap').text(response.dongianhap);
-            },
-            
+            success: function(response){
+              
+                var len = 0;
+                if(response != null){
+                len = response.length;
+                }
+
+                if(len > 0){
+                // Read data and create <option >
+                for(var i=0; i<len; i++){
+
+                    var id = response[i].id;
+                    var name = response[i].kichthuoc;
+                    var option = "<option value='"+id+"'>"+name+"</option>"; 
+                    $("#thay-doi-dgn2").append(option); 
+                }
+                }
+            }
         })
     })
 
-    $('#thay-doi-dgn').on('change', function(){
-
-        const id = $('select[name="sanpham_id"]').val();
-        const soluong = $('input[name="soluong"]').val();
-        $.ajax({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type:"get",
-            url: '/admin/hoadonnhap/timidsp/' + id,
-            dataType:"json",
-            success: function (response) {
-                console.log(response);
-                $('p#ogiasieunhap').text(response.dongianhap);
-                var dongianhapne = response.dongianhap;
-                var tongtien= soluong * dongianhapne;
-                $('p#hientongtien').text(tongtien);
-            },
-            
-        })
-    })    
-    
-
-     $('#ajax-nhapsoluong').on('input', function(){
+     $('.ajax-nhapsoluong').on('input', function(){
 
         const soluong = $('input[name="soluong"]').val();
+        const gianhap = $('input[name="dongianhap"]').val();
+        
         const id = $('select[name="sanpham_id"]').val();
-
+      
         $.ajax({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type:"get",
-            url: '/admin/hoadonnhap/timidsp/' + id,
-            dataType:"json",
             success: function (response) {
                 console.log(response);
-                var dongianhapne = response.dongianhap;
-                var tongtien= soluong * dongianhapne;
+                var tongtien= soluong * gianhap;
                 $('p#hientongtien').text(tongtien);
             },
             
         })
         
     })
-    
+
+
+
+
     $("#form-add-tong-hd").click(function(event){
 
         
@@ -498,10 +508,10 @@
         var url = $(this).attr('data-url-ctsp');
         let soluong = $("input[name=soluong]").val();
         let sanpham_id = $("select[name=sanpham_id]").val();
+        let ctsanpham_id = $("select[name=ctsanpham_id]").val();
         var hoadonnhap_id = $('#idcthdne').html();
         let _token   = $('meta[name="csrf-token"]').attr('content');
-        var dongianhap = $('#ogiasieunhap').html();
-
+        let dongianhap = $("input[name=dongianhap]").val();
 
         function themmoichitiethoadon() {
 
@@ -512,11 +522,16 @@
             var cell3 = row.insertCell(2);
             var cell4 = row.insertCell(3);
             var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+            var cell7 = row.insertCell(6);
+
             cell1.innerHTML = sanpham_id;
-            cell2.innerHTML = soluong;
-            cell3.innerHTML = (soluong * dongianhap);
-            cell4.innerHTML = 1;
-            cell5.innerHTML = "<button onclick='deleteRow(this)' type='button' class='btn btn-danger btn-delete'>Delete</button>";
+            cell2.innerHTML = ctsanpham_id;
+            cell3.innerHTML = soluong;
+            cell4.innerHTML = dongianhap;
+            cell5.innerHTML = soluong*dongianhap;
+            cell6.innerHTML = 1;
+            cell7.innerHTML = "<button onclick='deleteRow(this)' type='button' class='btn btn-danger btn-delete'>Delete</button>";
         }
 
         $.ajax({
@@ -554,13 +569,13 @@
             var cellVal2 = oCells.item(3).innerHTML;
             //loops through each cell in current row
             for(var j = 0; j < rowLength-rowLength+1; j++){
-                // get your cell info here
-                // var cellVal = oCells.item(j).innerHTML;
-                // var cellVal1 = oCells.item(2).innerHTML;
-                var dongianhap = $('#idcthdne').html();
-                let soluong = oCells.item(1).innerHTML;
+                
+                var hoadonnhap_id = $('#idcthdne').html();
+                let dongianhap = oCells.item(3).innerHTML;
+                let soluong = oCells.item(2).innerHTML;
                 let sanpham_id = oCells.item(0).innerHTML;
-                var hoadonnhap_id = dongianhap;
+                let ctsanpham_id = oCells.item(1).innerHTML;
+                let thanhtien = oCells.item(4).innerHTML;
                 let _token   = $('meta[name="csrf-token"]').attr('content');
             
                 var cellVal1 = oCells.item(2).innerHTML;
@@ -569,8 +584,11 @@
                     url: '/admin/hoadonnhap/xulycreatectsp/',
                     type:"POST",
                     data:{
+                        dongianhap:dongianhap,
                         soluong:soluong,
                         sanpham_id:sanpham_id,
+                        ctsanpham_id:ctsanpham_id,
+                        thanhtien:thanhtien,
                         hoadonnhap_id:hoadonnhap_id,
                         _token: _token
                     },

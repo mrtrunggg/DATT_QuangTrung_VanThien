@@ -70,10 +70,14 @@
                                 @foreach ($dshoadonnhap as $SP)
                                             <tr id="{{$SP->id}}">                   
                                                 <td>
-                                                    {{$SP->tennhacungcap}}    
+                                                    {{$SP->tennhacungcap_id}}    
                                                 </td>
                                                 <td>
-                                                    {{$SP->taikhoan_id}}    
+                                                    @foreach ($tenkh as $TSP)
+                                                        @if ($TSP->id == $SP->taikhoan_id)
+                                                            {{$TSP->tendangnhap}}   
+                                                        @endif
+                                                    @endforeach    
                                                 </td>
                                                 <td>
                                                     {{$SP->ngaylap}}    
@@ -102,9 +106,11 @@
                                                     <a href="#" class="deletehdn" data-id="{{$SP->id}}" onclick="return confirm('Bạn có muốn xoá không?')">Delete</a>  
                                                 </td>
                                                 <td>
-                                                    <button data-url22="{{ route('viewCTHDN',$SP->id)}}" data-url="{{ route('viewHDN',$SP->id)}}" type="button" class="btn btn-primary btn_showne" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        View
-                                                    </button>
+                                                    <a href="{{route('viewcthdnhap',['SP'=>$SP->id])}}">
+                                                        <button type="button" class="btn btn-primary btn_showne" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            View
+                                                        </button>
+                                                    </a>
                                                 </td>
                                             </tr>              
                                     @endforeach  
@@ -139,67 +145,7 @@
     <!-- End footer -->
     <!-- ============================================================== -->
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-       <div class="modal-content">
-        <p class="badge bg-primary text-wrap font-weight fontdetail">Invoice</p>
-        <div class="table-responsive">
-            
-            <table class="table text-nowrap">
-                <thead>
-                    <tr>
-                        <th class="border-top-0">Supplier</th>
-                        <th class="border-top-0">Invoice Person</th>
-                        <th class="border-top-0">Invoice Date</th>
-                        <th class="border-top-0">Total Money</th>
-                        <th class="border-top-0">Describe</th>
-                        <th class="border-top-0">Status</th>
-                    </tr>
-                </thead>
-                    <tbody>
-                        <tr>                   
-                            <td id="tennhacungcap">
-                                
-                            </td>
-                            <td id="taikhoan_id">
-                                
-                            </td>
-                            <td id="ngaylap">
-                                    
-                            </td>
-                            <td id="tongtien">
-                                    
-                            </td>
-                            <td id="mota">
-                                    
-                            </td>
-                            <td id="trangthai">
-                                
-                            </td>
-                        </tr>   
-                    </tbody>
-                </table>
-            </div>
-            <p class="badge bg-primary text-wrap font-weight fontdetail">Invoice details</p>
-            <table class="table text-nowrap">
-                <thead>
-                    <tr>
-                        <th class="border-top-0">Import invoice code</th>
-                        <th class="border-top-0">Product code</th>
-                        <th class="border-top-0">Quantily</th>
-                        <th class="border-top-0">Into money</th>
-                        <th class="border-top-0">Status</th>
-                    </tr>
-                </thead>
-                    <tbody id="123cthd">
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-       
-    </div>
-</div>
+
  
 </div>
 <script type="text/javascript">
@@ -276,57 +222,57 @@
         event.preventDefault();
     })
 
-    $('.btn_showne').on('click', function(){
-        var url22=$(this).attr('data-url22');   
-        var url=$(this).attr('data-url');
-     $.ajax({
-         type:"get",
-         url: url,
-         dataType: "json",
-         success: function(response) {
-            console.log(response)
+//     $('.btn_showne').on('click', function(){
+//         var url22=$(this).attr('data-url22');   
+//         var url=$(this).attr('data-url');
+//      $.ajax({
+//          type:"get",
+//          url: url,
+//          dataType: "json",
+//          success: function(response) {
+//             console.log(response)
 
-            $('td#tennhacungcap').text(response.data.tennhacungcap)
-            $('td#taikhoan_id').text(response.data.taikhoan_id)
-            $('td#ngaylap').text(response.data.ngaylap)
-            $('td#tongtien').text(response.data.tongtien)
-            $('td#mota').text(response.data.mota)
-            $('td#trangthai').text(response.data.trangthai)
+//             $('td#tennhacungcap').text(response.data.tennhacungcap)
+//             $('td#taikhoan_id').text(response.data.taikhoan_id)
+//             $('td#ngaylap').text(response.data.ngaylap)
+//             $('td#tongtien').text(response.data.tongtien)
+//             $('td#mota').text(response.data.mota)
+//             $('td#trangthai').text(response.data.trangthai)
             
-         },
-         error: function (data, textStatus, errorThrown) {
+//          },
+//          error: function (data, textStatus, errorThrown) {
             
-         },
+//          },
         
-     })
+//      })
 
      
-        $.ajax({
-            type: "get",
-            url: url22,
-            dataType: "json",
-            success: function (response) {
-                // console.log(response);
-                $('#123cthd').html("");
-                $.each(response.data2, function (key, item) {
-                    $('#123cthd').append('<tr>\
-                        <td>' + item.hoadonnhap_id + '</td>\
-                        <td>' + item.sanpham_id + '</td>\
-                        <td>' + item.soluong + '</td>\
-                        <td>' + item.thanhtien + '</td>\
-                        <td>' + item.trangthai + '</td>\
-                    \</tr>');
-                });
-            }
-        });
+//         $.ajax({
+//             type: "get",
+//             url: url22,
+//             dataType: "json",
+//             success: function (response) {
+//                 // console.log(response);
+//                 $('#123cthd').html("");
+//                 $.each(response.data2, function (key, item) {
+//                     $('#123cthd').append('<tr>\
+//                         <td>' + .hoadonnhap_id + '</td>\
+//                         <td>' + item.sanpham_id + '</td>\
+//                         <td>' + item.soluong + '</td>\
+//                         <td>' + item.thanhtien + '</td>\
+//                         <td>' + item.trangthai + '</td>\
+//                     \</tr>');
+//                 });
+//             }
+//         });
         
 
 
 
 
 
-     event.preventDefault();
- })
+//      event.preventDefault();
+//  })
 
 
 

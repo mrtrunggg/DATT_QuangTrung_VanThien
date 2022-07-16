@@ -15,7 +15,7 @@ class CreateHoadonnhapsTable extends Migration
     {
         Schema::create('hoadonnhaps', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tennhacungcap_id')->unsigned();
+            $table->string('tennhacungcap_id');
             $table->integer('taikhoan_id')->unsigned();
             $table->datetime('ngaylap');
             $table->integer('tongtien')->nullable();;

@@ -17,7 +17,9 @@
                                 <!-- Product Meta Data -->
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">Price: {{number_format($sanpham->giaban)}} $</p>
+                                        {{-- @foreach ($ctsanpham as $a)
+                                            <p class="product-price">Price: {{number_format($a->giaban)}} $</p>
+                                        @endforeach --}}
                                     <a href="#">
                                         <h6>{{$sanpham->tensp}}</h6>
                                     </a>

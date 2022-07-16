@@ -88,7 +88,6 @@
                                         <select class="form-select shadow-none p-0 border-0 form-control-line" name="loaitk" id="loaitk">
 
                                             <option value="1">Staff</option> 
-                                            <option value="2">Manage</option>
                                         </select>
                                     </div>
                                 </div>
