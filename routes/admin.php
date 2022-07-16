@@ -134,8 +134,6 @@ Route::group(['prefix' => 'hoadonnhap'], function() {
     // Route::post('edit/{TK}',[nhapkhoController::class, 'xulyedit'])->name('xylysuaTK');
     Route::post('delete/{SP}',[nhapkhoController::class, 'xulydelete']);
     Route::post('editTTHdb/{SP}',[nhapkhoController::class, 'editTTHdb']);
-    Route::get('view/{SP}',[nhapkhoController::class, 'view'])->name('viewHDN');
-    Route::get('viewct/{SP}', [nhapkhoController::class, 'viewct'])->name('viewCTHDN');
     Route::post('xulycreatectsp',[nhapkhoController::class, 'xulycreatectsp'])->name('xylythemCTHDN');
     Route::get('showctsp/{SP}',[nhapkhoController::class, 'showctsp']);
     Route::get('timidsp/{SP}',[nhapkhoController::class, 'timidsp']);
@@ -147,6 +145,7 @@ Route::group(['prefix' => 'hoadonnhap'], function() {
     Route::get('create2',[nhapkhoController::class, 'create2'])->name('formthemhdn2');
 
     Route::get('timkiemtheongayHDN',[nhapkhoController::class, 'timkiemtheongayHDN'])->name('timkiemtheongayHDNne');
+    Route::get('view/{SP}',[nhapkhoController::class, 'view'])->name('viewcthdnhap');
     
 });
 

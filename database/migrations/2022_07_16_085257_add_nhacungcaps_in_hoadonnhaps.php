@@ -14,9 +14,9 @@ class AddNhacungcapsInHoadonnhaps extends Migration
     public function up()
     {
         Schema::table('hoadonnhaps', function (Blueprint $table) {
-            $table->foreign('tennhacungcap_id')
-            ->references('id')->on('nhacungcaps')
-            ->onDelete('cascade');
+            // $table->foreign('tennhacungcap_id')
+            // ->references('id')->on('nhacungcaps')
+            // ->onDelete('cascade');
         });
     }
 

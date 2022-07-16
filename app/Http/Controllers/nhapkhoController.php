@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\chitietsanpham;
 use App\Models\cthoadonnhap;
 use App\Models\hoadonnhap;
 use App\Models\sanpham;
@@ -16,11 +17,25 @@ use Carbon\Carbon;
 
 class nhapkhoController extends Controller
 {
+    function view($id){       
+        $data=1;
+        $dshoadonban3 = DB::table('hoadonnhaps')->where('trangthai','!=','0')
+                                            ->where('id','=',$id)->get();
+        $dscthoadonban = DB::table('cthoadonnhaps')->where('hoadonnhap_id','=',$id)->get();
+
+       
+        $tenkh= DB::table('taikhoans')->where('trangthai','!=','0')->get();
+        $tensp= DB::table('sanphams')->where('trangthai','!=','0')->get();
+        $tensize= DB::table('chitietsanphams')->where('trangthai','!=','0')->get();
+        return view('admin.quanlyadmin.hoadonnhap.view',compact('dshoadonban3','dscthoadonban','tenkh','tensp','tensize'), ['cuccung' => $data]);
+    }
+
     function index()
     {
         $data=1;
-        $dshoadonnhap = DB::table('hoadonnhaps')->where('trangthai','!=','0')->paginate(5);   
-        return view('admin.quanlyadmin.hoadonnhap.index',compact('dshoadonnhap'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);;
+        $dshoadonnhap = DB::table('hoadonnhaps')->where('trangthai','!=','0')->paginate(5); 
+        $tenkh= DB::table('taikhoans')->where('trangthai','!=','0')->get();  
+        return view('admin.quanlyadmin.hoadonnhap.index',compact('dshoadonnhap','tenkh'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *5);;
     }
 
     function timkiem(Request $req)
@@ -61,8 +76,14 @@ class nhapkhoController extends Controller
 
     function timidsp($id)
     {
+        
         $Tk = sanpham::find($id);
-        return response()->json($Tk);
+        
+        $ctsp = DB::table('chitietsanphams')
+        ->where('sanpham_id', '=', $id)
+        ->where('trangthai', '!=' ,'0')
+        ->get();
+        return response()->json($ctsp);
     }
 
 
@@ -77,29 +98,7 @@ class nhapkhoController extends Controller
         return response()->json($Tk,$tk3);
     }
 
-        
-    function view($id){       
-        $data=1;
-        $dshoadonnhapne = hoadonnhap::find($id);
-        // $dscthoadonnhapne = cthoadonnhap::find($id)->get();
-        // @dd($dscthoadonnhapne);
-        // // $dscthoadonnhapne = DB::table('cthoadonnhaps')
-        // //     ->where('hoadonnhap_id', '=', $id)
-        // //     ->get();                 
-        return response()->json(['data'=>$dshoadonnhapne],200);                      
-        // return view('admin.quanlyadmin.hoadonnhap.view',compact('dshoadonnhapne'), ['cuccung' => $data]);
-    }
-
     
-    function viewct($id){       
-        $data=1;
-        $dscthoadonnhapne = DB::table('cthoadonnhaps')
-            ->where('hoadonnhap_id', '=', $id)
-            ->where('trangthai', '!=', '0')
-            ->get();                 
-        return response()->json(['data2'=>$dscthoadonnhapne],200);                   
-        // return view('admin.quanlyadmin.hoadonnhap.view',compact('dshoadonnhapne'), ['cuccung' => $data]);
-    }
 
 
     function xulycreate(Request $req){
@@ -108,7 +107,7 @@ class nhapkhoController extends Controller
         // return response()->json(['data'=>$student,'name'=>'Bình'],200); // 200 là mã lỗi
       
         $TK = new hoadonnhap();
-        $TK->tennhacungcap = $req->tennhacungcap;
+        $TK->tennhacungcap_id = $req->tennhacungcap;
         $TK->taikhoan_id = $req -> taikhoan_id;
         $TK->mota = $req->mota;
         $TK->ngaylap = Carbon::now();
@@ -124,13 +123,14 @@ class nhapkhoController extends Controller
     
     function xulycreatectsp(Request $req){
         
-        $sanpham = DB::table('sanphams')->find($req->sanpham_id);
-        $dongianhap = $sanpham->dongianhap;
         $TK = new cthoadonnhap();
         $TK->hoadonnhap_id = $req->hoadonnhap_id;
+        $TK->ctsanpham_id = $req->ctsanpham_id;
         $TK->sanpham_id = $req -> sanpham_id;
         $TK->soluong = $req->soluong;
-        $TK->thanhtien = $req->soluong * $dongianhap;
+        $TK->thanhtien = $req->thanhtien;
+        $TK->dongianhap = $req->dongianhap;
+      
         $TK->trangthai = 1;
         $TK -> save();
 
@@ -169,7 +169,8 @@ class nhapkhoController extends Controller
         return response()->json(['data'=>'removed'],200);
     }
 
-    function editTTHdb(Request $req){       
+    function editTTHdb(Request $req){  
+
         $HDB = hoadonnhap::find($req->id);
         $HDB->trangthai = $req->trangthai;
         $HDB -> update();
@@ -181,8 +182,7 @@ class nhapkhoController extends Controller
             $cthdb -> trangthai = $req->trangthai;
             $cthdb -> update();
             
-
-            $sp = sanpham::find($b->sanpham_id);
+            $sp = chitietsanpham::find($b->ctsanpham_id);
             $sp->soluong = $sp->soluong + $b->soluong;
             $sp -> update();
         }
@@ -193,4 +193,7 @@ class nhapkhoController extends Controller
 
     // $Tk = sanpham::find($id);
     //     return response()->json($Tk);
+
+
 }
+   
