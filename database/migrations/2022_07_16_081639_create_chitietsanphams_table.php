@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCthoadonbansTable extends Migration
+class CreateChitietsanphamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,18 @@ class CreateCthoadonbansTable extends Migration
      */
     public function up()
     {
-        Schema::create('cthoadonbans', function (Blueprint $table) {
+        Schema::create('chitietsanphams', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('hoadonban_id')->unsigned();
             $table->integer('sanpham_id')->unsigned();
-            $table->integer('kichco');
-            $table->integer('soluong');
-            $table->integer('dongia');
-            $table->integer('thanhtien');
-            $table->integer('trangthai')->nullable()->default(1);     
+            $table->string('kichthuoc')->nullable();
+            $table->integer('soluong')->default(0);
+            $table->integer('giaban')->nullable();
+            $table->integer('discount')->nullable();
+            $table->integer('giakhuyenmai')->nullable();
+            $table->integer('trangthai')->nullable()->default(1);
             $table->timestamps();
             $table->softDeletes();
 
-
-            $table->foreign('hoadonban_id')->references('id')->on('hoadonbans');
             $table->foreign('sanpham_id')->references('id')->on('sanphams');
         });
     }
@@ -38,6 +36,6 @@ class CreateCthoadonbansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cthoadonbans');
+        Schema::dropIfExists('chitietsanphams');
     }
 }

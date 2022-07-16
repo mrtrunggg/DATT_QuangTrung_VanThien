@@ -15,7 +15,7 @@ class CreateHoadonnhapsTable extends Migration
     {
         Schema::create('hoadonnhaps', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tennhacungcap');
+            $table->integer('tennhacungcap_id')->unsigned();
             $table->integer('taikhoan_id')->unsigned();
             $table->datetime('ngaylap');
             $table->integer('tongtien')->nullable();;
@@ -26,6 +26,8 @@ class CreateHoadonnhapsTable extends Migration
 
             
             $table->foreign('taikhoan_id')->references('id')->on('taikhoans');
+           
+
         });
     }
 

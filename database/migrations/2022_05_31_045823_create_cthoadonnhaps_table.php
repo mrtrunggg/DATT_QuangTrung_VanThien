@@ -17,7 +17,9 @@ class CreateCthoadonnhapsTable extends Migration
             $table->increments('id');
             $table->integer('hoadonnhap_id')->unsigned();
             $table->integer('sanpham_id')->unsigned();
+            $table->integer('ctsanpham_id')->unsigned();
             $table->integer('soluong');
+            $table->integer('dongianhap');
             $table->integer('thanhtien');
             $table->integer('trangthai')->nullable()->default(1);     
             $table->timestamps();     

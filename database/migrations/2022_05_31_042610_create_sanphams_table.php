@@ -16,16 +16,10 @@ class CreateSanphamsTable extends Migration
         Schema::create('sanphams', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tensp');
-            $table->string('loaisp');      
-            $table->string('mausac')->nullable();
-            $table->string('kichthuoc')->nullable();
+            $table->string('loaisp');
+            $table->string('mausac');
             $table->string('hinhanh')->nullable();
-            $table->integer('soluong')->default(0);
-            $table->integer('giaban')->nullable();
-            $table->integer('discount')->nullable();
-            $table->integer('giakhuyenmai')->nullable();
             $table->string('mota')->nullable();
-            $table->integer('dongianhap')->nullable();
             $table->integer('trangthai')->nullable()->default(1);     
             $table->timestamps();
             $table->softDeletes();
@@ -42,3 +36,11 @@ class CreateSanphamsTable extends Migration
         Schema::dropIfExists('sanphams');
     }
 }
+
+
+
+
+
+
+
+

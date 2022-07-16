@@ -48,75 +48,61 @@
                                             class="form-control p-0 border-0" value="{{$thongtin->tensp}}"> </div>
                                 </div>
                                 <div class="form-group mb-4">
-                                    <label class="col-md-12 p-0">Product Type</label>
-                                    <div class="col-md-12 border-bottom p-0">
-                                        <input type="text" placeholder=" " name="loaisp"
-                                            class="form-control p-0 border-0" value="{{$thongtin->loaisp}}"> </div>
+                                    <label class="col-md-6 p-0">Product Type</label>
+                                    <div class="col-md-6 border-bottom p-0">
+                                            <select name="loaisp" style="width: 100%; border: transparent;">
+                                                <option value="T-shirt" <?php if($thongtin->loaisp == 'T-shirt'){echo("selected");}?>>T-shirt</option>
+                                                <option value="Coart" <?php if($thongtin->loaisp == 'Coart'){echo("selected");}?>>Coat</option>
+                                                <option value="Shirt" <?php if($thongtin->loaisp == 'Shirt'){echo("selected");}?>>Shirt</option>
+                                                <option value="Shorts" <?php if($thongtin->loaisp == 'Shorts'){echo("selected");}?>>Shorts</option>
+                                                <option value="Trousers" <?php if($thongtin->loaisp == 'Trousers'){echo("selected");}?>>Trousers</option>
+                                                <option value="Jeans" <?php if($thongtin->loaisp == 'Jeans'){echo("selected");}?>>Jeans</option>
+                                            </select>
+                                    </div>
                                 </div>
-                                <div class="form-group mb-2">
+
+
+
+                                <div class="form-group mb-2" style="margin-bottom: 20px !important;;">
                                     <label class="col-md-6 p-0">Color</label>
                                     <div class="col-md-6 border-bottom p-0">
-                                        <input type="text" placeholder=" " name="color"
-                                            class="form-control p-0 border-0" value="{{$thongtin->mausac}}"> </div>
+                                            <select name="color" style="width: 100%; border: transparent;">
+                                                <option value="Red" <?php if($thongtin->mausac == 'Red'){echo("selected");}?>>Red</option>
+                                                <option value="Yellow" <?php if($thongtin->mausac == 'Yellow'){echo("selected");}?> >Yellow</option>
+                                                <option value="Blue" <?php if($thongtin->mausac == 'Blue'){echo("selected");}?>>Blue</option>
+                                                <option value="Green" <?php if($thongtin->mausac == 'Green'){echo("selected");}?>>Green</option>
+                                                <option value="Violet" <?php if($thongtin->mausac == 'Violet'){echo("selected");}?>>Violet</option>
+                                                <option value="White" <?php if($thongtin->mausac == 'White'){echo("selected");}?>>White</option>
+                                                <option value="Black" <?php if($thongtin->mausac == 'Black'){echo("selected");}?>>Black</option>
+                                                <option value="Orange" <?php if($thongtin->mausac == 'Orange'){echo("selected");}?>>Orange</option>
+                                            </select>
+                                    </div>
                                 </div>
-                                <div class="form-group mb-2">
-                                    <label class="col-md-6 p-0">Size</label>
-                                    <div class="col-md-6 border-bottom p-0">
-                                        <input type="text" placeholder=" " name="size"
-                                            class="form-control p-0 border-0" value="{{$thongtin->kichthuoc}}"> </div>
-                                </div>
+
+
+
+
+                               
+                            
                                 <div class="form-group mb-2">
                                     <label class="col-md-6 p-0">Picture</label>
                                     <div class="col-md-6 border-bottom p-0">
                                         <input type="file" placeholder=" " name="hinhanh"
                                             class="form-control p-0 border-0" value="{{$thongtin->hinhanh}}"> </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group mb-4">
-                                            <label class="col-md-4 p-0">Quantily</label>
-                                            <div class="col-md-0 border-bottom p-0">
-                                                <input type="number" placeholder=" " name="soluong"
-                                                    class="form-control p-0 border-1" value="{{$thongtin->soluong}}"> </div>
-                                        </div>     
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group mb-4">
-                                            <label class="col-md-4 p-0">Price</label>
-                                            <div class="col-md-0 border-bottom p-0">
-                                                <input type="number" placeholder=" " name="giaban"
-                                                    class="form-control p-0 border-1" value="{{$thongtin->giaban}}"> </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group mb-4">
-                                            <label class="col-md-4 p-0">Discount</label>
-                                            <div class="col-md-0 border-bottom p-0">
-                                                <input type="number" placeholder=" " name="discount"
-                                                    class="form-control p-0 border-1" value="{{$thongtin->discount}}"> </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group mb-4">
-                                            <label class="col-md-0 p-0">Promotional Price</label>
-                                            <div class="col-md-0 border-bottom p-0">
-                                                <input type="number" placeholder=" " name="giakhuyenmai"
-                                                    class="form-control p-0 border-1" value="{{$thongtin->giakhuyenmai}}"> </div>
-                                        </div>
-                                    </div>
-                                </div>
+                              
                                 <div class="form-group mb-4">
                                     <label class="col-md-12 p-0">Describe</label>
                                     <div class="col-md-12 border-bottom p-0">
                                         <textarea rows="5" name="desc" class="form-control p-0 border-0">{{$thongtin->mota}}</textarea>
                                     </div>
                                 </div>
-                                <div class="form-group mb-2">
+                                {{-- <div class="form-group mb-2">
                                     <label class="col-md-6 p-0">Import Unit Price</label>
                                     <div class="col-md-6 border-bottom p-0">
                                         <input type="number" placeholder=" " name="dongianhap"
                                             class="form-control p-0 border-0" value="{{$thongtin->dongianhap}}"> </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group mb-4">
                                     <label class="col-sm-12">Status</label>
 

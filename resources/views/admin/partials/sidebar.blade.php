@@ -51,14 +51,14 @@
                         <span class="hide-menu">Import management</span>
                     </a>
                 </li>
-                <li class="sidebar-item pt-2">
+                {{-- <li class="sidebar-item pt-2">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('indexHA')}}
                         aria-expanded="false">
                         <i class="fas fa-file-image" aria-hidden="true"></i>
                         <span class="hide-menu">Image</span>
 
                     </a>
-                </li>
+                </li> --}}
                  <li class="sidebar-item pt-2">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('tksanpham')}}
                         aria-expanded="false">

@@ -63,7 +63,7 @@
         @yield('content')
 
     </div>
-    <script>
+    {{-- <script>
         const ctx = document.getElementById('hoandon').getContext('2d');
         const hoandon = new Chart(ctx, {
             type: 'bar',
@@ -99,7 +99,7 @@
                 }
             }
         });
-    </script>
+    </script> --}}
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
@@ -107,7 +107,7 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <!-- thong ke -->
-    <script>
+    {{-- <script>
         const a = document.getElementById('ngay').getContext('2d');
         const ngay = new Chart(a, {
             type: 'line',
@@ -143,7 +143,7 @@
                 }
             }
         });
-    </script>
+    </script> --}}
 
     <script src="{{ asset('admin1/plugins/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->

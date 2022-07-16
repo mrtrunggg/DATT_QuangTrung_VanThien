@@ -16,19 +16,21 @@ class CreateHoadonbansTable extends Migration
         Schema::create('hoadonbans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('khachhang_id')->unsigned();
-
-            $table->integer('nhanvien_id')->nullable()->unsigned();
-
+            // $table->integer('nhanvien_id')->nullable()->unsigned();
             $table->string('ngaylap');
+            
             $table->integer('tongtien');
             $table->string('mota')->nullable();
             $table->string('thongtinnguoinhan');
+            $table->string('email_nguoinhan');
+            $table->integer('sodienthoai_nguoinhan');
+            $table->string('diachi_nguoinhan');
             $table->integer('trangthai')->nullable()->default(1);     
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('khachhang_id')->references('id')->on('taikhoans');
-            $table->foreign('nhanvien_id')->references('id')->on('taikhoans');
+            // $table->foreign('nhanvien_id')->references('id')->on('taikhoans');
         });
     }
 

@@ -51,6 +51,9 @@
                                     <th class="border-top-0">Total Money</th>
                                     <th class="border-top-0">Describe</th>
                                     <th class="border-top-0">Receiver's Information</th>
+                                    <th class="border-top-0">Recipient's email</th>
+                                    <th class="border-top-0">Recipient's phone number</th>
+                                    <th class="border-top-0">Receiver's address</th>
                                     <th class="border-top-0">Status</th>
                                 </tr>
                             </thead>
@@ -78,6 +81,15 @@
                                                 </td>
                                                 <td>
                                                     {{$SP->thongtinnguoinhan}}    
+                                                </td>
+                                                <td>
+                                                    {{$SP->email_nguoinhan}}    
+                                                </td>
+                                                <td>
+                                                    {{$SP->sodienthoai_nguoinhan}}    
+                                                </td>
+                                                <td>
+                                                    {{$SP->diachi_nguoinhan}}    
                                                 </td>
                                                 <td>
                                                     @if($SP->trangthai==1)

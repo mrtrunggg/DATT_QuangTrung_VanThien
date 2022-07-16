@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\chitietsanpham;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\sanpham;
@@ -56,18 +57,14 @@ class sanphamController extends Controller
         $SP->tensp = $req->tensp;
         $SP->loaisp = $req->loaisp;
         $SP->mausac = $req->color;
-        $SP->kichthuoc = $req->size;
         $SP->hinhanh = $req->image;
-        $SP->soluong = $req->soluong;
-        $SP->giaban = $req->giaban;
-        $SP->discount = $req->discount;
-        $SP->giakhuyenmai = $req->giakhuyenmai;
         $SP->mota = $req->desc;
-        $SP->dongianhap = $req->dongianhap;
         $SP->trangthai = 1;
         $SP -> save();
         $dsSanpham = sanpham::all();
        return redirect()->route('sanpham',compact('dsSanpham'));
+
+
     }
 
     function xulycreateHDN(Request $req){
@@ -129,14 +126,8 @@ class sanphamController extends Controller
         $SP->tensp = $req->tensp;
         $SP->loaisp = $req->loaisp;
         $SP->mausac = $req->color;
-        $SP->kichthuoc = $req->size;
         $SP->hinhanh = $req->image;
-        $SP->soluong = $req->soluong;
-        $SP->giaban = $req->giaban;
-        $SP->discount = $req->discount;
-        $SP->giakhuyenmai = $req->giakhuyenmai;
         $SP->mota = $req->desc;
-        $SP->dongianhap = $req->dongianhap;
         $SP->trangthai = $req->trangthai;
         $SP -> save();    
         $dsSanpham = sanpham::all();

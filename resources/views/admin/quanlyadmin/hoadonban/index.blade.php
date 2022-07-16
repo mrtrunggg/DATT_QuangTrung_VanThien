@@ -68,11 +68,13 @@
                             <thead>
                                 <tr>
                                     <th class="border-top-0">Customer Name</th>
-                                    <th class="border-top-0">Staff's Name</th>
                                     <th class="border-top-0">Invoice Date</th>
                                     <th class="border-top-0">Total Money</th>
                                     <th class="border-top-0">Describe</th>
                                     <th class="border-top-0">Receiver's Information</th>
+                                    <th class="border-top-0">Recipient's email</th>
+                                    <th class="border-top-0">Recipient's phone number</th>
+                                    <th class="border-top-0">Receiver's address</th>
                                     <th class="border-top-0">Status</th>
                                 </tr>
                             </thead>
@@ -91,9 +93,6 @@
                                                     @endforeach    
                                                 </td>
                                                 <td>
-                                                    {{$SP->nhanvien_id}}    
-                                                </td>
-                                                <td>
                                                     {{$SP->ngaylap}}    
                                                 </td>
                                                 <td>
@@ -106,16 +105,30 @@
                                                     {{$SP->thongtinnguoinhan}}    
                                                 </td>
                                                 <td>
+                                                    {{$SP->email_nguoinhan}}    
+                                                </td>
+                                                <td>
+                                                    {{$SP->sodienthoai_nguoinhan}}    
+                                                </td>
+                                                <td>
+                                                    {{$SP->diachi_nguoinhan}}    
+                                                </td>
+                                                <td>
                                                     @if($SP->trangthai==1)
                                                         <button type="submit" class="btn btn-primary thay-doi-tt-hd btnthaydoi " data-id="{{$SP->id}}">
                                                             Confirm
                                                         </button>
                                                     @endif  
-                                                    @if($SP->trangthai==2)
-                                                        <button type="submit" class="btn btn-primary thay-doi-tt-hd btnthaydoi " disabled>
-                                                            Confirmed
+                                                    @if($SP->trangthai==3)
+                                                        <button type="submit" class="btn btn-primary thay-doi-tt-hd3 btnthaydoi " data-id2="{{$SP->id}}">
+                                                            Delivering
                                                         </button>
                                                     @endif 
+                                                    @if($SP->trangthai==2)
+                                                        <button type="submit" class="btn btn-primary thay-doi-tt-hd btnthaydoi" data-id3="{{$SP->id}}" disabled>
+                                                            Complete
+                                                        </button>
+                                                    @endif
                                                 </td>
                                                 <td class="column2">
                                                     <a href="{{route('viewcthd',['SP'=>$SP->id])}}"  >View |</a>
@@ -185,6 +198,35 @@
             url: '/admin/hoadon/editTTHdb/' + id,
             data:{
                 id: id,
+                trangthai: 3,
+                _token: '{{csrf_token()}}'
+            },
+            dataType:"json",
+
+            
+            success: function (data) {
+                console.log(data);
+                
+                location.reload(true);
+                },
+            error: function (data, textStatus, errorThrown) {
+                console.log(data);
+                location.reload(false);
+            },
+        })
+    })
+    $('.thay-doi-tt-hd3').on('click', function(){
+
+        var id =$(this).attr('data-id2');
+        
+        $.ajax({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type:"post",
+            url: '/admin/hoadon/editTTHdb/' + id,
+            data:{
+                id: id,
                 trangthai: 2,
                 _token: '{{csrf_token()}}'
             },
@@ -202,6 +244,9 @@
             },
         })
     })
+
+
+
 </script>
 
 

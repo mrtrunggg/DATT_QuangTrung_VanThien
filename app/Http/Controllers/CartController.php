@@ -25,7 +25,7 @@ class CartController extends Controller
         $productID = $req->product_id_hidden;
         $quantity = $req->quantity;
 
-        $product_info = DB::table('sanphams')->find($productID);
+        $product_info = DB::table('chitietsanphams')->where('sanpham_id','=',$productID)->get();
         // Cart::add('293ad', 'Product 1', 1, 9.99, 550);
         // dd(Cart::content());
         // Cart::destroy();
@@ -36,6 +36,7 @@ class CartController extends Controller
         $data['price'] = $product_info->giaban;
         $data['weight'] = 0;
         $data['options']['image'] = $product_info->hinhanh;
+        $data['options']['size'] = $product_info->kichco;
         //dd($data);
         Cart::add($data);
         return redirect()->route('showCart');
@@ -75,24 +76,25 @@ class CartController extends Controller
             }
         }
 
-        $thongtin = Null;
+        $thongtin1 = Null;
+        $thongtin2 = Null;
         $tk = DB::table('taikhoans')->find(Auth::user()->id);
         if($req->check == 1){
             return redirect()->route('checkout')->with('erro1','Please select product before ordering!');
         }
         else{
         if($req ->fullname == Null){
-            $thongtin = $tk->tendangnhap;
+            $thongtin1 = $tk->tendangnhap;
         }
         else{
             $thongtin = $req->fullname;
         
         }
         if($req->email == Null){
-            $thongtin = $thongtin.' - '.$tk->email;
+            $thongtin2 = $tk->email;
         }
         else{
-            $thongtin = $thongtin.' - '.$req->email;
+            $thongtin = $req->email;
         }
         if($req->address == Null){
             return redirect()->route('checkout')->with('erro1','Please enter your delivery address');
@@ -100,21 +102,15 @@ class CartController extends Controller
         elseif($req->phoneNo == Null){
             return redirect()->route('checkout')->with('erro1','Please enter the phone number!');
         }
-        else{
-        $thongtin = $thongtin.' - '.$req->address;
-        }
-        if($req->phoneNo == Null){
-            $thongtin = $thongtin.' - '.$tk->dienthoai;
-        }
-        else{
-            $thongtin = $thongtin.' - '.$req->phoneNo;
-        }
         $tongtien = 0;
         $NewHD = new hoadonban();
         $NewHD ->khachhang_id = Auth::user()->id;
         $NewHD -> ngaylap = Carbon::now();
         $NewHD -> mota = $req->comment;
-        $NewHD ->thongtinnguoinhan = $thongtin;
+        $NewHD ->thongtinnguoinhan = $thongtin1;
+        $NewHD ->email_nguoinhan = $thongtin2;
+        $NewHD -> sodienthoai_nguoinhan = $req->phoneNo;
+        $NewHD -> diachi_nguoinhan = $req->address;
         $NewHD -> trangthai = 1;
         $NewHD -> tongtien = 1;
         $NewHD ->save();

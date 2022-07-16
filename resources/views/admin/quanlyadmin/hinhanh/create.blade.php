@@ -23,7 +23,7 @@
     
     <div class="container-fluid">
         <p>
-            <a href="{{route('indexHA')}}" class="btn btn-primary pull-right">Back</a>
+            <a href="{{route('sanpham')}}" class="btn btn-primary pull-right">Back</a>
         </p>
         <!-- ============================================================== -->
         <!-- Start Page Content -->
@@ -40,11 +40,22 @@
                     <div class="row">
                         <div class="col-md-6 form-group mb-3">
                             <label for="" class="col-form-label">Picture</label>
-                            <select class="form-control" name="masp" id="masp">
-                                @foreach ($dssanpham as $a)
-                                <option value="{{$a->id}}">{{$a->tensp}}</option>
-                                @endforeach  
-                              </select>
+                            
+                            <select class="form-control" name="masp" id="masp" disabled style="background-color: white;">
+                                <option value="{{$dssanpham->id}} " selected>{{$dssanpham->tensp}}</option>
+                            </select>
+                           
+
+                            <div class="form-group mb-2">
+                                
+                                <div class="col-md-6 border-bottom p-0">
+                                    <input type="hidden" placeholder=" " name="masp"
+                                        class="form-control p-0 border-0" value="{{$dssanpham->id}}"> </div>
+                            </div>
+
+
+
+
                         </div>
                         <div class="col-md-6 form-group mb-3">
                             <label for="" class="col-form-label">Select image</label>
@@ -62,7 +73,39 @@
             </div>
             <!-- Column -->
         </div>
+
         <!-- Row -->
+
+
+
+        <table class="table text-nowrap" style="margin-left: 35px;">
+            <thead>
+                <tr>
+                    <th class="border-top-0">Image</th>
+                    <th class="border-top-0">Product</th>
+                    <th class="border-top-0">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($dshinhanh as $SP)
+                            <tr>                   
+                                <td>
+                                    <img style="width:150px;height:80px" src="{!! url('filename/'.$SP->tenhinhanh.'') !!}">
+                                </td>
+                                <td>
+                                    @foreach ($tensp as $TSP)
+                                        @if ($TSP->id==$SP->masp)
+                                            {{$TSP->tensp}}   
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <a href="{{route('xylyxoahahehe',['HA'=>$SP->id])}}" class="button btn btn-primary">Delete</a>
+                                </td>
+                            </tr>              
+                    @endforeach  
+            </tbody>
+        </table>
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->

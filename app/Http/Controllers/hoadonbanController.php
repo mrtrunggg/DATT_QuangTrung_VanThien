@@ -52,6 +52,7 @@ class hoadonbanController extends Controller
     } 
     
     function editTTHdb(Request $req){       
+       
         $HDB = Hoadonban::find($req->id);
         $HDB->trangthai = $req->trangthai;
         $HDB -> update();

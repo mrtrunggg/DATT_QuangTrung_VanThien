@@ -12,6 +12,7 @@ use App\Http\Controllers\nhapkhoController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\quanlyCommentController;
+use App\Http\Controllers\chitietsanphamController;
 use App\Http\Controllers\hinhanhController;
 use App\Http\Controllers\BinhluanController;
 use Illuminate\Http\Request;
@@ -28,141 +29,12 @@ Route::group(['prefix' => '/'], function () {
     Route::post('login', [Admin\LoginController::class, 'login'])->name('admin.login.post');
     Route::get('logout', [Admin\LoginController::class, 'logout'])->name('admin.logout');
     Route::get('/', function () {
-   
-        $thongke = hoadonban::select(DB::raw("sum(tongtien) as count"))
-            ->whereYear('updated_at', date('Y'))
-            ->where('trangthai','2')
-            ->groupBy(DB::raw("Month(updated_at)"))
-            ->pluck('count');
-
-            $tongdoanhthu = DB::table('sanphams')
-            ->select('thanhtien','cthoadonbans.soluong','sanphams.dongianhap')
-            ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
-            ->where('cthoadonbans.trangthai','=','2')
-            ->get();
-    
-        $tongsanphamkk = DB::table('sanphams')->where('trangthai','=','1')->get();
-        $tongtienmuahang = DB::table('hoadonnhaps')
-        ->select(DB::raw("sum(tongtien) as tongtien"))
-        ->where('trangthai','=','2')
-        ->groupBy('trangthai')
-        ->get();
-            $thongtienne = 0;
-            $loinhuanne = 0;
-            $tonkhone = 0;
-            //dd($tongdoanhthu);
-            foreach($tongdoanhthu as $tongtien){
-                $thongtienne += $tongtien->thanhtien;
-                $loinhuanne += $tongtien->thanhtien - ($tongtien->soluong * $tongtien->dongianhap);
-            }
-    
-            foreach($tongsanphamkk as $tongsp){
-                $tonkhone += $tongsp->soluong;
-            }
-
-        $monththongke = hoadonban::select(DB::raw("Month(updated_at) as month"))
-            ->whereYear('updated_at', date('Y'))
-            ->where('trangthai','2')
-            ->groupBy(DB::raw("Month(updated_at)"))
-            ->pluck('month');     
-
-        $data = [0,0,0,0,0,0,0,0,0,0,0,0];
-        $line = [0,0,0,0,0,0,0,0,0,0,0,0];
-            //dd($monththongke);
-        foreach ($monththongke as $index => $month){
-
-
-        $tiennhap = sanpham::join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
-            ->select('cthoadonbans.sanpham_id','cthoadonbans.thanhtien','cthoadonbans.soluong','sanphams.giaban','sanphams.dongianhap','cthoadonbans.trangthai',(DB::raw("Month(cthoadonbans.updated_at) as month")))
-            ->whereYear('cthoadonbans.updated_at', date('Y'))
-            ->where('cthoadonbans.trangthai','=','2')
-            ->where(DB::raw("Month(cthoadonbans.updated_at)"),'=', $month)
-            ->get();
- 
-        $doanhthuban = 0;
-        foreach ($tiennhap as $tinhtien){
-            $doanhthuban += $tinhtien->thanhtien - ($tinhtien->soluong  * $tinhtien->dongianhap);
-        }
-    $index;
-    $line[--$month] = $doanhthuban;
-    $data[$month] = $thongke[$index];
-    }
-    //dd( $line);
-        return view('admin.quanlyadmin.thongke.index', compact('tonkhone','thongtienne','loinhuanne','tongtienmuahang'), ['cuccung' =>$data,'line'=>$line]);
+        return view('admin.quanlyadmin.thongke.index');
     })->name('admin.index22222');
 
     Route::group(['middleware' => ['auth:admin']], function () {
-
-
         Route::get('/', function () {
-            $tongdoanhthu = DB::table('sanphams')
-            ->select('thanhtien','cthoadonbans.soluong','sanphams.dongianhap')
-            ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
-            ->where('cthoadonbans.trangthai','=','2')
-            ->get();
-            
-        $tongsanphamkk = DB::table('sanphams')->where('trangthai','=','1')->get();
-        $tongtienmuahang = DB::table('hoadonnhaps')
-        ->select(DB::raw("sum(tongtien) as tongtien"))
-        ->where('trangthai','=','2')
-        ->groupBy('trangthai')
-        ->get();
-    
-            $thongtienne = 0;
-            $loinhuanne = 0;
-            $tonkhone = 0;
-            //dd($tongdoanhthu);
-            foreach($tongdoanhthu as $tongtien){
-                $thongtienne += $tongtien->thanhtien;
-                $loinhuanne += $tongtien->thanhtien - ($tongtien->soluong * $tongtien->dongianhap);
-            }
-    
-            foreach($tongsanphamkk as $tongsp){
-                $tonkhone += $tongsp->soluong;
-            }
-
-        $monththongke = hoadonban::select(DB::raw("Month(updated_at) as month"))
-            ->whereYear('updated_at', date('Y'))
-            ->where('trangthai','2')
-            ->groupBy(DB::raw("Month(updated_at)"))
-            ->pluck('month');     
-
-        $data = [0,0,0,0,0,0,0,0,0,0,0,0];
-        $line = [0,0,0,0,0,0,0,0,0,0,0,0];
-            //dd($monththongke);
-            $thongke = hoadonban::select(DB::raw("sum(tongtien) as count"))
-            ->whereYear('updated_at', date('Y'))
-            ->where('trangthai','2')
-            ->groupBy(DB::raw("Month(updated_at)"))
-            ->pluck('count');
-
-            $monththongke = hoadonban::select(DB::raw("Month(updated_at) as month"))
-                ->whereYear('updated_at', date('Y'))
-                ->where('trangthai','2')
-                ->groupBy(DB::raw("Month(updated_at)"))
-                ->pluck('month');     
-
-            $data = [0,0,0,0,0,0,0,0,0,0,0,0];
-            $line = [0,0,0,0,0,0,0,0,0,0,0,0];
-            //dd($monththongke);
-            foreach ($monththongke as $index => $month){
-                $tiennhap = sanpham::join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
-                    ->select('cthoadonbans.sanpham_id','cthoadonbans.thanhtien','cthoadonbans.soluong','sanphams.giaban','sanphams.dongianhap','cthoadonbans.trangthai',(DB::raw("Month(cthoadonbans.updated_at) as month")))
-                    ->whereYear('cthoadonbans.updated_at', date('Y'))
-                    ->where('cthoadonbans.trangthai','=','2')
-                    ->where(DB::raw("Month(cthoadonbans.updated_at)"),'=', $month)
-                    ->get();
-                $doanhthuban = 0;
-                foreach ($tiennhap as $tinhtien){
-                    $doanhthuban += $tinhtien->thanhtien - ($tinhtien->soluong  * $tinhtien->dongianhap);
-                }
-                //dd( $monththongke);
-            $index;
-            $line[--$month] = $doanhthuban;
-            $data[$month] = $thongke[$index];
-            }
-
-            return view('admin.quanlyadmin.thongke.index', compact('tonkhone','thongtienne','loinhuanne','tongtienmuahang'), ['cuccung' =>$data,'line'=>$line]);
+            return view('admin.quanlyadmin.thongke.index');
         })->name('admin.dashboard');
     });
 });
@@ -182,6 +54,22 @@ Route::group(['prefix' => 'sanpham'], function() {
     Route::post('edit/{SP}',[sanphamController::class, 'xulyedit'])->name('xulysuasp');
     Route::get('delete/{SP}',[sanphamController::class, 'xulydelete'])->name('xoasp');
 });
+
+
+// chi tiết sản phẩm
+Route::group(['prefix' => 'chitietsanpham'], function() {
+    Route::get('index/{SP}',[chitietsanphamController::class, 'index'])->name('chitietsanpham');
+    // Route::get('timkiem',[chitietsanphamController::class, 'timkiem'])->name('timkiemsp');
+    // Route::get('timkiemloaisp',[chitietsanphamController::class, 'timkiemloaisp'])->name('timkiemloaisp');
+    Route::get('create/{SP}',[chitietsanphamController::class, 'create'])->name('themct');
+    // Route::post('xulycreate',[chitietsanphamController::class, 'xulycreateHDN'])->name('xulythemctsp');
+    Route::post('xulycreate',[chitietsanphamController::class, 'xulycreate'])->name('xulythemctsp');
+    Route::get('edit/{SP}',[chitietsanphamController::class, 'edit'])->name('suactsp');
+    Route::post('edit/{SP}',[chitietsanphamController::class, 'xulyedit'])->name('xulysuactsp');
+    Route::get('delete/{SP}',[chitietsanphamController::class, 'xulydelete'])->name('xoactsp');
+});
+
+
 
 //tai khoan ne
 Route::group(['prefix' => 'taikhoan'], function() {
@@ -266,8 +154,8 @@ Route::group(['prefix' => 'hoadonnhap'], function() {
 Route::group(['prefix' => 'hinhanh'], function() {
     Route::get('index',[hinhanhController::class, 'index'])->name('indexHA');
     Route::get('timkiem',[hinhanhController::class, 'timkiem'])->name('timkiemha');
-    Route::get('create',[hinhanhController::class, 'create'])->name('themha');
-    Route::post('xulycreate',[hinhanhController::class, 'xulycreate'])->name('xylythemha');
+    Route::get('create/{HA}',[hinhanhController::class, 'create'])->name('themha');
+    Route::post('create',[hinhanhController::class, 'xulycreate'])->name('xylythemha');
     Route::get('delete/{HA}',[hinhanhController::class, 'deleteha'])->name('xylyxoahahehe');
 });
 

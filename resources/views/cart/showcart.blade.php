@@ -22,6 +22,7 @@
                                     <tr class="flexth">
                                         <th></th>
                                         <th>Name</th>
+                                        <th>Size</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
                                         <th>Total</th>
@@ -35,6 +36,9 @@
                                         </td>
                                         <td class="cart_product_desc">
                                             <h5>{{$cart->name}}</h5>
+                                        </td>
+                                        <td class="cart_product_desc">
+                                            <h5>{{$cart->options->size}}</h5>
                                         </td>
                                         <td class="price">
                                             <span>{{number_format($cart->price)}} $</span>
