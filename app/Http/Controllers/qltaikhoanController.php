@@ -15,22 +15,47 @@ class qltaikhoanController extends Controller
     function index()
     {
         $data=1;
-        $dstaikhoan = DB::table('taikhoans')->paginate(8);   
+        $dstaikhoan = DB::table('taikhoans')->where('loaitk',"=",'1')->where('trangthai',"!=",'-1')->paginate(8);   
         return view('admin.quanlyadmin.taikhoan.index',compact('dstaikhoan'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *8);
+    }
+
+    function indexuser()
+    {
+        $data=1;
+        $dstaikhoan = DB::table('taikhoans')->where('loaitk',"=",'0')->where('trangthai',"!=",'-1')->paginate(8);   
+        return view('admin.quanlyadmin.taikhoan.user',compact('dstaikhoan'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *8);
     }
 
     function timkiem(Request $req)
     {
         $data=1;
-        $dstaikhoan = DB::table('taikhoans')->where('tendangnhap','like','%'.$req->search.'%')->paginate(10);   
+        $dstaikhoan = DB::table('taikhoans')->where('tendangnhap','like','%'.$req->search.'%')->where('loaitk',"=",'1')->where('trangthai',"!=",'-1')->paginate(10);   
         return view('admin.quanlyadmin.taikhoan.index',compact('dstaikhoan'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
     }
     function timkiemloaisp(Request $req)
     {
         $data=1;
-        $dstaikhoan = DB::table('taikhoans')->where('loaitk','like','%'.$req->searchloaisp.'%')->paginate(10);;   
+        $dstaikhoan = DB::table('taikhoans')->where('trangthai','like','%'.$req->search23.'%')->where('loaitk',"=",'1')->where('trangthai',"!=",'-1')->paginate(10);;   
         return view('admin.quanlyadmin.taikhoan.index',compact('dstaikhoan'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
     }
+
+
+    function timkiemuser(Request $req)
+    {
+        $data=1;
+        $dstaikhoan = DB::table('taikhoans')->where('tendangnhap','like','%'.$req->search.'%')->where('loaitk',"=",'0')->where('trangthai',"!=",'-1')->paginate(10);   
+        return view('admin.quanlyadmin.taikhoan.user',compact('dstaikhoan'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
+    }
+    function timkiemloaispuser(Request $req)
+    {
+        $data=1;
+        $dstaikhoan = DB::table('taikhoans')->where('trangthai','like','%'.$req->search23.'%')->where('loaitk',"=",'0')->where('trangthai',"!=",'-1')->paginate(10);;   
+        return view('admin.quanlyadmin.taikhoan.user',compact('dstaikhoan'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
+    }
+
+
+
+
 
     function create()
     {
@@ -73,7 +98,7 @@ class qltaikhoanController extends Controller
         $thongtin = taikhoan::find($id);
         return view('admin.quanlyadmin.taikhoan.edit',compact('thongtin'), ['cuccung' => $data]);
     }
-
+    
     function xulyedit(Request $req, $id){  
 
         if($req->has('hinhdaidien')){
@@ -110,13 +135,20 @@ class qltaikhoanController extends Controller
         // @dd($HDB);
         return response()->json($HDB);
     } 
-
+    
     function xulydelete($id){       
         $Tk = taikhoan::find($id);
-        $Tk -> trangthai = 0;
+        $Tk -> trangthai = -1;
         $Tk -> save();
-        $dstaikhoan = DB::table('taikhoans')->where('trangthai','=','1')->get();    
+        $dstaikhoan = DB::table('taikhoans')->where('trangthai','!=','-1')->where('loaitk','=','1')->get();    
         return redirect()->route('indexTk',compact('dstaikhoan'));
+    } 
+    function xulydeleteuser($id){       
+        $Tk = taikhoan::find($id);
+        $Tk -> trangthai = -1;
+        $Tk -> save();
+        $dstaikhoan = DB::table('taikhoans')->where('trangthai','!=','-1')->where('loaitk','=','0')->get();    
+        return redirect()->route('indexTkuser',compact('dstaikhoan'));
     } 
 
     function information(){
@@ -194,5 +226,41 @@ class qltaikhoanController extends Controller
         }
     }
     
+
+    function changepasswordadmin($id)
+    {
+        $data=1;
+        $thongtin = taikhoan::find($id);
+        return view('admin.quanlyadmin.taikhoan.changepasswordadmin',compact('thongtin'), ['cuccung' => $data]);
+    }
+
+
+    public function postchangepasswordadmin(Request $req, $id){
+        $user = DB::table('taikhoans')->find($id);
+
+        if($req->oldpass == Null){
+            return redirect()->route('changepassadin',['TK'=>$id])->with('notice1','Please enter old password!');
+        }
+        elseif($req->newpass == Null)
+        {
+            return redirect()->route('changepassadin',['TK'=>$id])->with('notice1','Please enter a new password!');
+        }
+        elseif($req->renewpass == Null){
+            return redirect()->route('changepassadin',['TK'=>$id])->with('notice1','Please re-enter new password!');
+        }
+        elseif($req->newpass != $req->renewpass){
+            return redirect()->route('changepassadin',['TK'=>$id])->with('notice1','Please re-enter the correct new password!');
+        }
+        elseif(!(Hash::check($req->get('oldpass'),$user->password)))
+        {
+            return redirect()->route('changepassadin',['TK'=>$id])->with('notice1','The old password is incorrect, please re-enter!');
+        }
+        else{
+            $pass = DB::table('taikhoans')->where('id',$id)->update(['password'=>bcrypt($req->newpass)]);
+            return redirect()->route('indexTk')->with('notice','Password change successful!');
+
+        }
+    }
+
 
 }

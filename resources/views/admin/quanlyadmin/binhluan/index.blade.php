@@ -30,15 +30,25 @@
     <!-- ============================================================== -->
     <div class="container-fluid">
 
-        <form action="{{route('timkiemsanpham')}}" method="get" style="padding-bottom: 20px">
-            <select name="search" style="height: 27px; width: 150px;">
-                @foreach($tensp as $a)
-                    <option value="{{$a->id}}">{{$a->tensp}}</option>
-                @endforeach 
-            </select>   
-           
-            <button type="submit">Search</button>
-        </form>
+        <div style="display:flex; margin-bottom:20px;">
+            <form action="{{route('timkiemsanpham')}}" method="get" style="margin-right: 20px">
+                <select name="search" style="height: 27px; width: 150px;">
+                    @foreach($tensp as $a)
+                        <option value="{{$a->id}}">{{$a->tensp}}</option>
+                    @endforeach 
+                </select>   
+                
+                <button type="submit">Search</button>
+            </form>
+
+            <form action="{{route('timkiemloaisanpham')}}" method="get" style="margin-right: 20px">
+                <select name="searchloaisp" style="height: 27px; width: 150px;">
+                    <option value="0">Comment lock</option>
+                    <option value="1">Comment active</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+        </div>
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->

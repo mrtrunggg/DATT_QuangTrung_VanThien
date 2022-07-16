@@ -37,6 +37,10 @@
                 </select>
                 <button type="submit">Search</i></button>
             </form>
+            <form action="{{route('timkiemtheongayHDNne')}}" method="get" style="margin-left:20px">
+                <input type="date" value="<?php echo date('y-m-d'); ?>" name="layngay">  
+                <button type="submit">Search</button>
+            </form>
         </div>
         <!-- ============================================================== -->
         <!-- Start Page Content -->

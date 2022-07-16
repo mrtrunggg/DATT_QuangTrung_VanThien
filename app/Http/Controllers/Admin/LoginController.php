@@ -56,7 +56,7 @@ class LoginController extends Controller
         }
         $remember = $request->remember;
         foreach($tk as $a){
-            if($a->trangthai == 0){
+            if($a->trangthai == 0 || $a->trangthai == -1){
                 return redirect()->route('admin.login')->with('message', 'Account has been locked!');
             }
             else{

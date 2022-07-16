@@ -186,19 +186,25 @@ Route::group(['prefix' => 'sanpham'], function() {
 //tai khoan ne
 Route::group(['prefix' => 'taikhoan'], function() {
     Route::get('index',[qltaikhoanController::class, 'index'])->name('indexTk');
+    Route::get('indexuser',[qltaikhoanController::class, 'indexuser'])->name('indexTkuser');
     Route::get('timkiem',[qltaikhoanController::class, 'timkiem'])->name('timkiemtentk');
     Route::get('timkiemloaitk',[qltaikhoanController::class, 'timkiemloaisp'])->name('timkiemloaitk');
+    Route::get('timkiemuser',[qltaikhoanController::class, 'timkiemuser'])->name('timkiemtentkuser');
+    Route::get('timkiemloaitkuser',[qltaikhoanController::class, 'timkiemloaispuser'])->name('timkiemloaitkuser');
     Route::get('create',[qltaikhoanController::class, 'create'])->name('formthemTK');
     Route::post('xulycreate',[qltaikhoanController::class, 'xulycreate'])->name('xylythemTK');
     Route::get('edit/{TK}',[qltaikhoanController::class, 'edit'])->name('SuaTK');
     Route::post('edit/{TK}',[qltaikhoanController::class, 'xulyedit'])->name('xylysuaTK');
     Route::post('editTTTK/{SP}',[qltaikhoanController::class, 'editTTTK']);
     Route::get('delete/{TK}',[qltaikhoanController::class, 'xulydelete'])->name('xylyxoaTK');
+    Route::get('deleteuser/{TK}',[qltaikhoanController::class, 'xulydeleteuser'])->name('xylyxoaTKuser');
     Route::get('information',[qltaikhoanController::class, 'information'])->name('information');
     Route::get('changeinformation',[qltaikhoanController::class, 'changeinformation'])->name('changeinfo');
     Route::post('changeinformation',[qltaikhoanController::class, 'xulyeditthongtin'])->name('editthongtin');
     Route::get('changepasssword',[qltaikhoanController::class, 'changepassword'])->name('changepassw');
     Route::post('changepasssword',[qltaikhoanController::class, 'postrchangepasssword'])->name('editthongtinpass');
+    Route::get('changepassword/{TK}',[qltaikhoanController::class, 'changepasswordadmin'])->name('changepassadin');
+    Route::post('changepassword/{TK}',[qltaikhoanController::class, 'postchangepasswordadmin'])->name('postchangepassadin');
 });
 
 // hoa don ban ne
@@ -225,6 +231,7 @@ Route::group(['prefix' => 'Comment'], function(){
     Route::post('editTTBL/{SP}',[quanlyCommentController::class, 'editTTBL']);
     
     Route::get('timkiem',[quanlyCommentController::class, 'timkiem'])->name('timkiemsanpham');
+    Route::get('timkiemloaisp',[quanlyCommentController::class, 'timkiemloaisp'])->name('timkiemloaisanpham');
 });
 
 
@@ -250,6 +257,8 @@ Route::group(['prefix' => 'hoadonnhap'], function() {
     Route::get('tongtienne/{SP}',[nhapkhoController::class, 'tongtienne']);
 
     Route::get('create2',[nhapkhoController::class, 'create2'])->name('formthemhdn2');
+
+    Route::get('timkiemtheongayHDN',[nhapkhoController::class, 'timkiemtheongayHDN'])->name('timkiemtheongayHDNne');
     
 });
 

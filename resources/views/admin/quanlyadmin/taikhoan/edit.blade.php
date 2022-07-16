@@ -47,12 +47,12 @@
                                         <input type="text" placeholder=" " name="tendangnhap"
                                             class="form-control p-0 border-0" value="{{$thongtin->tendangnhap}}"> </div>
                                 </div>
-                                <div class="form-group mb-4">
+                                {{-- <div class="form-group mb-4">
                                     <label class="col-md-12 p-0">Password</label>
                                     <div class="col-md-12 border-bottom p-0">
                                         <input type="text" placeholder=" " name="password"
                                             class="form-control p-0 border-0" value="{{$thongtin->password}}" > </div>
-                                </div>
+                                </div> --}}
                                 <div class="form-group mb-2">
                                     <label class="col-md-6 p-0">Email</label>
                                     <div class="col-md-6 border-bottom p-0">

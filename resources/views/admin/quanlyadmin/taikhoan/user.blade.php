@@ -31,22 +31,18 @@
     <div class="container-fluid">
 
         <div style="display:flex; margin-bottom:20px;">
-            <form action="{{route('timkiemtentk')}}" method="get" style="margin-right: 20px">
+            <form action="{{route('timkiemtentkuser')}}" method="get" style="margin-right: 20px">
                 <input type="search" name="search" placeholder="Type your keyword...">
                 <button type="submit">Search</i></button>
             </form>
     
-
-            <form action="{{route('timkiemloaitk')}}" method="get" style="margin-right: 20px">
+            <form action="{{route('timkiemloaitkuser')}}" method="get">
                 <select name="search23" style="height: 27px; width: 150px;">
                     <option value="0">Banned</option>
                     <option value="1">Active</option>
                 </select>
                 <button type="submit">Search</button>
             </form>
-
-
-            
     </div>
 
 
@@ -56,11 +52,6 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="white-box">
-
-                    <p>
-                        <a href="{{route('formthemTK')}}" class="btn btn-primary pull-right">Add Account</a>
-                    </p>
-                   
                     <div class="table-responsive">
                         <table class="table text-nowrap">
                             <thead>
@@ -92,17 +83,11 @@
                                                     {{$TK->dienthoai}}    
                                                 </td>
                                                 <td>
-
                                                     @if ($TK->hinhdaidien != null)
                                                         <img style="width:100px;height:80px" src="{!! url('uploads/'.$TK->hinhdaidien.'') !!}">
                                                     @else
-                                                        <img style="width:100px;height:80px" src="{{asset('amado-master/img/core-img/admin.png')}}" alt="">
+                                                        <img style="width:100px;height:80px" src="{{asset('amado-master/img/core-img/account.jpg')}}" alt="">
                                                     @endif
-
-
-
-
-
                                                 </td>
                                                 <td>
                                                     {{$TK->hoten}}    
@@ -147,9 +132,7 @@
                                                     @endif  
                                                 </td>
                                                 <td class="column2">
-                                                    <a href="{{route('SuaTK',['TK'=>$TK->id])}}"  >Edit |</a>
-                                                    <a href="{{route('changepassadin',['TK'=>$TK->id])}}">Change Password |</a>  
-                                                    <a href="{{route('xylyxoaTK',['TK'=>$TK->id])}}" onclick="return confirm('Bạn có muốn xoá không?')">Delete</a>  
+                                                    <a href="{{route('xylyxoaTKuser',['TK'=>$TK->id])}}" onclick="return confirm('Bạn có muốn xoá không?')">Delete</a>  
                                                 </td>
                                             </tr>              
                                     @endforeach  
@@ -184,7 +167,6 @@
     <!-- End footer -->
     <!-- ============================================================== -->
 </div>
-
 <style>
     .table td, .table th {
     text-align: center;
@@ -223,6 +205,7 @@
     })
 })
 
+
 $('.thay-doi-tt-hd-2').on('click', function(){
 
 var id =$(this).attr('data-id');
@@ -252,6 +235,8 @@ $.ajax({
     },
     })
 })
+
+
 
 
 

@@ -17,12 +17,19 @@
                         <i class="fas fa-dolly-flatbed" aria-hidden="true"></i>
                         <span class="hide-menu">Product</span>
                     </a>
-                </li>
+                </li>         
                 <li class="sidebar-item pt-2">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('indexTk')}}
                         aria-expanded="false">
+                        <i class="fas fa-address-card" aria-hidden="true"></i>
+                        <span class="hide-menu">Account Staff</span>
+                    </a>
+                </li>
+                <li class="sidebar-item pt-2">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href= {{route('indexTkuser')}}
+                        aria-expanded="false">
                         <i class="far fa-user" aria-hidden="true"></i>
-                        <span class="hide-menu">Account</span>
+                        <span class="hide-menu">Account User</span>
                     </a>
                 </li>
                 <li class="sidebar-item pt-2">

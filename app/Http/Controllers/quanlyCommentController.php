@@ -42,6 +42,15 @@ class quanlyCommentController extends Controller
       
         return view('admin.quanlyadmin.binhluan.index',compact('dsbinhluan','dsbl','tensp'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
     }
+    function timkiemloaisp(Request $req)
+    {
+        $data=1;
+        $dsbinhluan = DB::table('binhluans')->orderBy('ngaybl','DESC')->where('trangthai','=',$req->searchloaisp)->paginate(10);
+        $dsbl = DB::table('taikhoans')->join('binhluans','taikhoans.id','=','binhluans.taikhoan_id')->orderBy('ngaybl','DESC')->where('binhluans.trangthai','=',$req->searchloaisp)->paginate(10);
+      
+        $tensp = DB::table('sanphams')->where('trangthai','!=','0')->get();
+        return view('admin.quanlyadmin.binhluan.index',compact('dsbinhluan','dsbl','tensp'),  ['cuccung' => $data])->with('i', (request()->input('page', 1) -1) *10);
+    }
 
     public function repComment(Request $req){
         $data = $req -> all();

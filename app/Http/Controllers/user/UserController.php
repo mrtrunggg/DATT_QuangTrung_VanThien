@@ -48,7 +48,7 @@ class UserController extends Controller
             $tk = DB::table('taikhoans')->where('email',$request->email)->get();
             $remember = $request->remember;
             foreach($tk as $a){
-                if($a->trangthai == 0){
+                if($a->trangthai == 0 || $a->trangthai == -1){
                     return redirect()->route('user-login')->with('erro', 'Account has been locked!');
                 }
                 else{
