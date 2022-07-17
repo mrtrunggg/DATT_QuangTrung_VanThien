@@ -65,7 +65,7 @@
                         <i class="fas fa-chart-line" aria-hidden="true"></i>
                         <span class="hide-menu">Statistical</span>
                     </a>
-                </li>  -->
+                </li>
             </ul>
             
         </nav>

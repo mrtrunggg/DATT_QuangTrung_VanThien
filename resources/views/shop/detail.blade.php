@@ -46,15 +46,29 @@
                             <div class="product-meta-data">
                                 <div class="line"></div>
                                 @if($ctsanpham->discount == 0)
-                                <p class="product-price">Price: {{number_format($ctsanpham->giaban)}}$</p>
+                                <p class="product-price">${{number_format($ctsanpham->giaban)}}</p>
                                 @else
-                                <p class="product-price">Price: <del>{{number_format($ctsanpham->giaban)}}$</del> - {{number_format($ctsanpham->giakhuyenmai)}}$</p>
+                                <p class="product-price">${{number_format($ctsanpham->giakhuyenmai)}} <span class="giakhuyenmai">${{number_format($ctsanpham->giaban)}}</span></p>
                                 @endif
-                                <p class="product-price">Size {{$ctsanpham->kichthuoc}}</p>
+                               
+                              
+
                                 
-                                <a href="{{route('detail')}}">
-                                    <h6>{{$SP->tensp}}</h6>
-                                </a>
+                                
+
+
+
+
+                                
+
+                                
+
+                              
+                                
+                                <h2>{{$SP->tensp}} 
+                                    <span class="product-size">{{$ctsanpham->kichthuoc}}</span>
+                                </h2>
+                             
                                 <!-- Ratings & Review -->
                                 <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
                                     <!-- <div class="ratings">
@@ -79,19 +93,20 @@
                                 <!-- Avaiable -->
                                 @if($ctsanpham->soluong <= 0)
                                     <p class="avaibility"><i class="fa fa-circle" style="color:red"></i> Out of stock</p>
-                                
                                 @else
                                     <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
                                 @endif
 
                             </div>
-                            <div style="margin: 20px 0px 0px 0px;">
-                                <p> Size </p>
-                            @foreach($size as $a)
-                                <a href="{{route('detailproductsize',['idsp'=>$SP->id,'kichco'=>$a->kichthuoc])}}" style="margin: 0 10px 0 10px;font-size: 20px">{{$a->kichthuoc}}</a>
-                                @endforeach
+                            <div style="margin: 20px 0px 0px 0px; display:flex">
+                                <p style="margin-bottom:0; padding-right:8px">Size: </p>
+                                <div>
+                                    @foreach($size as $a)
+                                        <a href="{{route('detailproductsize',['idsp'=>$SP->id,'kichco'=>$a->kichthuoc])}}" class="sizene">{{$a->kichthuoc}}</a>
+                                    @endforeach
+                                </div>
                             </div>
-                            <div class="short_overview my-5">
+                            <div class="short_overview my-3">
                                 <p>{{$SP->mota}}</p>
                             </div>
 
@@ -129,11 +144,100 @@
                         </div>
                     </div>
                 </div>
+                
+
+
+                <p class="sanphamlienquan">Related products</p>
+
+                <div class="your-class">
+                    @foreach($sanphamlienquan as $splienquan)
+                        @foreach($giabanlienquan as $gialienquan)
+                            @if($gialienquan->sanpham_id == $splienquan->id)
+                                <a class="tongsplq" href="{{route('detailproduct',$splienquan->id)}}">
+                                    <div class="sizehinhanh">
+                                        <img src="{{asset('uploads/'.$splienquan->hinhanh)}}">
+                                    </div>  
+                                    <div style="margin-top:10px">
+                                        <p class="tensanphamlienquan">{{$splienquan->tensp}} <span>${{$gialienquan->giaban}}</span></p> 
+                                    </div>
+                                </a>  
+                                @break
+                            @endif
+                        @endforeach
+                    @endforeach
+                </div>
+
+
+
             </div>
         </div>
         <!-- Product Details Area End -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('.your-class').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 1000,
+          });
+        });
+    </script>
 
-   @endsection
+
+
+
+<style>
+.tensanphamlienquan{
+    margin-bottom:0px;
+    font-size: 25px;
+}
+.tensanphamlienquan span{
+   color: #fbb710;
+    font-size: 20px;
+}
+.sanphamlienquan{
+    font-size: 27px;
+    text-transform: uppercase;
+    margin-top: 55px;
+    margin-bottom: 0;
+}
+.your-class{
+    margin-top: 10px;
+}
+.tongsplq{
+    padding: 0 10px;
+}
+
+.tongsplq img{
+    width: 100%;
+}
+
+.giakhuyenmai{
+   text-decoration-line: line-through; 
+   font-size: 20px;
+}
+.product-size{
+    color: #6f6363;
+    font-size: 25px;
+}
+.sizene{
+    padding: 5px;
+    border: 1px solid #aaa7a7;
+    margin-right: 10px;
+    font-size:20px;
+    transition: none;
+    font-weight: lighter;
+}
+.sizene:hover{
+    color: white;
+    font-size:20px;
+    background-color: #fbb710;
+    font-weight: 200;
+}
+</style>
+
+
+@endsection

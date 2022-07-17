@@ -8,8 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <!-- Title  -->
     <title>Amado - Furniture Ecommerce Template | Home</title>
+    <link rel="stylesheet" type="text/css" href="{{asset('amado-master/js/slick/slick.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('amado-master/js/slick/slick-theme.css')}}"/>
+
+    
 
     <!-- Favicon  -->
     <link rel="icon" href="{{ asset('amado-master/img/core-img/favicon.ico')}}">
@@ -214,6 +220,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script src="{{asset('amado-master/js/jquery/jquery-2.2.4.min.js')}}"></script>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="{{asset('amado-master/js/slick/slick.min.js')}}"></script>
+
+ 
     
     <!-- Popper js -->
     <script src="{{asset('amado-master/js/popper.min.js')}}"></script>
