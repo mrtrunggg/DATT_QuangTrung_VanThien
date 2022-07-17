@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\taikhoan;
 use App\Models\hoadonban;
 use App\Models\cthoadonban;
+use App\Models\chitietsanpham;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\SessionGuard;
@@ -24,21 +25,26 @@ class CartController extends Controller
     public function saveCart(Request $req){
         $productID = $req->product_id_hidden;
         $quantity = $req->quantity;
-
-        $product_info = DB::table('chitietsanphams')->where('sanpham_id','=',$productID)->get();
+        $product_info = DB::table('sanphams')->find($productID);
+        $product_info_sale = DB::table('chitietsanphams')->where('sanpham_id',$productID)
+        ->where('kichthuoc',$req->size)->first();
         // Cart::add('293ad', 'Product 1', 1, 9.99, 550);
         // dd(Cart::content());
         // Cart::destroy();
-        
-        $data['id'] = $productID;
-        $data['qty'] = $quantity;
-        $data['name'] = $product_info->tensp;
-        $data['price'] = $product_info->giaban;
-        $data['weight'] = 0;
-        $data['options']['image'] = $product_info->hinhanh;
-        $data['options']['size'] = $product_info->kichco;
+            $data['id'] = $productID;
+            $data['qty'] = $quantity;
+            $data['name'] = $product_info->tensp;
+            if($product_info_sale->discount == 0){
+                $data['price'] = $product_info_sale->giaban;
+            }
+            else{
+                $data['price'] = $product_info_sale->giakhuyenmai;
+            }
+            $data['weight'] = 0;
+            $data['options']['image'] = $product_info->hinhanh;
+            $data['options']['size'] = $product_info_sale->kichthuoc;
+            Cart::add($data);
         //dd($data);
-        Cart::add($data);
         return redirect()->route('showCart');
     }
     public function showCart(){
@@ -69,10 +75,11 @@ class CartController extends Controller
         foreach($content as $check)
         {
             $idsp = DB::table('sanphams')->where('tensp','like',$check->name)->first();
-
-            if($idsp->soluong < $check ->qty)
+            $chitietsanpham = DB::table('chitietsanphams')->where('sanpham_id',$idsp->id)
+            ->where('kichthuoc',$check->options->size)->first();
+            if($chitietsanpham->soluong < $check ->qty)
             {
-                return redirect()->route('showCart')->with('erro','Product '.$idsp->tensp.' only '.$idsp->soluong.' products in stock, please choose less quantity!');
+                return redirect()->route('showCart')->with('erro','Product '.$idsp->tensp.' only '.$chitietsanpham->soluong.' products in stock, please choose less quantity!');
             }
         }
 
@@ -87,14 +94,14 @@ class CartController extends Controller
             $thongtin1 = $tk->tendangnhap;
         }
         else{
-            $thongtin = $req->fullname;
+            $thongtin1 = $req->fullname;
         
         }
         if($req->email == Null){
             $thongtin2 = $tk->email;
         }
         else{
-            $thongtin = $req->email;
+            $thongtin2 = $req->email;
         }
         if($req->address == Null){
             return redirect()->route('checkout')->with('erro1','Please enter your delivery address');
@@ -121,6 +128,7 @@ class CartController extends Controller
             $newcthd -> sanpham_id = $idsp->id;
             $newcthd -> soluong = $cthd ->qty;
             $newcthd -> dongia = $cthd -> price;
+            $newcthd -> kichco = $cthd -> options-> size;
             $newcthd ->thanhtien = $cthd->price * $cthd->qty;
             $newcthd -> trangthai = 0;
             $tongtien = $tongtien +  $newcthd ->thanhtien;

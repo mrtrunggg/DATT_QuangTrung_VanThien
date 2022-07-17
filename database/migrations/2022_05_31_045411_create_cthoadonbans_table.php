@@ -17,7 +17,7 @@ class CreateCthoadonbansTable extends Migration
             $table->increments('id');
             $table->integer('hoadonban_id')->unsigned();
             $table->integer('sanpham_id')->unsigned();
-            $table->integer('kichco');
+            $table->string('kichco');
             $table->integer('soluong');
             $table->integer('dongia');
             $table->integer('thanhtien');

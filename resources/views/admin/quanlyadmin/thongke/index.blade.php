@@ -30,7 +30,7 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                {{-- <li class="ms-auto"><span class="counter text-success">{{$thongtienne}}$</span></li> --}}
+                                <!-- {{-- <li class="ms-auto"><span class="counter text-success">{{$thongtienne}}$</span></li> --}} -->
                             </ul>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                {{-- <li class="ms-auto"><span class="counter text-purple">{{$loinhuanne}}$</span></li> --}}
+                                <!-- {{-- <li class="ms-auto"><span class="counter text-purple">{{$loinhuanne}}$</span></li> --}} -->
                             </ul>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                {{-- <li class="ms-auto"><span class="counter text-info">{{$tonkhone}}</span> --}}
+                                <!-- {{-- <li class="ms-auto"><span class="counter text-info">{{$tonkhone}}</span> --}} -->
                                 </li>
                             </ul>
                         </div>
@@ -70,11 +70,11 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                {{-- <li class="ms-auto"><span class="counter text-danger">
+                                <!-- {{-- <li class="ms-auto"><span class="counter text-danger">
                                     @foreach($tongtienmuahang as $a)
                                     {{$a->tongtien}}$
                                     @endforeach
-                                </span></li> --}}
+                                </span></li> --}} -->
                             </ul>
                         </div>
                     </div>

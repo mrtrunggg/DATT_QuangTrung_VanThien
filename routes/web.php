@@ -97,6 +97,9 @@ Route::get('/Jeans',[giaodienController::class, 'quanjean'])->name('quanjean');
 Route::get('/detail-product',[giaodienController::class, 'detail'])->name('detail');
 Route::get('detail/{idsp}',[giaodienController::class, 'detailProduct'])->name('detailproduct');
 
+
+Route::get('detail/{idsp}/{kichco}',[giaodienController::class, 'detailProductSize'])->name('detailproductsize');
+
 //tim kiem
 Route::get('search',[giaodienController::class, 'timKiem'])->name('search');
 

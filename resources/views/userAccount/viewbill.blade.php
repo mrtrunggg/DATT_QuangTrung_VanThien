@@ -19,6 +19,7 @@
                                     <tr>
                                         <th></th>
                                         <th>Name</th>
+                                        <th>Size</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
                                         <th>Total</th>

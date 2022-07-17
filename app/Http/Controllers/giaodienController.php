@@ -26,33 +26,39 @@ class giaodienController extends Controller
         // ->groupBy('sanphams.id')
         // ->get();
         // dd($SP);
-        $ctsanpham = DB::table('chitietsanphams')->first();
+        $ctsanpham = DB::table('chitietsanphams')->get();
         return view('shop.shop',compact('SP','ctsanpham'))->with('i', (request()->input('page', 1) -1) *8);
     }
 
     public function aosomi(){
         $SP = DB::table('sanphams')->where('loaisp','=','T-Shirt')->paginate(8);
-        return view('shop.shop',compact('SP'))->with('i', (request()->input('page', 1) -1) *8);
+        $ctsanpham = DB::table('chitietsanphams')->get();
+        return view('shop.shop',compact('SP','ctsanpham'))->with('i', (request()->input('page', 1) -1) *8);
     }
     public function aothun(){
         $SP = DB::table('sanphams')->where('loaisp','=','Shirt')->paginate(8);
-        return view('shop.shop',compact('SP'))->with('i', (request()->input('page', 1) -1) *8);
+        $ctsanpham = DB::table('chitietsanphams')->get();
+        return view('shop.shop',compact('SP','ctsanpham'))->with('i', (request()->input('page', 1) -1) *8);
     }
     public function aokhoac(){
         $SP = DB::table('sanphams')->where('loaisp','like','%Coart%')->paginate(8);
-        return view('shop.shop',compact('SP'))->with('i', (request()->input('page', 1) -1) *8);
+        $ctsanpham = DB::table('chitietsanphams')->get();
+        return view('shop.shop',compact('SP','ctsanpham'))->with('i', (request()->input('page', 1) -1) *8);
     }
     public function quandai(){
         $SP = DB::table('sanphams')->where('loaisp','like','%Trousers%')->paginate(8);
-        return view('shop.shop',compact('SP'))->with('i', (request()->input('page', 1) -1) *8);
+        $ctsanpham = DB::table('chitietsanphams')->get();
+        return view('shop.shop',compact('SP','ctsanpham'))->with('i', (request()->input('page', 1) -1) *8);
     }
     public function quandui(){
         $SP = DB::table('sanphams')->where('loaisp','like','%Shorts%')->paginate(8);
-        return view('shop.shop',compact('SP'))->with('i', (request()->input('page', 1) -1) *8);
+        $ctsanpham = DB::table('chitietsanphams')->get();
+        return view('shop.shop',compact('SP','ctsanpham'))->with('i', (request()->input('page', 1) -1) *8);
     }
     public function quanjean(){
         $SP = DB::table('sanphams')->where('loaisp','=','T-Shirt')->paginate(8);
-        return view('shop.shop',compact('SP'))->with('i', (request()->input('page', 1) -1) *8);
+        $ctsanpham = DB::table('chitietsanphams')->get();
+        return view('shop.shop',compact('SP','ctsanpham'))->with('i', (request()->input('page', 1) -1) *8);
     }
 
     public function detail(){
@@ -62,9 +68,26 @@ class giaodienController extends Controller
     public function detailProduct($idsp){
         $SP = DB::table('sanphams')->find($idsp);
         $hinhanh = DB::table('hinhanhsps')->where('masp',$idsp)->limit(4)->get();
+        $ctsanpham = DB::table('chitietsanphams')->where('sanpham_id','=',$idsp)
+        ->where('trangthai',1)->first();
+        $size = DB::table('chitietsanphams')->where('sanpham_id','=',$idsp)
+        ->where('trangthai',1)->get();
+      
         $check = 1;
-        return view('shop.detail',compact('SP','hinhanh','check'));
+        return view('shop.detail',compact('SP','hinhanh','check','ctsanpham','size'));
     }
+
+    public function detailProductSize($idsp,$kichco){
+        $SP = DB::table('sanphams')->find($idsp);
+        $hinhanh = DB::table('hinhanhsps')->where('masp',$idsp)->limit(4)->get();
+        $ctsanpham = DB::table('chitietsanphams')->where('sanpham_id','=',$idsp)
+        ->where('kichthuoc',$kichco)->first();
+        $size = DB::table('chitietsanphams')->where('sanpham_id','=',$idsp)
+        ->where('trangthai',1)->get();
+        $check = 1;
+        return view('shop.detail',compact('SP','hinhanh','check','ctsanpham','size'));
+    }
+
 
     public function timKiem(Request $req){
         $SP = DB::table('sanphams')->where('tensp','like','%'.$req->search.'%')->paginate(8);

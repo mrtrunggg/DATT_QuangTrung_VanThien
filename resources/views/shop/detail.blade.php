@@ -20,6 +20,7 @@
                                     <li  data-target="#product_details_slider" data-slide-to="{{$check}}" style="background-image: url({{asset('filename/'.$sanpham->tenhinhanh)}});">
                                     {{$check ++}}
                                     </li>
+
                                     @endforeach
                                 </ol>
                                 <div class="carousel-inner">
@@ -44,7 +45,13 @@
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">Price: {{number_format($SP->giaban)}} $</p>
+                                @if($ctsanpham->discount == 0)
+                                <p class="product-price">Price: {{number_format($ctsanpham->giaban)}}$</p>
+                                @else
+                                <p class="product-price">Price: <del>{{number_format($ctsanpham->giaban)}}$</del> - {{number_format($ctsanpham->giakhuyenmai)}}$</p>
+                                @endif
+                                <p class="product-price">Size {{$ctsanpham->kichthuoc}}</p>
+                                
                                 <a href="{{route('detail')}}">
                                     <h6>{{$SP->tensp}}</h6>
                                 </a>
@@ -70,16 +77,20 @@
                                     @endif
                                 </div>
                                 <!-- Avaiable -->
-                                @if($SP->soluong <= 0)
+                                @if($ctsanpham->soluong <= 0)
                                     <p class="avaibility"><i class="fa fa-circle" style="color:red"></i> Out of stock</p>
                                 
                                 @else
                                     <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
-                                
                                 @endif
 
                             </div>
-
+                            <div style="margin: 20px 0px 0px 0px;">
+                                <p> Size </p>
+                            @foreach($size as $a)
+                                <a href="{{route('detailproductsize',['idsp'=>$SP->id,'kichco'=>$a->kichthuoc])}}" style="margin: 0 10px 0 10px;font-size: 20px">{{$a->kichthuoc}}</a>
+                                @endforeach
+                            </div>
                             <div class="short_overview my-5">
                                 <p>{{$SP->mota}}</p>
                             </div>
@@ -99,11 +110,12 @@
                                         <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
                                         <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
                                         <input type="hidden" name="product_id_hidden" value="{{$SP->id}}">
+                                        <input type="hidden" name="size" value="{{$ctsanpham->kichthuoc}}">
                                         <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
 
-                                @if($SP->soluong <= 0)
+                                @if($ctsanpham->soluong <= 0)
                                 <button disabled type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
                                 
                                 @else

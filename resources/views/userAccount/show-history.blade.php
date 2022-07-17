@@ -64,7 +64,12 @@
                                         </td>
                                         @elseif($sp->trangthai == 1)
                                         <td>Awaiting Approval</td>
-                                        <td><a class="btn fontsizebtn amado-btn w-100" href="{{route('huy',['hds'=>$sp->id])}}">Cancel order</a></td><td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['bill'=>$sp->id])}}">View</a></td>
+                                        <td><a class="btn fontsizebtn amado-btn w-100" href="{{route('huy',['hds'=>$sp->id])}}">Cancel order</a></td>
+                                        <td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['bill'=>$sp->id])}}">View</a></td>
+                                        @elseif($sp->trangthai == 3)
+                                        <td>Being transported</td>
+                                        <td></td>
+                                        <td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['bill'=>$sp->id])}}">View</a></td>
                                         @else
                                         <td>Approval</td>
                                         <td></td><td> <a class="btn fontsizebtn amado-btn w-100" href="{{route('viewbill',['bill'=>$sp->id])}}">View</a></td>

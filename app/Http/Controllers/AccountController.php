@@ -100,6 +100,7 @@ class AccountController extends Controller
             $data['price'] = $hd->dongia;
             $data['weight'] = 0;
             $data['options']['image'] = $product_info->hinhanh;
+            $data['options']['sizr']=$hd->kichco;
             //dd($data);
             Cart::add($data);  
         }
