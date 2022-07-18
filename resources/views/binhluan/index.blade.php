@@ -35,7 +35,12 @@ swal("{{session()->get('erro')}}","Fill full the information!","warning");
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">Price: {{number_format($SP->giaban)}} $</p>
+                                @if($ctsanpham->discount == 0)
+                                <p class="product-price">${{number_format($ctsanpham->giaban)}}</p>
+                                @else
+                                <p class="product-price">${{number_format($ctsanpham->giakhuyenmai)}} <span class="giakhuyenmai">${{number_format($ctsanpham->giaban)}}</span></p>
+                                @endif
+                              
                                 <a href="{{route('detail')}}">
                                     <h6>{{$SP->tensp}}</h6>
                                 </a>
@@ -53,13 +58,6 @@ swal("{{session()->get('erro')}}","Fill full the information!","warning");
                                     </div>
                                 </div>
                                 <!-- Avaiable -->
-                                @if($SP->soluong <= 0)
-                                <p class="avaibility"><i class="fa fa-circle" style="color:red"></i> Out of stock</p>
-                            
-                            @else
-                                <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
-                            
-                            @endif
                             </div>
 
                             <div class="short_overview my-5">
@@ -153,5 +151,55 @@ swal("{{session()->get('erro')}}","Fill full the information!","warning");
         <!-- Product Details Area End -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
+    <style>
+.tensanphamlienquan{
+    margin-bottom:0px;
+    font-size: 25px;
+}
+.tensanphamlienquan span{
+   color: #fbb710;
+    font-size: 20px;
+}
+.sanphamlienquan{
+    font-size: 27px;
+    text-transform: uppercase;
+    margin-top: 55px;
+    margin-bottom: 0;
+}
+.your-class{
+    margin-top: 10px;
+}
+.tongsplq{
+    padding: 0 10px;
+}
+
+.tongsplq img{
+    width: 100%;
+}
+
+.giakhuyenmai{
+   text-decoration-line: line-through; 
+   font-size: 20px;
+}
+.product-size{
+    color: #6f6363;
+    font-size: 25px;
+}
+.sizene{
+    padding: 5px;
+    border: 1px solid #aaa7a7;
+    margin-right: 10px;
+    font-size:20px;
+    transition: none;
+    font-weight: lighter;
+}
+.sizene:hover{
+    color: white;
+    font-size:20px;
+    background-color: #fbb710;
+    font-weight: 200;
+}
+</style>
+
 
 @endsection

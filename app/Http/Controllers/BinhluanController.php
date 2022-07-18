@@ -27,7 +27,8 @@ class BinhluanController extends Controller
         $SP = DB::table('sanphams')->find($sp);
         $binhluan = DB::table('taikhoans')->join('binhluans','binhluans.taikhoan_id','=','taikhoans.id')->where('sanpham_id','=',$sp)->orderBy('binhluans.trangthai','DESC')->get();
         $dsbinhluan = DB::table('binhluans')->get();
-        return view('binhluan.index',compact('SP','binhluan','dsbinhluan'));
+        $ctsanpham = DB::table('chitietsanphams')->where('sanpham_id','=',$sp)->first();
+        return view('binhluan.index',compact('SP','binhluan','dsbinhluan','ctsanpham'));
     }
     public function checkne(){
         return redirect()->route('user-login')->with('erro','Please log in!');
