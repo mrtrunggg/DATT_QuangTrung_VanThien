@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\chitietsanpham;
 use App\Models\cthoadonban;
 use App\Models\sanpham;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -60,20 +61,53 @@ class hoadonbanController extends Controller
         $x = DB::table('cthoadonbans')->where('hoadonban_id','=',$HDB->id)->get();
        
         foreach($x as $b){
-
+            
             $cthdb = cthoadonban::find($b->id);
             $cthdb -> trangthai = $req->trangthai;
             $cthdb -> update();
-            
-            $sp = sanpham::find($b->sanpham_id);
-            $sp->soluong = $sp->soluong - $b->soluong;
-            $sp -> update();
+          
         }
-      
+        foreach($x as $b){
+            $spsoluong = DB::table('chitietsanphams')
+            ->where('sanpham_id','=',$b->sanpham_id)
+            ->where('kichthuoc','=',$b->kichco)
+            ->first();
+          
+            $spsoluong->soluong = $spsoluong->soluong - $b->soluong;
+
+            $sp = DB::table('chitietsanphams')
+            ->where('sanpham_id','=',$b->sanpham_id)
+            ->where('kichthuoc','=',$b->kichco)
+            ->update(['soluong'=>$spsoluong->soluong]);
+           
+        }
+
+
+
+
+
         // @dd($HDB);
         return response()->json($HDB);
     } 
 
+    function editTTHdb2(Request $req){       
+       
+        $HDB = Hoadonban::find($req->id);
+        $HDB->trangthai = $req->trangthai;
+        $HDB -> update();
+        
+        $x = DB::table('cthoadonbans')->where('hoadonban_id','=',$HDB->id)->get();
+       
+        foreach($x as $b){
+            
+            $cthdb = cthoadonban::find($b->id);
+            $cthdb -> trangthai = $req->trangthai;
+            $cthdb -> update();
+          
+        }
+        // @dd($HDB);
+        return response()->json($HDB);
+    } 
     
 
     function view($id){       

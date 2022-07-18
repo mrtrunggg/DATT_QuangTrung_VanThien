@@ -194,6 +194,7 @@ Route::group(['prefix' => 'hoadon'], function() {
     // Route::post('edit/{TK}',[hoadonbanController::class, 'xulyedit'])->name('xylysuaTK');
     Route::get('delete/{SP}',[hoadonbanController::class, 'xulydelete'])->name('xylyxoaHDB');
     Route::post('editTTHdb/{SP}',[hoadonbanController::class, 'editTTHdb']);
+    Route::post('editTTHdb2/{SP}',[hoadonbanController::class, 'editTTHdb2']);
     Route::get('view/{SP}',[hoadonbanController::class, 'view'])->name('viewcthd');
 });
 

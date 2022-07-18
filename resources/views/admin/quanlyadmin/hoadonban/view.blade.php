@@ -46,7 +46,6 @@
                             <thead>
                                 <tr>
                                     <th class="border-top-0">Customer Name</th>
-                                    <th class="border-top-0">Staff's Name</th>
                                     <th class="border-top-0">Invoice Date</th>
                                     <th class="border-top-0">Total Money</th>
                                     <th class="border-top-0">Describe</th>
@@ -66,9 +65,6 @@
                                                             {{$TSP->tendangnhap}}   
                                                         @endif
                                                     @endforeach     
-                                                </td>
-                                                <td>
-                                                    {{$SP->nhanvien_id}}    
                                                 </td>
                                                 <td>
                                                     {{$SP->ngaylap}}    
