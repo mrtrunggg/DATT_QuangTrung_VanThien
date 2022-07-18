@@ -224,7 +224,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type:"post",
-            url: '/admin/hoadon/editTTHdb/' + id,
+            url: '/admin/hoadon/editTTHdb2/' + id,
             data:{
                 id: id,
                 trangthai: 2,
@@ -236,11 +236,11 @@
             success: function (data) {
                 console.log(data);
                 
-                location.reload(true);
+                // location.reload(true);
                 },
             error: function (data, textStatus, errorThrown) {
                 console.log(data);
-                location.reload(false);
+                // location.reload(false);
             },
         })
     })
