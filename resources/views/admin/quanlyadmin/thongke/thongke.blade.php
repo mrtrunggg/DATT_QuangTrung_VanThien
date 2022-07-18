@@ -40,7 +40,6 @@
                     <select name="searchloaisp" style="height: 27px; width: 150px;">
                         <option value="0">Quantity</option>
                         <option value="1">Turnover</option> 
-                        <option value="2">Profit</option>
                     </select>
                 <button type="submit">Search</button>
             </form>
@@ -64,10 +63,12 @@
                             <thead>
                                 <tr>
                                     <th class="border-top-0">Product</th>
+                                  
                                     <th class="border-top-0">Picture</th>
                                     <th class="border-top-0">Quantity</th>
                                     <th class="border-top-0">Turnover</th>
-                                    <th class="border-top-0">Profit</th>
+                                    <th class="border-top-0">Size</th>
+                                    <th class="border-top-0">Time</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,6 +77,7 @@
                                                 <td>
                                                     {{$TK->tensp}}    
                                                 </td>
+
                                                 <td>
                                                     <img style="width:150px;height:80px" src="{!! url('uploads/'.$TK->hinhanh.'') !!}">
                                                 </td>
@@ -86,7 +88,10 @@
                                                     {{$TK->thanhtien}}
                                                 </td>
                                                 <td>
-                                                    {{$TK->doanhthu}}    
+                                                    {{$TK->kichco}}
+                                                </td>
+                                                <td>
+                                                    {{$TK->updated_at}}
                                                 </td>
                                             </tr> 
                                             @empty   

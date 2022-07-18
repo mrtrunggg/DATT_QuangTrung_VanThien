@@ -28,25 +28,21 @@ class thongkeController extends Controller
         ->groupBy(DB::raw("Month(updated_at)"))
         ->pluck('count');
        // dd($tonkhone);
-       $tongdoanhthu = DB::table('sanphams')
-       ->select('thanhtien','cthoadonbans.soluong','sanphams.dongianhap')
-       ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
-       ->where('cthoadonbans.trangthai','=','2')
+       $tongdoanhthu = DB::table('hoadonbans')
+       ->where('trangthai','=','2')
        ->get();
 
-   $tongsanphamkk = DB::table('sanphams')->where('trangthai','=','1')->get();
+   $tongsanphamkk = DB::table('chitietsanphams')->where('trangthai','=','1')->get();
    $tongtienmuahang = DB::table('hoadonnhaps')
    ->select(DB::raw("sum(tongtien) as tongtien"))
    ->where('trangthai','=','2')
    ->groupBy('trangthai')
    ->get();
        $thongtienne = 0;
-       $loinhuanne = 0;
        $tonkhone = 0;
        //dd($tongdoanhthu);
        foreach($tongdoanhthu as $tongtien){
-           $thongtienne += $tongtien->thanhtien;
-           $loinhuanne += $tongtien->thanhtien - ($tongtien->soluong * $tongtien->dongianhap);
+           $thongtienne += $tongtien->tongtien;
        }
 
        foreach($tongsanphamkk as $tongsp){
@@ -60,54 +56,30 @@ class thongkeController extends Controller
        ->pluck('month');     
 
    $data = [0,0,0,0,0,0,0,0,0,0,0,0];
-   $line = [0,0,0,0,0,0,0,0,0,0,0,0];
        //dd($monththongke);
 
-    $monththongke = hoadonban::select(DB::raw("Month(updated_at) as month"))
-        ->whereYear('updated_at', date('Y'))
-        ->where('trangthai','2')
-        ->groupBy(DB::raw("Month(updated_at)"))
-        ->pluck('month');     
-
-    $data = [0,0,0,0,0,0,0,0,0,0,0,0];
-    $line = [0,0,0,0,0,0,0,0,0,0,0,0];
-          //dd($monththongke);
-
     foreach ($monththongke as $index => $month){
-        $doanhthuban = 0;
-        $tiennhap = sanpham::join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
-        ->select('cthoadonbans.sanpham_id','cthoadonbans.soluong','sanphams.giaban','sanphams.dongianhap','cthoadonbans.trangthai',(DB::raw("Month(cthoadonbans.updated_at) as month")))
-        ->whereYear('cthoadonbans.updated_at', date('Y'))
-        ->where('cthoadonbans.trangthai','=','2')
-        ->where(DB::raw("Month(cthoadonbans.updated_at)"),'=', $month)
-        ->get();
-
-
-        foreach ($tiennhap as $tinhtien){
-            $doanhthuban = $doanhthuban + (($tinhtien->soluong * $tinhtien->giaban) - ($tinhtien->soluong  * $tinhtien->dongianhap));
-        }
     $index;
-    $line[--$month] = $doanhthuban;
-    $data[$month] = $thongke[$index];
+    $data[--$month] = $thongke[$index];
     }
-    return view('admin.quanlyadmin.thongke.index',compact('tonkhone','thongtienne','loinhuanne','tongtienmuahang'), ['cuccung' =>$data,'line'=>$line]);
+    return view('admin.quanlyadmin.thongke.index',compact('tonkhone','thongtienne','tongtienmuahang'), ['cuccung' =>$data]);
     }
     public function tksanpham(){
         $check = 0;
         $thongke = DB::table('sanphams')
-        ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("(sum(thanhtien)-(sum(cthoadonbans.soluong)*dongianhap)) as doanhthu"),DB::raw("sum(cthoadonbans.soluong) as soluong"), 'dongianhap')
+        ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("sum(cthoadonbans.soluong) as soluong"),'cthoadonbans.updated_at','cthoadonbans.kichco')
         ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')->where('cthoadonbans.trangthai','=','2')
-        ->groupBy('tensp','hinhanh','dongianhap')->paginate(10);
+        ->groupBy('tensp','hinhanh','cthoadonbans.updated_at','cthoadonbans.kichco')->paginate(10);
         //dd($thongke);
         return view('admin.quanlyadmin.thongke.thongke',compact('thongke'))->with('i', (request()->input('page', 1) -1) *10);
     }
     public function sptimkiemsp(Request $req){
         $thongke = DB::table('sanphams')
-        ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("(sum(thanhtien)-(sum(cthoadonbans.soluong)*dongianhap)) as doanhthu"),DB::raw("sum(cthoadonbans.soluong) as soluong"), 'dongianhap')
+        ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("sum(cthoadonbans.soluong) as soluong"),'cthoadonbans.updated_at','cthoadonbans.kichco')
         ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
         ->where('tensp','like','%'.$req->a.'%')
         ->where('cthoadonbans.trangthai','=','2')
-        ->groupBy('tensp','hinhanh','dongianhap')->paginate(10);
+        ->groupBy('tensp','hinhanh','cthoadonbans.updated_at','cthoadonbans.kichco')->paginate(10);
         //dd($thongke);
         return view('admin.quanlyadmin.thongke.thongke',compact('thongke'))->with('i', (request()->input('page', 1) -1) *10);
     }
@@ -117,15 +89,13 @@ class thongkeController extends Controller
             $check = "soluong";
         }else if ($req->searchloaisp == 1){
             $check = "thanhtien";
-        }else{
-            $check ="doanhthu";
         }
         $thongke = DB::table('sanphams')
-        ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("(sum(thanhtien)-(sum(cthoadonbans.soluong)*dongianhap)) as doanhthu"),DB::raw("sum(cthoadonbans.soluong) as soluong"), 'dongianhap')
+        ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("sum(cthoadonbans.soluong) as soluong"),'cthoadonbans.updated_at','cthoadonbans.kichco')
         ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
         ->where('cthoadonbans.trangthai','=','2')
         ->orderBy($check,'DESC')
-        ->groupBy('tensp','hinhanh','dongianhap')->paginate(10);
+        ->groupBy('tensp','hinhanh','cthoadonbans.updated_at','cthoadonbans.kichco')->paginate(10);
         //dd($thongke);
         return view('admin.quanlyadmin.thongke.thongke',compact('thongke'))->with('i', (request()->input('page', 1) -1) *10);
     }
@@ -133,9 +103,9 @@ class thongkeController extends Controller
         $check ="";
         if ($req->denngay == "2022-06-30" && $req->layngay == "2022-06-30"){
             $thongke = DB::table('sanphams')
-            ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("(sum(thanhtien)-(sum(cthoadonbans.soluong)*dongianhap)) as doanhthu"),DB::raw("sum(cthoadonbans.soluong) as soluong"), 'dongianhap')
+            ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("sum(cthoadonbans.soluong) as soluong"),'cthoadonbans.kichco','cthoadonbans.updated_at')
             ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')->where('cthoadonbans.trangthai','=','2')
-            ->groupBy('tensp','hinhanh','dongianhap')->paginate(10);
+            ->groupBy('tensp','hinhanh','cthoadonbans.updated_at','cthoadonbans.kichco')->paginate(10);
             //dd($thongke);
             return view('admin.quanlyadmin.thongke.thongke',compact('thongke'))->with('i', (request()->input('page', 1) -1) *10);
      
@@ -149,21 +119,21 @@ class thongkeController extends Controller
 
         if($check == ""){
             $thongke = DB::table('sanphams')
-            ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("(sum(thanhtien)-(sum(cthoadonbans.soluong)*dongianhap)) as doanhthu"),DB::raw("sum(cthoadonbans.soluong) as soluong"), 'dongianhap','cthoadonbans.updated_at')
+            ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("sum(cthoadonbans.soluong) as soluong"),'cthoadonbans.updated_at')
             ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
             ->where('cthoadonbans.updated_at','>=',$req->layngay)
             ->where('cthoadonbans.updated_at','<=',$req->denngay)
             ->where('cthoadonbans.trangthai','=','2')
-            ->groupBy('tensp','hinhanh','dongianhap','cthoadonbans.updated_at')->paginate(10);
+            ->groupBy('tensp','hinhanh','cthoadonbans.updated_at','cthoadonbans.kichco')->paginate(10);
             //dd($thongke);
             return view('admin.quanlyadmin.thongke.thongke',compact('thongke'))->with('i', (request()->input('page', 1) -1) *10);       
         }else{
             $thongke = DB::table('sanphams')
-            ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("(sum(thanhtien)-(sum(cthoadonbans.soluong)*dongianhap)) as doanhthu"),DB::raw("sum(cthoadonbans.soluong) as soluong"), 'dongianhap','cthoadonbans.updated_at')
+            ->select('hinhanh','tensp',DB::raw("sum(thanhtien) as thanhtien"),DB::raw("sum(cthoadonbans.soluong) as soluong"),'cthoadonbans.updated_at')
             ->join('cthoadonbans','sanphams.id','=','cthoadonbans.sanpham_id')
             ->where('cthoadonbans.updated_at','like','%'.$check.'%')
             ->where('cthoadonbans.trangthai','=','2')
-            ->groupBy('tensp','hinhanh','dongianhap','cthoadonbans.updated_at')->paginate(10);
+            ->groupBy('tensp','hinhanh','cthoadonbans.updated_at','cthoadonbans.kichco')->paginate(10);
             //dd($thongke);
             return view('admin.quanlyadmin.thongke.thongke',compact('thongke'))->with('i', (request()->input('page', 1) -1) *10);
         }
