@@ -29,12 +29,99 @@ Route::group(['prefix' => '/'], function () {
     Route::post('login', [Admin\LoginController::class, 'login'])->name('admin.login.post');
     Route::get('logout', [Admin\LoginController::class, 'logout'])->name('admin.logout');
     Route::get('/', function () {
-        return view('admin.quanlyadmin.thongke.index');
+
+        $thongke = hoadonban::select(DB::raw("sum(tongtien) as count"))
+        ->whereYear('updated_at', date('Y'))
+        ->where('trangthai','2')
+        ->groupBy(DB::raw("Month(updated_at)"))
+        ->pluck('count');
+       // dd($tonkhone);
+       $tongdoanhthu = DB::table('hoadonbans')
+       ->where('trangthai','=','2')
+       ->get();
+
+   $tongsanphamkk = DB::table('chitietsanphams')->where('trangthai','=','1')->get();
+   $tongtienmuahang = DB::table('hoadonnhaps')
+   ->select(DB::raw("sum(tongtien) as tongtien"))
+   ->where('trangthai','=','2')
+   ->groupBy('trangthai')
+   ->get();
+       $thongtienne = 0;
+       $tonkhone = 0;
+       //dd($tongdoanhthu);
+       foreach($tongdoanhthu as $tongtien){
+           $thongtienne += $tongtien->tongtien;
+       }
+
+       foreach($tongsanphamkk as $tongsp){
+           $tonkhone += $tongsp->soluong;
+       }
+
+   $monththongke = hoadonban::select(DB::raw("Month(updated_at) as month"))
+       ->whereYear('updated_at', date('Y'))
+       ->where('trangthai','2')
+       ->groupBy(DB::raw("Month(updated_at)"))
+       ->pluck('month');     
+
+   $data = [0,0,0,0,0,0,0,0,0,0,0,0];
+       //dd($monththongke);
+
+    foreach ($monththongke as $index => $month){
+    $index;
+    $data[--$month] = $thongke[$index];
+    }
+
+    return view('admin.quanlyadmin.thongke.index',compact('tonkhone','thongtienne','tongtienmuahang'), ['cuccung' =>$data]);
+ 
     })->name('admin.index22222');
 
     Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/', function () {
-            return view('admin.quanlyadmin.thongke.index');
+
+            $thongke = hoadonban::select(DB::raw("sum(tongtien) as count"))
+            ->whereYear('updated_at', date('Y'))
+            ->where('trangthai','2')
+            ->groupBy(DB::raw("Month(updated_at)"))
+            ->pluck('count');
+           // dd($tonkhone);
+           $tongdoanhthu = DB::table('hoadonbans')
+           ->where('trangthai','=','2')
+           ->get();
+    
+       $tongsanphamkk = DB::table('chitietsanphams')->where('trangthai','=','1')->get();
+       $tongtienmuahang = DB::table('hoadonnhaps')
+       ->select(DB::raw("sum(tongtien) as tongtien"))
+       ->where('trangthai','=','2')
+       ->groupBy('trangthai')
+       ->get();
+           $thongtienne = 0;
+           $tonkhone = 0;
+           //dd($tongdoanhthu);
+           foreach($tongdoanhthu as $tongtien){
+               $thongtienne += $tongtien->tongtien;
+           }
+    
+           foreach($tongsanphamkk as $tongsp){
+               $tonkhone += $tongsp->soluong;
+           }
+    
+       $monththongke = hoadonban::select(DB::raw("Month(updated_at) as month"))
+           ->whereYear('updated_at', date('Y'))
+           ->where('trangthai','2')
+           ->groupBy(DB::raw("Month(updated_at)"))
+           ->pluck('month');     
+    
+       $data = [0,0,0,0,0,0,0,0,0,0,0,0];
+           //dd($monththongke);
+    
+        foreach ($monththongke as $index => $month){
+        $index;
+        $data[--$month] = $thongke[$index];
+        }
+
+
+        return view('admin.quanlyadmin.thongke.index',compact('tonkhone','thongtienne','tongtienmuahang'), ['cuccung' =>$data]);
+
         })->name('admin.dashboard');
     });
 });

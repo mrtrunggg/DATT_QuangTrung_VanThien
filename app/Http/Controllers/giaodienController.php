@@ -86,8 +86,10 @@ class giaodienController extends Controller
         ->where('kichthuoc',$kichco)->first();
         $size = DB::table('chitietsanphams')->where('sanpham_id','=',$idsp)
         ->where('trangthai',1)->get();
+        $sanphamlienquan = DB::table('sanphams')->where('loaisp',$SP->loaisp)->get();
+        $giabanlienquan = DB::table('chitietsanphams')->where('trangthai',1)->get();
         $check = 1;
-        return view('shop.detail',compact('SP','hinhanh','check','ctsanpham','size'));
+        return view('shop.detail',compact('SP','hinhanh','check','ctsanpham','sanphamlienquan','giabanlienquan','size'));
     }
 
 

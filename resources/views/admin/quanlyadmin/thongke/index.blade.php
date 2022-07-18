@@ -30,20 +30,7 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                <!-- {{-- <li class="ms-auto"><span class="counter text-success">{{$thongtienne}}$</span></li> --}} -->
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="white-box analytics-info" style="background: #f8f5f5;">
-                            <h3 class="box-title">Sales profit</h3>
-                            <ul class="list-inline two-part d-flex align-items-center mb-0">
-                                <li>
-                                    <div id="sparklinedash2"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div>
-                                </li>
-                                <!-- {{-- <li class="ms-auto"><span class="counter text-purple">{{$loinhuanne}}$</span></li> --}} -->
+                             <li class="ms-auto"><span class="counter text-success">{{$thongtienne}}$</span></li> 
                             </ul>
                         </div>
                     </div>
@@ -56,7 +43,7 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                <!-- {{-- <li class="ms-auto"><span class="counter text-info">{{$tonkhone}}</span> --}} -->
+                                 <li class="ms-auto"><span class="counter text-info">{{$tonkhone}}</span> 
                                 </li>
                             </ul>
                         </div>
@@ -70,11 +57,11 @@
                                             style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
-                                <!-- {{-- <li class="ms-auto"><span class="counter text-danger">
+                             <li class="ms-auto"><span class="counter text-danger">
                                     @foreach($tongtienmuahang as $a)
                                     {{$a->tongtien}}$
                                     @endforeach
-                                </span></li> --}} -->
+                                </span></li> 
                             </ul>
                         </div>
                     </div>
@@ -83,9 +70,6 @@
     </div>
     <div class="row page-breadcrumb bg-white">
         <canvas id="hoandon" id-thongso="data" width="auto" height="100"></canvas>
-    </div>
-    <div class="row page-breadcrumb bg-white">
-        <canvas id="ngay" id-nay="data" width="auto" height="100"></canvas>
     </div>
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->

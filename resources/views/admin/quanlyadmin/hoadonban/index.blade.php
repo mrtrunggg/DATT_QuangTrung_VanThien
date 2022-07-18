@@ -207,11 +207,11 @@
             success: function (data) {
                 console.log(data);
                 
-                location.reload(true);
+                // location.reload(true);
                 },
             error: function (data, textStatus, errorThrown) {
                 console.log(data);
-                location.reload(false);
+                // location.reload(false);
             },
         })
     })
